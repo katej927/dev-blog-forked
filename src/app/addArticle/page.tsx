@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState, FormEvent, ChangeEvent } from 'react'
-import { DEFINED_URL } from '@/src/constants/common'
+import { API_URL } from '@/src/constants/common'
 
 export default function AddAritcle() {
   const [title, setTitle] = useState('')
@@ -19,7 +19,7 @@ export default function AddAritcle() {
     }
 
     try {
-      const res = await fetch(`${DEFINED_URL}/api/articles`, {
+      const res = await fetch(`${API_URL}/api/articles`, {
         method: 'POST',
         headers: {
           Content: 'application/json',
