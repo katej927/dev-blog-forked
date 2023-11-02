@@ -1,13 +1,39 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useState, FormEvent, ChangeEvent } from 'react'
 
 export default function AddAritcle() {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const router = useRouter()
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (!title || !content) {
+      alert('Title and content are required')
+      return
+    }
+
+    try {
+      const res = await fetch('http://localhost:3000/api/articles', {
+        method: 'POST',
+        headers: {
+          Content: 'application/json',
+        },
+        body: JSON.stringify({ title, content }),
+      })
+
+      if (res.ok) {
+        router.push('/')
+      } else {
+        throw new Error('Failed to create an article')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
