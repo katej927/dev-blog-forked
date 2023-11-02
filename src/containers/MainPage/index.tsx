@@ -1,4 +1,4 @@
-import GetArticlesResponseInterface from '@/interface/response/GetArticlesResponseInterface'
+import GetArticlesResponseInterface from '@/src/interface/response/GetArticlesResponseInterface'
 
 const getArticles = async (): Promise<GetArticlesResponseInterface | undefined> => {
   try {

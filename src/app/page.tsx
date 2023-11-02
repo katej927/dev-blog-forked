@@ -1,4 +1,4 @@
-import MainPage from '@/containers/MainPage'
+import MainPage from '@/src/containers/MainPage'
 
 export default function Home() {
   return <MainPage />
