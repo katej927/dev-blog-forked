@@ -8,3 +8,9 @@ export async function POST(request: Request) {
   await Article.create({ title, content })
   return NextResponse.json({ message: 'Article created' }, { status: 201 })
 }
+
+export async function GET() {
+  await connectMongoDB()
+  const articles = await Article.find()
+  return NextResponse.json({ articles })
+}
