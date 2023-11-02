@@ -1,5 +1,5 @@
-import styles from './page.module.css'
+import MainPage from '@/containers/MainPage'
 
 export default function Home() {
-  return <main className={styles.main}></main>
+  return <MainPage />
 }
