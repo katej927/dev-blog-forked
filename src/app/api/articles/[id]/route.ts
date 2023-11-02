@@ -1,5 +1,5 @@
-import connectMongoDB from '@/libs/mongodb'
-import Article from '@/models/topic'
+import connectMongoDB from '@/src/libs/mongodb'
+import Article from '@/src/models/topic'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 import { NextRequest, NextResponse } from 'next/server'
 
