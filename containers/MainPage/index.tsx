@@ -24,7 +24,7 @@ export default async function MainPage() {
   return (
     <main>
       {data.articles?.map(({ title, content }, idx) => (
-        <div key={`${title}-${idx}`}>
+        <div key={`${title}-${idx}`} style={{ border: '1px solid black' }}>
           <div>{title}</div>
           <div>{content}</div>
         </div>
