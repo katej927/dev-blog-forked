@@ -54,10 +54,10 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
 
-            const deployURL = 'https://dev-blog-forked.vercel.app/';
+            const deployURL = process.env.VERCEL_PREVIEW_URL
             const comments = [
               `## Deploy Preview`,
-              `🔥 **check your project preview here!** : `
+              `🔥 **check your project preview here!** : ${deployURL}`
             ].join('\n');
 
             core.setOutput('comment', comments);
