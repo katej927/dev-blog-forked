@@ -20,7 +20,7 @@ const getArticles = async (): Promise<
   }
 }
 
-export default async function MainPage() {
+const MainPage = async () => {
   const data = await getArticles()
 
   if (!data) return
@@ -38,3 +38,5 @@ export default async function MainPage() {
     </main>
   )
 }
+
+export default MainPage

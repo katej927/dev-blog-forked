@@ -20,11 +20,7 @@ const getArticleById = async (
   }
 }
 
-export default async function ArticlePage({
-  params,
-}: {
-  params: { id: string }
-}) {
+const ArticlePage = async ({ params }: { params: { id: string } }) => {
   const { id } = params
   const data = await getArticleById(id)
 
@@ -41,3 +37,4 @@ export default async function ArticlePage({
     </div>
   )
 }
+export default ArticlePage
