@@ -4,8 +4,8 @@
 
 # Screenshot
 
-| Function | Screenshot |
-| --- | --- |
-|  |  |
+# Notes
+
+# Questions
 
 # Test Checklist
