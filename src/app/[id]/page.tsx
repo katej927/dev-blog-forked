@@ -1,6 +1,6 @@
-import GetArticleResponseInterface from '@/src/interface/response/GetArticleResponseInterface'
 import dayjs from 'dayjs'
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
+
+import GetArticleResponseInterface from '@/src/interface/response/GetArticleResponseInterface'
 
 const getArticleById = async (
   id: string,
@@ -20,7 +20,11 @@ const getArticleById = async (
   }
 }
 
-export default async function ArticlePage({ params }: Params) {
+export default async function ArticlePage({
+  params,
+}: {
+  params: { id: string }
+}) {
   const { id } = params
   const data = await getArticleById(id)
 

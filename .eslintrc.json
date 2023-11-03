@@ -15,15 +15,13 @@
   },
   "extends": [
     "airbnb-base",
-    "airbnb",
-    "airbnb/hooks",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
     "eslint-config-prettier",
     "next/core-web-vitals",
     "next",
     "prettier",
-    "react-app"
+    "plugin:@typescript-eslint/recommended"
   ],
   "globals": {
     "_": true,

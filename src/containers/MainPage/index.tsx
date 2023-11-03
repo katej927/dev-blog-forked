@@ -1,5 +1,6 @@
-import GetArticlesResponseInterface from '@/src/interface/response/GetArticlesResponseInterface'
 import Link from 'next/link'
+
+import GetArticlesResponseInterface from '@/src/interface/response/GetArticlesResponseInterface'
 
 const getArticles = async (): Promise<
   GetArticlesResponseInterface | undefined
