@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "dayjs": "^1.11.10",
     "mongoose": "^8.0.0",
     "next": "13.5.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "stylelint-declaration-strict-value": "^1.9.2"
   },
   "devDependencies": {
     "@types/node": "^20",

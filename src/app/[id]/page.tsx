@@ -1,6 +1,9 @@
+import GetArticleResponseInterface from '@/src/interface/response/GetArticleResponseInterface'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
-const getArticleById = async (id: string) => {
+const getArticleById = async (
+  id: string,
+): Promise<GetArticleResponseInterface | undefined> => {
   try {
     const res = await fetch(`http://localhost:3000/api/articles/${id}`, {
       cache: 'no-store',
@@ -12,7 +15,7 @@ const getArticleById = async (id: string) => {
 
     return res.json()
   } catch (error) {
-    console.log('error')
+    console.log(error)
   }
 }
 
@@ -20,5 +23,16 @@ export default async function ArticlePage({ params }: Params) {
   const { id } = params
   const data = await getArticleById(id)
 
-  return <div>ArticlePage</div>
+  if (!data) return
+  const {
+    article: { title, content, updatedAt },
+  } = data
+
+  return (
+    <div>
+      <h2>제목: {title}</h2>
+      <div>수정 일자: {updatedAt}</div>
+      <div>내용: {content}</div>
+    </div>
+  )
 }

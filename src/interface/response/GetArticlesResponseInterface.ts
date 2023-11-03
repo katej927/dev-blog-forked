@@ -1,12 +1,5 @@
-interface GetArticlesInterface {
-  _id: string
-  title: string
-  content: string
-  createdAt: Date
-  updatedAt: Date
-  __v: number
-}
+import { GetArticleInterface } from './GetArticleResponseInterface'
 
 export default interface GetArticlesResponseInterface {
-  articles: GetArticlesInterface[]
+  articles: GetArticleInterface[]
 }
