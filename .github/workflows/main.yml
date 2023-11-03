@@ -54,6 +54,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
 
+            const deployURL = 'https://dev-blog-forked.vercel.app/';
             const comments = [
               `## Deploy Preview`,
               `🔥 **check your project preview here!** : `
