@@ -1,4 +1,5 @@
 import GetArticleResponseInterface from '@/src/interface/response/GetArticleResponseInterface'
+import dayjs from 'dayjs'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
 const getArticleById = async (
@@ -31,7 +32,7 @@ export default async function ArticlePage({ params }: Params) {
   return (
     <div>
       <h2>제목: {title}</h2>
-      <div>수정 일자: {updatedAt}</div>
+      <div>수정 일자: {dayjs(updatedAt).format('YYYY-MM-DD')}</div>
       <div>내용: {content}</div>
     </div>
   )
