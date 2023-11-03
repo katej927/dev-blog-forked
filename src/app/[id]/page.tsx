@@ -2,7 +2,9 @@ import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
 const getArticleById = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/articles/${id}`, { cache: 'no-store' })
+    const res = await fetch(`http://localhost:3000/api/articles/${id}`, {
+      cache: 'no-store',
+    })
 
     if (!res.ok) {
       throw new Error('Failed to fetch an article.')

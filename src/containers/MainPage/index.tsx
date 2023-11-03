@@ -1,7 +1,9 @@
 import GetArticlesResponseInterface from '@/src/interface/response/GetArticlesResponseInterface'
 import Link from 'next/link'
 
-const getArticles = async (): Promise<GetArticlesResponseInterface | undefined> => {
+const getArticles = async (): Promise<
+  GetArticlesResponseInterface | undefined
+> => {
   try {
     const res = await fetch(`http://localhost:3000/api/articles`, {
       cache: 'no-store',
