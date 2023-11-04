@@ -1,5 +1,7 @@
-import styles from './page.module.css'
+import MainPage from '@/src/containers/MainPage'
 
-export default function Home() {
-  return <main className={styles.main}>main</main>
+const Home = () => {
+  return <MainPage />
 }
+
+export default Home
