@@ -45,10 +45,10 @@ jobs:
         id: my-script
         with:
           script: |
-            console.log(process.env.PR_NUMBER, process.env.DEPLOYMENT_URL)
+            console.log("${{ process.env.DEPLOYMENT_URL }}")
             github.rest.issues.createComment({
-              issue_number: ${{ env.PR_NUMBER }},
+              issue_number: process.env.PR_NUMBER,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "Deployed at ${{ env.DEPLOYMENT_URL }}"
+              body: "Deployed at ${{ process.env.DEPLOYMENT_URL }}"
             })
