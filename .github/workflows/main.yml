@@ -40,11 +40,12 @@ jobs:
       - name: Comment URL to PR
         env:
           DEPLOYMENT_URL: ${{ needs.Deploy-Preview.outputs.deploymentUrl }}
+          PR_NUMBER: ${{ env.PR_NUMBER }}
         uses: actions/github-script@v6
         id: my-script
         with:
           script: |
-            console.log('${{ env.PR_NUMBER }}', ${{ env.PR_NUMBER }},'${{ env.DEPLOYMENT_URL }}', ${{ env.DEPLOYMENT_URL }} , '${{ needs.Deploy-Preview.outputs.deploymentUrl }}', ${{ needs.Deploy-Preview.outputs.deploymentUrl }})
+            console.log(process.env.PR_NUMBER, process.env.DEPLOYMENT_URL)
             github.rest.issues.createComment({
               issue_number: ${{ env.PR_NUMBER }},
               owner: context.repo.owner,
