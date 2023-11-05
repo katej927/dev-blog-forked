@@ -11,8 +11,6 @@ on:
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
-    outputs:
-      deploymentUrl: ${{ steps.deploy-step.outputs.deploymentUrl }}
     steps:
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
@@ -25,7 +23,8 @@ jobs:
         id: deploy-step
         run: |
           vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} >deployment-url.txt
-          echo "::set-env name=DEPLOYMENT_URL::$(cat deployment-url.txt)"  # Set DEPLOYMENT_URL environment variable
+          DEPLOYMENT_URL=$(cat deployment-url.txt)
+          echo "::set-output name=deploymentUrl::$DEPLOYMENT_URL"  # Set DEPLOYMENT_URL as an output
 
   Add-Comment:
     runs-on: ubuntu-latest
@@ -40,7 +39,7 @@ jobs:
 
       - name: Comment URL to PR
         env:
-          DEPLOYMENT_URL: ${{ env.DEPLOYMENT_URL }}
+          DEPLOYMENT_URL: ${{ steps.Deploy-Preview.outputs.deploymentUrl }}
         uses: actions/github-script@v6
         id: my-script
         with:
