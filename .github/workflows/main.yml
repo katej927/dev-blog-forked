@@ -40,7 +40,15 @@ jobs:
         id: my-script
         with:
           script: |
-            console.log(JSON.stringify(context.issue))
+            const issues = await github.rest.pulls.list({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            head: `${context.repo.owner}:${context.ref.replace('refs/heads/', '')}`
+            })
+
+            console.log(JSON.stringify(context.issue), 'issues.data[0].number', issues.data[0].number)
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
