@@ -2,9 +2,10 @@
 
 import { useRouter } from 'next/navigation'
 import { useState, FormEvent, ChangeEvent } from 'react'
+
 import { API_URL } from '@/src/constants/common'
 
-export default function AddAritcle() {
+const AddAritcle = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
@@ -29,6 +30,7 @@ export default function AddAritcle() {
 
       if (res.ok) {
         router.push('/')
+        router.refresh()
       } else {
         throw new Error('Failed to create an article')
       }
@@ -37,15 +39,31 @@ export default function AddAritcle() {
     }
   }
 
-  const handleChangeTitle = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => setTitle(value)
+  const handleChangeTitle = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => setTitle(value)
 
-  const handleChangeContent = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => setContent(value)
+  const handleChangeContent = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => setContent(value)
 
   return (
     <form onSubmit={handleSubmit}>
-      <input onChange={handleChangeTitle} value={title} type="text" placeholder="Text title..." />
-      <input onChange={handleChangeContent} value={content} type="text" placeholder="Text content..." />
+      <input
+        onChange={handleChangeTitle}
+        value={title}
+        type="text"
+        placeholder="Text title..."
+      />
+      <input
+        onChange={handleChangeContent}
+        value={content}
+        type="text"
+        placeholder="Text content..."
+      />
       <button type="submit">Publish</button>
     </form>
   )
 }
+
+export default AddAritcle

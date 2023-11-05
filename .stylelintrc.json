@@ -1,0 +1,52 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-rational-order"
+  ],
+  "rules": {
+    "at-rule-empty-line-before": null,
+    "color-function-notation": "legacy",
+    "color-hex-case": "lower",
+    "color-hex-length": "long",
+    "custom-property-empty-line-before": null,
+    "declaration-empty-line-before": "never",
+    "function-name-case": [
+      "lower",
+      {
+        "ignoreFunctions": ["/^[a-z_](|[a-zA-Z0-9]+)$/"]
+      }
+    ],
+    "keyframes-name-pattern": "^[a-z][a-zA-Z0-9_]+$",
+    "max-nesting-depth": 6,
+    "no-descending-specificity": null,
+    "no-invalid-position-at-import-rule": null,
+    "number-leading-zero": "always",
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": ["appearance"]
+      }
+    ],
+    "selector-max-id": 0,
+    "selector-class-pattern": "^[a-z](|[a-zA-Z0-9*]+)$",
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global", "export"]
+      }
+    ],
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignoreTypes": ["/^transition-/"]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["/^view-transition-/"]
+      }
+    ],
+    "string-quotes": "single"
+  }
+}
