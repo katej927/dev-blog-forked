@@ -44,8 +44,7 @@ jobs:
         id: my-script
         with:
           script: |
-            console.log('context',JSON.stringify(context),'${{ env.PR_NUMBER }}', ${{ env.PR_NUMBER }}, 'process.env.PR_NUMBER', process.env.PR_NUMBER, ' "Deployed at ${{ process.env.DEPLOYMENT_URL }}"
-',  "Deployed at ${{ process.env.DEPLOYMENT_URL }}",  "Deployed at ${{ env.DEPLOYMENT_URL }}",  "Deployed at ${{ env.DEPLOYMENT_URL }}", 'process.env.PR_NUMBER',process.env.PR_NUMBER, 'needs.Deploy-Preview.outputs.deploymentUrl', needs.Deploy-Preview.outputs.deploymentUrl, 'process.env.DEPLOYMENT_URL', process.env.DEPLOYMENT_URL)
+            console.log('${{ env.PR_NUMBER }}', ${{ env.PR_NUMBER }},'${{ env.DEPLOYMENT_URL }}', ${{ env.DEPLOYMENT_URL }} , '${{ needs.Deploy-Preview.outputs.deploymentUrl }}', ${{ needs.Deploy-Preview.outputs.deploymentUrl }})
             github.rest.issues.createComment({
               issue_number: ${{ env.PR_NUMBER }},
               owner: context.repo.owner,
