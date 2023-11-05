@@ -53,5 +53,5 @@ jobs:
               issue_number: pr,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "🚀 Preview : ${{env.DEPLOYMENT_URL}}"
+              body: "🚀 Preview : [Link](${{env.DEPLOYMENT_URL}})"
             })
