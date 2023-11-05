@@ -47,10 +47,12 @@ jobs:
             head: `${context.repo.owner}:${context.ref.replace('refs/heads/', '')}`
             })
 
-            console.log(JSON.stringify(context.issue), 'issues.data[0].number', issues.data[0].number)
+            const pr = context.issue.number || issues.data[0].number
+
+            console.log('pr',pr)
 
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: pr,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: "Deployed at ${{env.DEPLOYMENT_URL}}"
