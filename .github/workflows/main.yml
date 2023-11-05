@@ -49,11 +49,9 @@ jobs:
 
             const pr = context.issue.number || issues.data[0].number
 
-            console.log('pr',pr)
-
             github.rest.issues.createComment({
               issue_number: pr,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "Deployed at ${{env.DEPLOYMENT_URL}}"
+              body: "🚀 Preview : ${{env.DEPLOYMENT_URL}}"
             })
