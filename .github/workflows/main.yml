@@ -39,7 +39,7 @@ jobs:
 
       - name: Comment URL to PR
         env:
-          DEPLOYMENT_URL: ${{ steps.Deploy-Preview.outputs.deploymentUrl }}
+          DEPLOYMENT_URL: ${{ needs.Deploy-Preview.outputs.deploymentUrl }}
         uses: actions/github-script@v6
         id: my-script
         with:
