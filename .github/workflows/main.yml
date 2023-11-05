@@ -34,15 +34,20 @@ jobs:
       issues: write
       pull-requests: write
     steps:
+      - name: Get PR Number
+        id: pr-number
+        run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+
       - name: Comment URL to PR
         env:
           DEPLOYMENT_URL: ${{needs.Deploy-Preview.outputs.deploymentUrl}}
+          PR_NUMBER: ${{ env.PR_NUMBER }}
         uses: actions/github-script@v6
         id: my-script
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: PR_NUMBER,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: "Deployed at ${{env.DEPLOYMENT_URL}}"
