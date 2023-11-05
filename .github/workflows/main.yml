@@ -1,66 +1,28 @@
-name: github action CI/CD 테스트용
+name: Vercel Preview Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   pull_request:
-    branches:
-      - '*'
-
-permissions:
-  contents: read
-  pages: write
-  deployments: write
-  id-token: write
-  pull-requests: write
-
+    types: [opened, reopened, edited]
+  push:
+    branches-ignore:
+      - main
 jobs:
-  deployment:
-    name: Deployment-action
+  Deploy-Preview:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      deploymentUrl: ${{ steps.deploy-step.outputs.deploymentUrl }}
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Setting node
-        uses: actions/setup-node@v3.5.1
-        with:
-          node-version: 18
-          cache: 'yarn'
-
-      - name: npm install & build
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        id: deploy-step
         run: |
-          yarn install
-          yarn run build
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: './.next'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
-
-      - name: Format comment message
-        id: format_comment_message
-        uses: actions/github-script@v3
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-
-            const deployURL = process.env.VERCEL_PREVIEW_URL
-            const comments = [
-              `## Deploy Preview`,
-              `🔥 **check your project preview here!** : ${deployURL}`
-            ].join('\n');
-
-            core.setOutput('comment', comments);
-
-      - name: comment PR
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          message: |
-            ${{ steps.format_comment_message.outputs.comment}}[${{ steps.deployment.outputs.page_url }}](${{ steps.deployment.outputs.page_url }})
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} >deployment-url.txt
+          echo "deploymentUrl=$(cat deployment-url.txt)" >> $GITHUB_OUTPUT
