@@ -25,6 +25,7 @@ jobs:
         id: deploy-step
         run: |
           vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} >deployment-url.txt
+          DEPLOYMENT_URL=$(cat deployment-url.txt)
           echo "deploymentUrl=$(cat deployment-url.txt)" >> $GITHUB_OUTPUT
   Add-Comment:
     runs-on: ubuntu-latest
