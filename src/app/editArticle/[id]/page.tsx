@@ -8,12 +8,16 @@ import { API_URL } from '@/src/constants/common'
 import { ArticleInterface } from '@/src/interface/article'
 import { getArticleById } from '@/src/services/articles'
 
+import NotFound from '../../not-found'
+
 const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
+  const router = useRouter()
+  const data = use(getArticleById(id))
+
+  if (!data) return <NotFound />
   const {
     article: { title: originalTitle, content: originalContent },
-  } = use(getArticleById(id))
-
-  const router = useRouter()
+  } = data
 
   const handleSubmit = async (
     e: FormEvent<HTMLFormElement>,
@@ -36,7 +40,7 @@ const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
         throw new Error('Failed to update article')
       }
 
-      console.log('res', res.json())
+      router.push(`/${id}`)
     } catch (error) {
       console.log(error)
     }
