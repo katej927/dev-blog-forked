@@ -1,16 +1,19 @@
-// 'use client'
+'use client'
 
-import { FormEvent } from 'react'
+import { FormEvent, use } from 'react'
+import { useRouter } from 'next/navigation'
 
 import ArticleForm from '@/src/components/articleForm'
 import { API_URL } from '@/src/constants/common'
 import { ArticleInterface } from '@/src/interface/article'
 import { getArticleById } from '@/src/services/articles'
 
-const EditArticle = async ({ params: { id } }: { params: { id: string } }) => {
+const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
   const {
     article: { title: originalTitle, content: originalContent },
-  } = await getArticleById(id)
+  } = use(getArticleById(id))
+
+  const router = useRouter()
 
   const handleSubmit = async (
     e: FormEvent<HTMLFormElement>,
