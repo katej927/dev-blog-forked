@@ -1,12 +1,13 @@
 import Link from 'next/link'
 
 import GetArticlesResponseInterface from '@/src/interface/response/GetArticlesResponseInterface'
+import { API_URL } from '@/src/constants/common'
 
 const getArticles = async (): Promise<
   GetArticlesResponseInterface | undefined
 > => {
   try {
-    const res = await fetch(`http://localhost:3000/api/articles`, {
+    const res = await fetch(`${API_URL}/api/articles`, {
       cache: 'no-store',
     })
 
