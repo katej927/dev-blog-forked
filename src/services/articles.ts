@@ -1,5 +1,20 @@
 import { API_URL } from '../constants/common'
-import GetArticleResponseInterface from '../interface/response/GetArticleResponseInterface'
+import { ArticleInterface } from '../interface/article'
+
+interface GetArticleInterface extends ArticleInterface {
+  _id: string
+  createdAt: string
+  updatedAt: string
+  __v: number
+}
+
+interface GetArticleResponseInterface {
+  article: GetArticleInterface
+}
+
+interface GetArticlesResponseInterface {
+  articles: GetArticleInterface[]
+}
 
 export const getArticleById = async (
   id: string,
@@ -16,5 +31,23 @@ export const getArticleById = async (
     return res.json()
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const getArticles = async (): Promise<
+  GetArticlesResponseInterface | undefined
+> => {
+  try {
+    const res = await fetch(`${API_URL}/api/articles`, {
+      cache: 'no-store',
+    })
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch articles')
+    }
+
+    return res.json()
+  } catch (error) {
+    console.log('Error loading articles:', error)
   }
 }
