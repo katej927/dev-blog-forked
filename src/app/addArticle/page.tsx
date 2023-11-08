@@ -1,18 +1,22 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useState, FormEvent, ChangeEvent } from 'react'
+import { FormEvent } from 'react'
 
 import { API_URL } from '@/src/constants/common'
+import ArticleForm from '@/src/components/articleForm'
+import { ArticleInterface } from '@/src/interface/article'
 
 const AddAritcle = () => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-
   const router = useRouter()
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: FormEvent<HTMLFormElement>,
+    article: ArticleInterface,
+  ) => {
     e.preventDefault()
+
+    const { title, content } = article
 
     if (!title || !content) {
       alert('Title and content are required')
@@ -39,31 +43,7 @@ const AddAritcle = () => {
     }
   }
 
-  const handleChangeTitle = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => setTitle(value)
-
-  const handleChangeContent = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => setContent(value)
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        onChange={handleChangeTitle}
-        value={title}
-        type="text"
-        placeholder="Text title..."
-      />
-      <input
-        onChange={handleChangeContent}
-        value={content}
-        type="text"
-        placeholder="Text content..."
-      />
-      <button type="submit">Publish</button>
-    </form>
-  )
+  return <ArticleForm title={''} content={''} onSubmit={handleSubmit} />
 }
 
 export default AddAritcle

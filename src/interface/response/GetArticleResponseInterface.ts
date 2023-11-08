@@ -1,7 +1,7 @@
-export interface GetArticleInterface {
+import { ArticleInterface } from '../article'
+
+export interface GetArticleInterface extends ArticleInterface {
   _id: string
-  title: string
-  content: string
   createdAt: string
   updatedAt: string
   __v: number
