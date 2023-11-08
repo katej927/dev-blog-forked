@@ -27,6 +27,11 @@ const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
 
     const { title, content } = article
 
+    if (!title || !content) {
+      alert('Title and description are required')
+      return
+    }
+
     try {
       const res = await fetch(`${API_URL}/api/articles/${id}`, {
         method: 'PUT',
