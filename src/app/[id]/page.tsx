@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 
 import GetArticleResponseInterface from '@/src/interface/response/GetArticleResponseInterface'
+import DeleteBtn from '@/src/containers/ArticlePage/_common/DeleteBtn'
 
 const getArticleById = async (
   id: string,
@@ -32,6 +33,7 @@ const ArticlePage = async ({ params }: { params: { id: string } }) => {
   return (
     <div>
       <h2>제목: {title}</h2>
+      <DeleteBtn id={id} />
       <div>수정 일자: {dayjs(updatedAt).format('YYYY-MM-DD')}</div>
       <div>내용: {content}</div>
     </div>
