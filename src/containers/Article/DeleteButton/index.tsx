@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation'
 
 import { API_URL } from '@/src/constants/common'
 
-const DeleteBtn = ({ id }: { id: string }) => {
+const DeleteButton = ({ id }: { id: string }) => {
   const router = useRouter()
 
-  const handleClickDeleteBtn = async () => {
+  const handleClickDeleteButton = async () => {
     const confirmed = window.confirm('Are you sure to delete?')
 
     if (!confirmed) return
@@ -27,6 +27,6 @@ const DeleteBtn = ({ id }: { id: string }) => {
     }
   }
 
-  return <button onClick={handleClickDeleteBtn}>DeleteBtn</button>
+  return <button onClick={handleClickDeleteButton}>DeleteButton</button>
 }
-export default DeleteBtn
+export default DeleteButton
