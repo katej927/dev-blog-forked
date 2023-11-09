@@ -1,7 +1,5 @@
-import dayjs from 'dayjs'
-
 import GetArticleResponseInterface from '@/src/interface/response/GetArticleResponseInterface'
-import DeleteBtn from '@/src/containers/Article/DeleteBtn'
+import Article from '@/src/containers/Article'
 
 const getArticleById = async (
   id: string,
@@ -26,17 +24,8 @@ const ArticlePage = async ({ params }: { params: { id: string } }) => {
   const data = await getArticleById(id)
 
   if (!data) return
-  const {
-    article: { title, content, updatedAt },
-  } = data
+  const { article } = data
 
-  return (
-    <div>
-      <h2>제목: {title}</h2>
-      <DeleteBtn id={id} />
-      <div>수정 일자: {dayjs(updatedAt).format('YYYY-MM-DD')}</div>
-      <div>내용: {content}</div>
-    </div>
-  )
+  return <Article article={article} />
 }
 export default ArticlePage
