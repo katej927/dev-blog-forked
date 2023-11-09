@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 import GetArticleResponseInterface from '@/src/interface/response/GetArticleResponseInterface'
-import DeleteBtn from '@/src/containers/ArticlePage/_common/DeleteBtn'
+import DeleteBtn from '@/src/containers/Article/_common/DeleteBtn'
 
 const getArticleById = async (
   id: string,
