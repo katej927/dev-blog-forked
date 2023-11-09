@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { getArticles } from '@/src/services/articles'
+import { getArticles } from '@/services/articles'
 
 const MainPage = async () => {
   const data = await getArticles()

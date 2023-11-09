@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import Link from 'next/link'
 
-import { getArticleById } from '@/src/services/articles'
+import { getArticleById } from '@/services/articles'
 
 import NotFound from '../not-found'
 

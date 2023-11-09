@@ -3,9 +3,10 @@
 import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
 
-import { API_URL } from '@/src/constants/common'
-import ArticleForm from '@/src/components/articleForm'
-import { ArticleInterface } from '@/src/interface/article'
+import { API_URL } from '@/constants/common'
+import { ArticleInterface } from '@/interface/article'
+
+import ArticleForm from '@/components/articleForm'
 
 const AddAritcle = () => {
   const router = useRouter()

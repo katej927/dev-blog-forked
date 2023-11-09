@@ -2,7 +2,7 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react'
 
-import { ArticleInterface } from '@/src/interface/article'
+import { ArticleInterface } from '@/interface/article'
 
 interface IProps extends ArticleInterface {
   onSubmit: (

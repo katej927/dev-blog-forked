@@ -3,11 +3,11 @@
 import { FormEvent, use } from 'react'
 import { useRouter } from 'next/navigation'
 
-import ArticleForm from '@/src/components/articleForm'
-import { API_URL } from '@/src/constants/common'
-import { ArticleInterface } from '@/src/interface/article'
-import { getArticleById } from '@/src/services/articles'
+import { API_URL } from '@/constants/common'
+import { ArticleInterface } from '@/interface/article'
+import { getArticleById } from '@/services/articles'
 
+import ArticleForm from '@/components/articleForm'
 import NotFound from '../../not-found'
 
 const EditArticle = ({ params: { id } }: { params: { id: string } }) => {

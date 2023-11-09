@@ -1,4 +1,4 @@
-import MainPage from '@/src/containers/MainPage'
+import MainPage from '@/containers/MainPage'
 
 const Home = () => {
   return <MainPage />
