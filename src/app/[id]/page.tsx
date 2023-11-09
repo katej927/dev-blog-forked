@@ -1,15 +1,14 @@
 import dayjs from 'dayjs'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
-import { getArticleById } from '@/services/articles'
-
-import NotFound from '../not-found'
+import { getArticleByIdAPI } from '@/services/articles'
 
 const ArticlePage = async ({ params }: { params: { id: string } }) => {
   const { id } = params
-  const data = await getArticleById(id)
+  const data = await getArticleByIdAPI(id)
 
-  if (!data) return <NotFound />
+  if (!data) return notFound()
   const {
     article: { _id, title, content, updatedAt },
   } = data
