@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
-import { getArticlesAPI } from '@/apis/articles'
+import { getArticles } from '@/apis/articles'
 
 const Home = async () => {
-  const data = await getArticlesAPI()
+  const data = await getArticles()
 
   if (!data) return
 

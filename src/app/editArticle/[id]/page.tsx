@@ -4,14 +4,14 @@ import { FormEvent, use } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { API_URL } from '@/constants/common'
-import { ArticleInterface, getArticleByIdAPI } from '@/apis/articles'
+import { ArticleInterface, getArticleById } from '@/apis/articles'
 
 import ArticleForm from '@/components/articleForm'
 import NotFound from '../../not-found'
 
 const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
   const router = useRouter()
-  const data = use(getArticleByIdAPI(id))
+  const data = use(getArticleById(id))
 
   if (!data) return <NotFound />
   const {

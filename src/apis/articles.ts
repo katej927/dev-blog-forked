@@ -19,7 +19,7 @@ interface GetArticlesResponseInterface {
   articles: GetArticleInterface[]
 }
 
-export const getArticleByIdAPI = async (
+export const getArticleById = async (
   id: string,
 ): Promise<GetArticleResponseInterface | undefined> => {
   try {
@@ -37,7 +37,7 @@ export const getArticleByIdAPI = async (
   }
 }
 
-export const getArticlesAPI = async (): Promise<
+export const getArticles = async (): Promise<
   GetArticlesResponseInterface | undefined
 > => {
   try {
