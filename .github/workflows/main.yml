@@ -47,7 +47,7 @@ jobs:
             head: `${context.repo.owner}:${context.ref.replace('refs/heads/', '')}`
             })
 
-            console.log('issues:',issues, 'context.issue', context.issue)
+            console.log('issues: ',issues, 'context.issue', context.issue)
 
             const pr = context.issue.number || issues.data[0].number
 
