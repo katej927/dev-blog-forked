@@ -5,7 +5,7 @@ import { useState, FormEvent, ChangeEvent } from 'react'
 
 import { API_URL } from '@/src/constants/common'
 
-const AddAritcle = () => {
+const WritePage = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
@@ -66,4 +66,4 @@ const AddAritcle = () => {
   )
 }
 
-export default AddAritcle
+export default WritePage

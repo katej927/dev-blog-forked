@@ -20,7 +20,7 @@ const getArticles = async (): Promise<
   }
 }
 
-const MainPage = async () => {
+const Home = async () => {
   const data = await getArticles()
 
   if (!data) return
@@ -39,4 +39,4 @@ const MainPage = async () => {
   )
 }
 
-export default MainPage
+export default Home
