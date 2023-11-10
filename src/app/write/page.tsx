@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState, FormEvent, ChangeEvent } from 'react'
 
 import { API_URL } from '@/src/constants/common'
-import Editor from '@/src/containers/Home/Article/Editor'
+import Editor from '@/src/components/Editor'
 
 const WritePage = () => {
   const [title, setTitle] = useState('')
