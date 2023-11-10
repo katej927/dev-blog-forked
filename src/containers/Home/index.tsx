@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { getArticlesAPI } from '@/apis/articles'
 
-const MainPage = async () => {
+const Home = async () => {
   const data = await getArticlesAPI()
 
   if (!data) return
@@ -21,4 +21,4 @@ const MainPage = async () => {
   )
 }
 
-export default MainPage
+export default Home

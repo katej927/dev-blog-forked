@@ -6,9 +6,15 @@ import { FormEvent } from 'react'
 import { API_URL } from '@/constants/common'
 import { ArticleInterface } from '@/apis/articles'
 
+<<<<<<< HEAD:src/app/addArticle/page.tsx
 import ArticleForm from '@/components/articleForm'
+=======
+const WritePage = () => {
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+>>>>>>> main:src/app/write/page.tsx
 
-const AddAritcle = () => {
+const WritePage = () => {
   const router = useRouter()
 
   const handleSubmit = async (
@@ -47,4 +53,4 @@ const AddAritcle = () => {
   return <ArticleForm title={''} content={''} onSubmit={handleSubmit} />
 }
 
-export default AddAritcle
+export default WritePage
