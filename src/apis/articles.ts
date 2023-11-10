@@ -5,7 +5,7 @@ export interface ArticleInterface {
   content: string
 }
 
-interface GetArticleInterface extends ArticleInterface {
+export interface GetArticleInterface extends ArticleInterface {
   _id: string
   createdAt: string
   updatedAt: string

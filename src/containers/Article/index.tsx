@@ -1,14 +1,14 @@
 import dayjs from 'dayjs'
 
-import { GetArticleInterface } from '@/src/interface/response/GetArticleResponseInterface'
+import { GetArticleInterface } from '@/apis/articles'
 
 import DeleteButton from './DeleteButton'
 
-interface IProps {
+interface Props {
   article: GetArticleInterface
 }
 
-const Article = ({ article: { title, _id, updatedAt, content } }: IProps) => {
+const Article = ({ article: { title, _id, updatedAt, content } }: Props) => {
   return (
     <div>
       <h2>제목: {title}</h2>

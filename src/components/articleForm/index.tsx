@@ -4,14 +4,14 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { ArticleInterface } from '@/apis/articles'
 
-interface IProps extends ArticleInterface {
+interface Props extends ArticleInterface {
   onSubmit: (
     e: FormEvent<HTMLFormElement>,
     article: ArticleInterface,
   ) => Promise<void>
 }
 
-const ArticleForm = ({ title, content, onSubmit }: IProps) => {
+const ArticleForm = ({ title, content, onSubmit }: Props) => {
   const [newTitle, setNewTitle] = useState(title)
   const [newContent, setNewContent] = useState(content)
 
