@@ -1,5 +1,9 @@
 import { API_URL } from '../constants/common'
-import { ArticleInterface } from '../interface/article'
+
+export interface ArticleInterface {
+  title: string
+  content: string
+}
 
 interface GetArticleInterface extends ArticleInterface {
   _id: string

@@ -4,8 +4,7 @@ import { FormEvent, use } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { API_URL } from '@/constants/common'
-import { ArticleInterface } from '@/interface/article'
-import { getArticleByIdAPI } from '@/apis/articles'
+import { ArticleInterface, getArticleByIdAPI } from '@/apis/articles'
 
 import ArticleForm from '@/components/articleForm'
 import NotFound from '../../not-found'

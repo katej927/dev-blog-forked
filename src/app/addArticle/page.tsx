@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
 
 import { API_URL } from '@/constants/common'
-import { ArticleInterface } from '@/interface/article'
+import { ArticleInterface } from '@/apis/articles'
 
 import ArticleForm from '@/components/articleForm'
 
