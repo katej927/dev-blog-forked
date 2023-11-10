@@ -1,7 +1,7 @@
-import MainPage from '@/src/containers/MainPage'
+import Home from '@/src/containers/Home'
 
-const Home = () => {
-  return <MainPage />
+const HomePage = () => {
+  return <Home />
 }
 
-export default Home
+export default HomePage
