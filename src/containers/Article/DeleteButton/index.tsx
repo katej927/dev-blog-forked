@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
-import { API_URL } from '@/src/constants/common'
+import { API_URL } from '@/constants/common'
 
 const DeleteButton = ({ id }: { id: string }) => {
   const router = useRouter()
