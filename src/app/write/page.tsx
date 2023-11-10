@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState, FormEvent, ChangeEvent } from 'react'
 
 import { API_URL } from '@/src/constants/common'
+import Editor from '@/src/containers/Home/Article/Editor'
 
 const WritePage = () => {
   const [title, setTitle] = useState('')
@@ -48,21 +49,24 @@ const WritePage = () => {
   }: ChangeEvent<HTMLInputElement>) => setContent(value)
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        onChange={handleChangeTitle}
-        value={title}
-        type="text"
-        placeholder="Text title..."
-      />
-      <input
-        onChange={handleChangeContent}
-        value={content}
-        type="text"
-        placeholder="Text content..."
-      />
-      <button type="submit">Publish</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <input
+          onChange={handleChangeTitle}
+          value={title}
+          type="text"
+          placeholder="Text title..."
+        />
+        <input
+          onChange={handleChangeContent}
+          value={content}
+          type="text"
+          placeholder="Text content..."
+        />
+        <button type="submit">Publish</button>
+      </form>
+      <Editor />
+    </>
   )
 }
 
