@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { getArticleByIdAPI } from '@/services/articles'
+import { getArticleByIdAPI } from '@/apis/articles'
 
 const ArticlePage = async ({ params }: { params: { id: string } }) => {
   const { id } = params

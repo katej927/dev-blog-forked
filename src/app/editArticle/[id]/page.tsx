@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 import { API_URL } from '@/constants/common'
 import { ArticleInterface } from '@/interface/article'
-import { getArticleByIdAPI } from '@/services/articles'
+import { getArticleByIdAPI } from '@/apis/articles'
 
 import ArticleForm from '@/components/articleForm'
 import NotFound from '../../not-found'
