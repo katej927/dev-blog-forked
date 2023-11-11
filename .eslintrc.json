@@ -172,7 +172,7 @@
     "consistent-return": "off",
     "no-restricted-syntax": ["off", "ForOfStatement"], // disallow specified syntax(ex. WithStatement)
     "prefer-arrow-callback": "error", // Require using arrow functions for callbacks
-    "require-await": "error",
+    "require-await": "warn",
     "arrow-parens": ["warn", "as-needed"], // a => {}
     "no-param-reassign": ["error", { "props": false }],
     "no-unused-expressions": [

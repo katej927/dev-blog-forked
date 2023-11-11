@@ -1,29 +1,13 @@
-import GetArticleResponseInterface from '@/src/interface/response/GetArticleResponseInterface'
-import Article from '@/src/containers/Article'
+import { notFound } from 'next/navigation'
 
-const getArticleById = async (
-  id: string,
-): Promise<GetArticleResponseInterface | undefined> => {
-  try {
-    const res = await fetch(`http://localhost:3000/api/articles/${id}`, {
-      cache: 'no-store',
-    })
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch an article.')
-    }
-
-    return res.json()
-  } catch (error) {
-    console.log(error)
-  }
-}
+import Article from '@/containers/Article'
+import { getArticleById } from '@/apis/articles'
 
 const ArticlePage = async ({ params }: { params: { id: string } }) => {
   const { id } = params
   const data = await getArticleById(id)
 
-  if (!data) return
+  if (!data) return notFound()
   const { article } = data
 
   return <Article article={article} />
