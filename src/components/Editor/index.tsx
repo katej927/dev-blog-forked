@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage'
 
-import { storage } from '@/src/Firebase'
+import { storage } from '@/Firebase'
 
 import { formats, convertModules } from './_shared'
 
