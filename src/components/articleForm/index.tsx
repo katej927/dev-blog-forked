@@ -18,9 +18,7 @@ const ArticleForm = ({ title, content, onSubmit }: Props) => {
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => setNewTitle(value)
 
-  const handleChangeNewContent = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => setNewContent(value)
+  const handleChangeNewContent = (value: string) => setNewContent(value)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -30,20 +28,14 @@ const ArticleForm = ({ title, content, onSubmit }: Props) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <button type="submit">Publish</button>
       <input
         onChange={handleChangeNewTitle}
         value={newTitle}
         type="text"
         placeholder="Text title..."
       />
-      <input
-        onChange={handleChangeNewContent}
-        value={newContent}
-        type="text"
-        placeholder="Text content..."
-      />
-      <Editor />
-      <button type="submit">Publish</button>
+      <Editor content={newContent} onChangeContent={handleChangeNewContent} />
     </form>
   )
 }

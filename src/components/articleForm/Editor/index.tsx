@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage'
@@ -9,8 +9,12 @@ import { storage } from '@/Firebase'
 
 import { formats, convertModules } from './_shared'
 
-const Editor = () => {
-  const [content, setContent] = useState('')
+interface Props {
+  content: string
+  onChangeContent: (value: string) => void
+}
+
+const Editor = ({ content, onChangeContent }: Props) => {
   const quillRef = useRef<ReactQuill>()
 
   const imageHandler = () => {
@@ -57,13 +61,11 @@ const Editor = () => {
 
   return (
     <>
-      <button onClick={() => console.log(content)}>value</button>
       <div style={{ display: 'flex' }}>
         <ReactQuill
           theme="snow"
           style={{ height: '600px' }}
-          value={content}
-          onChange={setContent}
+          onChange={(value) => onChangeContent(value)}
           modules={modules}
           formats={formats}
           ref={(element) => {
