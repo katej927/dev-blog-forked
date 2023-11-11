@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, use } from 'react'
+import { use } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { API_URL } from '@/constants/common'
