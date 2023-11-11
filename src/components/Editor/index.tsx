@@ -30,6 +30,7 @@ const Editor = () => {
       const file = input.files[0]
       const range = editor.getSelection(true)
       try {
+        // TODO: 이거 정리하기
         // 파일명을 "image/Date.now()"로 저장
         const storageRef = ref(storage, `image/${Date.now()}`)
         // // Firebase Method : uploadBytes, getDownloadURL
