@@ -1,1 +1,2 @@
-export { modules, formats } from './constants'
+export { formats } from './constants'
+export { convertModules } from './utils'
