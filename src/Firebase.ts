@@ -1,9 +1,6 @@
 // Import the functions you need from the SDKs you need
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { initializeApp, getApp, getApps } from 'firebase/app'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { getAnalytics } from 'firebase/analytics'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { getStorage } from 'firebase/storage'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries

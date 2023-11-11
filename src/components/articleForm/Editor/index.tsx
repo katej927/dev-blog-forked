@@ -3,7 +3,6 @@
 import { useMemo, useRef, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage'
 
 import { storage } from '@/Firebase'

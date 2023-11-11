@@ -4,6 +4,8 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { ArticleInterface } from '@/apis/articles'
 
+import Editor from './Editor'
+
 interface Props extends ArticleInterface {
   onSubmit: (article: ArticleInterface) => Promise<void>
 }
@@ -40,6 +42,7 @@ const ArticleForm = ({ title, content, onSubmit }: Props) => {
         type="text"
         placeholder="Text content..."
       />
+      <Editor />
       <button type="submit">Publish</button>
     </form>
   )
