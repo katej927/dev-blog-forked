@@ -18,12 +18,7 @@ const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
     article: { title: originalTitle, content: originalContent },
   } = data
 
-  const handleSubmit = async (
-    e: FormEvent<HTMLFormElement>,
-    article: ArticleInterface,
-  ) => {
-    e.preventDefault()
-
+  const handleSubmit = async (article: ArticleInterface) => {
     const { title, content } = article
 
     if (!title || !content) {

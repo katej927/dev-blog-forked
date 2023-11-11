@@ -11,12 +11,7 @@ import ArticleForm from '@/components/articleForm'
 const WritePage = () => {
   const router = useRouter()
 
-  const handleSubmit = async (
-    e: FormEvent<HTMLFormElement>,
-    article: ArticleInterface,
-  ) => {
-    e.preventDefault()
-
+  const handleSubmit = async (article: ArticleInterface) => {
     const { title, content } = article
 
     if (!title || !content) {

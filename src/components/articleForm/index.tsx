@@ -5,10 +5,7 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { ArticleInterface } from '@/apis/articles'
 
 interface Props extends ArticleInterface {
-  onSubmit: (
-    e: FormEvent<HTMLFormElement>,
-    article: ArticleInterface,
-  ) => Promise<void>
+  onSubmit: (article: ArticleInterface) => Promise<void>
 }
 
 const ArticleForm = ({ title, content, onSubmit }: Props) => {
@@ -23,8 +20,11 @@ const ArticleForm = ({ title, content, onSubmit }: Props) => {
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => setNewContent(value)
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) =>
-    onSubmit(e, { title: newTitle, content: newContent })
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    onSubmit({ title: newTitle, content: newContent })
+  }
 
   return (
     <form onSubmit={handleSubmit}>
