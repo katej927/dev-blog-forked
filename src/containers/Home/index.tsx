@@ -1,24 +1,6 @@
 import Link from 'next/link'
 
-import GetArticlesResponseInterface from '@/src/interface/response/GetArticlesResponseInterface'
-
-const getArticles = async (): Promise<
-  GetArticlesResponseInterface | undefined
-> => {
-  try {
-    const res = await fetch(`http://localhost:3000/api/articles`, {
-      cache: 'no-store',
-    })
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch articles')
-    }
-
-    return res.json()
-  } catch (error) {
-    console.log('Error loading articles:', error)
-  }
-}
+import { getArticles } from '@/apis/articles'
 
 const Home = async () => {
   const data = await getArticles()

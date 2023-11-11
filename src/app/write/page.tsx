@@ -1,18 +1,18 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useState, FormEvent, ChangeEvent } from 'react'
+import { FormEvent } from 'react'
 
-import { API_URL } from '@/src/constants/common'
+import { API_URL } from '@/constants/common'
+import { ArticleInterface } from '@/apis/articles'
+
+import ArticleForm from '@/components/articleForm'
 
 const WritePage = () => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-
   const router = useRouter()
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = async (article: ArticleInterface) => {
+    const { title, content } = article
 
     if (!title || !content) {
       alert('Title and content are required')
@@ -39,31 +39,7 @@ const WritePage = () => {
     }
   }
 
-  const handleChangeTitle = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => setTitle(value)
-
-  const handleChangeContent = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => setContent(value)
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        onChange={handleChangeTitle}
-        value={title}
-        type="text"
-        placeholder="Text title..."
-      />
-      <input
-        onChange={handleChangeContent}
-        value={content}
-        type="text"
-        placeholder="Text content..."
-      />
-      <button type="submit">Publish</button>
-    </form>
-  )
+  return <ArticleForm title={''} content={''} onSubmit={handleSubmit} />
 }
 
 export default WritePage
