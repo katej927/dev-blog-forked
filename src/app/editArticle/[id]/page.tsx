@@ -30,7 +30,7 @@ const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
       const res = await fetch(`${API_URL}/api/articles/${id}`, {
         method: 'PUT',
         headers: {
-          Content: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ newTitle: title, newContent: content }),
       })

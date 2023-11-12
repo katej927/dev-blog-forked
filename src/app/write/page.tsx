@@ -22,13 +22,13 @@ const WritePage = () => {
       const res = await fetch(`${API_URL}/api/articles`, {
         method: 'POST',
         headers: {
-          Content: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ title, content }),
       })
 
       if (res.ok) {
-        router.push('/')
+        const { message: articleId } = await res.json()
       } else {
         throw new Error('Failed to create an article')
       }
