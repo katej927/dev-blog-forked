@@ -38,7 +38,13 @@ const WritePage = () => {
     }
   }
 
-  return <ArticleForm title={''} content={''} onSubmit={handleSubmit} />
+  return (
+    <ArticleForm
+      title={''}
+      content={{ text: '', html: '' }}
+      onSubmit={handleSubmit}
+    />
+  )
 }
 
 export default WritePage
