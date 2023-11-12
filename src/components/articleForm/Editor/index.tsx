@@ -3,9 +3,7 @@
 import { useMemo, useRef } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import { uploadBytes, getDownloadURL, ref } from 'firebase/storage'
 
-import { storage } from '@/Firebase'
 import { ArticleInterface } from '@/apis/articles'
 
 import { formats, convertModules } from './_shared'
