@@ -2,7 +2,7 @@ import { API_URL } from '../constants/common'
 
 export interface ArticleInterface {
   title: string
-  content: string
+  content: { text: string; html: string }
 }
 
 export interface GetArticleInterface extends ArticleInterface {

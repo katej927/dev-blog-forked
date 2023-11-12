@@ -6,12 +6,13 @@ import 'react-quill/dist/quill.snow.css'
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage'
 
 import { storage } from '@/Firebase'
+import { ArticleInterface } from '@/apis/articles'
 
 import { formats, convertModules } from './_shared'
 
 interface Props {
-  content: string
-  onChangeContent: (value: string) => void
+  content: ArticleInterface['content']
+  onChangeContent: (value: ArticleInterface['content']) => void
 }
 
 const Editor = ({ content, onChangeContent }: Props) => {
@@ -65,7 +66,9 @@ const Editor = ({ content, onChangeContent }: Props) => {
         <ReactQuill
           theme="snow"
           style={{ height: '600px' }}
-          onChange={(value) => onChangeContent(value)}
+          onChange={(value, delta, source, editor) =>
+            onChangeContent({ text: editor.getText(), html: editor.getHTML() })
+          }
           modules={modules}
           formats={formats}
           ref={(element) => {
@@ -75,12 +78,7 @@ const Editor = ({ content, onChangeContent }: Props) => {
           }}
           placeholder="내용을 입력해주세요."
         />
-        <ReactQuill
-          theme="bubble"
-          readOnly
-          value={content}
-          style={{ width: '50%', height: '600px' }}
-        />
+        <ReactQuill theme="bubble" value={content.html} readOnly />
       </div>
     </>
   )

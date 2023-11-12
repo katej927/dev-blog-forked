@@ -11,14 +11,17 @@ interface Props extends ArticleInterface {
 }
 
 const ArticleForm = ({ title, content, onSubmit }: Props) => {
-  const [newTitle, setNewTitle] = useState(title)
-  const [newContent, setNewContent] = useState(content)
+  const [newTitle, setNewTitle] = useState<ArticleInterface['title']>(title)
+  const [newContent, setNewContent] =
+    useState<ArticleInterface['content']>(content)
 
   const handleChangeNewTitle = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => setNewTitle(value)
 
-  const handleChangeNewContent = (value: string) => setNewContent(value)
+  const handleChangeNewContent = (value: ArticleInterface['content']) => {
+    setNewContent(value)
+  }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
