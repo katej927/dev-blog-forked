@@ -1,10 +1,9 @@
-'use client'
-
 import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { ArticleInterface } from '@/apis/articles'
 
 import Editor from './Editor'
+import ArticleContent from '../ArticleContent'
 
 interface Props extends ArticleInterface {
   onSubmit: (article: ArticleInterface) => Promise<void>
@@ -38,7 +37,13 @@ const ArticleForm = ({ title, content, onSubmit }: Props) => {
         type="text"
         placeholder="Text title..."
       />
-      <Editor content={newContent} onChangeContent={handleChangeNewContent} />
+      <div style={{ display: 'flex' }}>
+        <Editor
+          contentHtml={newContent.html}
+          onChangeContent={handleChangeNewContent}
+        />
+        <ArticleContent contentHtml={newContent.html} />
+      </div>
     </form>
   )
 }

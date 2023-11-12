@@ -11,11 +11,11 @@ import { ArticleInterface } from '@/apis/articles'
 import { formats, convertModules } from './_shared'
 
 interface Props {
-  content: ArticleInterface['content']
+  contentHtml: ArticleInterface['content']['html']
   onChangeContent: (value: ArticleInterface['content']) => void
 }
 
-const Editor = ({ content, onChangeContent }: Props) => {
+const Editor = ({ contentHtml, onChangeContent }: Props) => {
   const quillRef = useRef<ReactQuill>()
 
   const imageHandler = () => {
@@ -61,26 +61,22 @@ const Editor = ({ content, onChangeContent }: Props) => {
   const modules = useMemo(() => convertModules(imageHandler), [])
 
   return (
-    <>
-      <div style={{ display: 'flex' }}>
-        <ReactQuill
-          theme="snow"
-          style={{ height: '600px' }}
-          onChange={(value, delta, source, editor) =>
-            onChangeContent({ text: editor.getText(), html: editor.getHTML() })
-          }
-          modules={modules}
-          formats={formats}
-          ref={(element) => {
-            if (element !== null) {
-              quillRef.current = element
-            }
-          }}
-          placeholder="내용을 입력해주세요."
-        />
-        <ReactQuill theme="bubble" value={content.html} readOnly />
-      </div>
-    </>
+    <ReactQuill
+      theme="snow"
+      style={{ height: '600px' }}
+      onChange={(value, delta, source, editor) =>
+        onChangeContent({ text: editor.getText(), html: editor.getHTML() })
+      }
+      modules={modules}
+      formats={formats}
+      ref={(element) => {
+        if (element !== null) {
+          quillRef.current = element
+        }
+      }}
+      placeholder="내용을 입력해주세요."
+      value={contentHtml}
+    />
   )
 }
 
