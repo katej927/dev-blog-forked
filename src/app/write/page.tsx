@@ -29,6 +29,7 @@ const WritePage = () => {
 
       if (res.ok) {
         const { message: articleId } = await res.json()
+        router.push(`/${articleId}`)
       } else {
         throw new Error('Failed to create an article')
       }
