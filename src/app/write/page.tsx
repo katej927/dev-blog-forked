@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { ArticleInterface } from '@/apis/articles'
 import { API_URL } from '@/constants/common'
 
-import ArticleForm from '@/components/ArticleForm'
+import ArticleForm from '@/components/articleForm'
 
 const WritePage = () => {
   const router = useRouter()
