@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { API_URL } from '@/constants/common'
 import { ArticleInterface, getArticleById } from '@/apis/articles'
 
-import ArticleForm from '@/components/articleForm'
+import ArticleForm from '@/components/ArticleForm'
 import NotFound from '../../not-found'
 
 const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
@@ -30,7 +30,7 @@ const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
       const res = await fetch(`${API_URL}/api/articles/${id}`, {
         method: 'PUT',
         headers: {
-          Content: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ newTitle: title, newContent: content }),
       })

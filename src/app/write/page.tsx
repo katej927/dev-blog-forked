@@ -1,12 +1,17 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { FormEvent } from 'react'
+import dynamic from 'next/dynamic'
 
-import { API_URL } from '@/constants/common'
 import { ArticleInterface } from '@/apis/articles'
+import { API_URL } from '@/constants/common'
 
-import ArticleForm from '@/components/articleForm'
+const DynamicArticleForm = dynamic(
+  () => {
+    return import('@/components/ArticleForm')
+  },
+  { ssr: false },
+)
 
 const WritePage = () => {
   const router = useRouter()
@@ -23,14 +28,14 @@ const WritePage = () => {
       const res = await fetch(`${API_URL}/api/articles`, {
         method: 'POST',
         headers: {
-          Content: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ title, content }),
       })
 
       if (res.ok) {
-        router.push('/')
-        router.refresh()
+        const { message: articleId } = await res.json()
+        router.push(`/${articleId}`)
       } else {
         throw new Error('Failed to create an article')
       }
@@ -39,7 +44,13 @@ const WritePage = () => {
     }
   }
 
-  return <ArticleForm title={''} content={''} onSubmit={handleSubmit} />
+  return (
+    <DynamicArticleForm
+      title={''}
+      content={{ text: '', html: '' }}
+      onSubmit={handleSubmit}
+    />
+  )
 }
 
 export default WritePage

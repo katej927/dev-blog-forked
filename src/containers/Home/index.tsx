@@ -13,7 +13,7 @@ const Home = async () => {
         <Link key={`${title}-${idx}`} href={`/${_id}`}>
           <div style={{ border: '1px solid black' }}>
             <div>{title}</div>
-            <div>{content}</div>
+            <div>{content?.text}</div>
           </div>
         </Link>
       ))}
