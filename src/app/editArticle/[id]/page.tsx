@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { API_URL } from '@/constants/common'
 import { ArticleInterface, getArticleById } from '@/apis/articles'
 
-import ArticleForm from '@/components/ArticleForm1'
+import ArticleForm from '@/components/ArticleForm'
 import NotFound from '../../not-found'
 
 const EditArticle = ({ params: { id } }: { params: { id: string } }) => {

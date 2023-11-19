@@ -1,11 +1,17 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 
 import { ArticleInterface } from '@/apis/articles'
 import { API_URL } from '@/constants/common'
 
-import ArticleForm from '@/components/ArticleForm'
+const DynamicArticleForm = dynamic(
+  () => {
+    return import('@/components/ArticleForm')
+  },
+  { ssr: false },
+)
 
 const WritePage = () => {
   const router = useRouter()
@@ -39,7 +45,7 @@ const WritePage = () => {
   }
 
   return (
-    <ArticleForm
+    <DynamicArticleForm
       title={''}
       content={{ text: '', html: '' }}
       onSubmit={handleSubmit}
