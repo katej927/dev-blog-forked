@@ -2,48 +2,44 @@
 
 import { notFound, useRouter } from 'next/navigation'
 
-import { API_URL } from '@/constants/common'
-import { ArticleInterface, fetchArticleById } from '@/apis/articles'
+import {
+  ArticleInterface,
+  getArticleById,
+  putArticleById,
+} from '@/apis/articles'
 
 import ArticleForm from '@/components/ArticleForm'
 
 const EditArticle = async ({ params: { id } }: { params: { id: string } }) => {
   const router = useRouter()
-  const getArticleById = async () => {
+  const getArticle = async () => {
     try {
-      const res = await fetchArticleById(id)
+      const res = await getArticleById(id)
       return res
     } catch (error) {
       console.log(error)
     }
   }
 
-  const data = await getArticleById()
-
+  const data = await getArticle()
   if (!data) return notFound()
   const {
     article: { title: originalTitle, content: originalContent },
   } = data
 
   const handleSubmit = async (article: ArticleInterface) => {
-    const { title, content } = article
+    const { title: newTitle, content: newContent } = article
 
-    if (!title || !content) {
+    if (!newTitle || !newContent) {
       alert('Title and description are required')
       return
     }
 
     try {
-      const res = await fetch(`${API_URL}/api/articles/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ newTitle: title, newContent: content }),
-      })
+      const res = await putArticleById(id, { newTitle, newContent })
 
       if (!res.ok) {
-        throw new Error('Failed to update article')
+        throw new Error(`HTTP error! Status: ${res.status}`)
       }
 
       router.push(`/${id}`)

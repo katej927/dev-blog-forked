@@ -1,8 +1,18 @@
 import { API_URL } from '../constants/common'
 
+export interface ArticleContentInterface {
+  text: string
+  html: string
+}
+
 export interface ArticleInterface {
   title: string
-  content: { text: string; html: string }
+  content: ArticleContentInterface
+}
+
+export interface RevisedArticleInterface {
+  newTitle: string
+  newContent: ArticleContentInterface
 }
 
 export interface GetArticleInterface extends ArticleInterface {
@@ -19,7 +29,7 @@ interface GetArticlesResponseInterface {
   articles: GetArticleInterface[]
 }
 
-export const fetchArticleById = async (
+export const getArticleById = async (
   id: string,
 ): Promise<GetArticleResponseInterface | undefined> => {
   const res = await fetch(`${API_URL}/api/articles/${id}`, {
@@ -49,4 +59,19 @@ export const getArticles = async (): Promise<
   } catch (error) {
     console.log('Error loading articles:', error)
   }
+}
+
+export const putArticleById = async (
+  id: string,
+  revisedArticle: RevisedArticleInterface,
+) => {
+  const res = await fetch(`${API_URL}/api/articles/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(revisedArticle),
+  })
+
+  return res
 }

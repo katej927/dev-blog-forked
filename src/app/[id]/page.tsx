@@ -1,21 +1,21 @@
 import { notFound } from 'next/navigation'
 
-import { fetchArticleById } from '@/apis/articles'
+import { getArticleById } from '@/apis/articles'
 import Article from '@/containers/Article'
 
 const ArticlePage = async ({ params }: { params: { id: string } }) => {
   const { id } = params
 
-  const getArticleById = async () => {
+  const getArticle = async () => {
     try {
-      const res = await fetchArticleById(id)
+      const res = await getArticleById(id)
       return res
     } catch (error) {
       console.log(error)
     }
   }
 
-  const data = await getArticleById()
+  const data = await getArticle()
   if (!data) return notFound()
 
   const { article } = data
