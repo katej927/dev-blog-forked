@@ -1,19 +1,26 @@
 'use client'
 
-import { use } from 'react'
-import { useRouter } from 'next/navigation'
+import { notFound, useRouter } from 'next/navigation'
 
 import { API_URL } from '@/constants/common'
 import { ArticleInterface, fetchArticleById } from '@/apis/articles'
 
 import ArticleForm from '@/components/ArticleForm'
-import NotFound from '../../not-found'
 
-const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
+const EditArticle = async ({ params: { id } }: { params: { id: string } }) => {
   const router = useRouter()
-  const data = use(fetchArticleById(id))
+  const getArticleById = async () => {
+    try {
+      const res = await fetchArticleById(id)
+      return res
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  if (!data) return <NotFound />
+  const data = await getArticleById()
+
+  if (!data) return notFound()
   const {
     article: { title: originalTitle, content: originalContent },
   } = data
