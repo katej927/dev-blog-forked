@@ -25,7 +25,7 @@ interface GetArticleResponseInterface {
   article: GetArticleInterface
 }
 
-interface GetArticlesResponseInterface {
+export interface GetArticlesResponseInterface {
   articles: GetArticleInterface[]
 }
 
@@ -55,22 +55,12 @@ export const getArticleById = async (
   return res.json()
 }
 
-export const getArticles = async (): Promise<
-  GetArticlesResponseInterface | undefined
-> => {
-  try {
-    const res = await fetch(`${API_URL}/api/articles`, {
-      cache: 'no-store',
-    })
+export const getArticles = async () => {
+  const res = await fetch(`${API_URL}/api/articles`, {
+    cache: 'no-store',
+  })
 
-    if (!res.ok) {
-      throw new Error('Failed to fetch articles')
-    }
-
-    return res.json()
-  } catch (error) {
-    console.log('Error loading articles:', error)
-  }
+  return res
 }
 
 export const putArticleById = async (

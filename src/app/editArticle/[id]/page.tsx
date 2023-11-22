@@ -12,7 +12,7 @@ import ArticleForm from '@/components/ArticleForm'
 
 const EditArticle = async ({ params: { id } }: { params: { id: string } }) => {
   const router = useRouter()
-  const getArticle = async () => {
+  const loadedArticle = async () => {
     try {
       const res = await getArticleById(id)
       return res
@@ -21,7 +21,7 @@ const EditArticle = async ({ params: { id } }: { params: { id: string } }) => {
     }
   }
 
-  const data = await getArticle()
+  const data = await loadedArticle()
   if (!data) return notFound()
   const {
     article: { title: originalTitle, content: originalContent },
