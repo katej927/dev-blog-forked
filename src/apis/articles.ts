@@ -88,4 +88,10 @@ export const putArticleById = async (
   return res
 }
 
-export const deleteArticleById = async () => {}
+export const deleteArticleById = async (id: string) => {
+  const res = await fetch(`${API_URL}/api/articles?id=${id}`, {
+    method: 'DELETE',
+  })
+
+  return res
+}
