@@ -21,7 +21,7 @@ export interface GetArticleInterface extends ArticleInterface {
   updatedAt: string
 }
 
-interface GetArticleResponseInterface {
+export interface GetArticleResponseInterface {
   article: GetArticleInterface
 }
 
@@ -41,18 +41,12 @@ export const createArticleById = async (article: ArticleInterface) => {
   return res
 }
 
-export const getArticleById = async (
-  id: string,
-): Promise<GetArticleResponseInterface | undefined> => {
+export const getArticleById = async (id: string) => {
   const res = await fetch(`${API_URL}/api/articles/${id}`, {
     cache: 'no-store',
   })
 
-  if (!res.ok) {
-    throw new Error(`HTTP error! Status: ${res.status}`)
-  }
-
-  return res.json()
+  return res
 }
 
 export const getArticles = async () => {

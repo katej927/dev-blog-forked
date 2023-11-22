@@ -1,21 +1,27 @@
 import { notFound } from 'next/navigation'
 
-import { getArticleById } from '@/apis/articles'
+import { getArticleById, GetArticleResponseInterface } from '@/apis/articles'
 import Article from '@/containers/Article'
 
 const ArticlePage = async ({ params }: { params: { id: string } }) => {
   const { id } = params
 
-  const getArticle = async () => {
+  const loadedArticle = async (): Promise<
+    GetArticleResponseInterface | undefined
+  > => {
     try {
       const res = await getArticleById(id)
-      return res
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`)
+      }
+
+      return res.json()
     } catch (error) {
       console.log(error)
     }
   }
 
-  const data = await getArticle()
+  const data = await loadedArticle()
   if (!data) return notFound()
 
   const { article } = data

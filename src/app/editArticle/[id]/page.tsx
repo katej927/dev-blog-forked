@@ -5,6 +5,7 @@ import { notFound, useRouter } from 'next/navigation'
 import {
   ArticleInterface,
   getArticleById,
+  GetArticleResponseInterface,
   putArticleById,
 } from '@/apis/articles'
 
@@ -12,10 +13,17 @@ import ArticleForm from '@/components/ArticleForm'
 
 const EditArticle = async ({ params: { id } }: { params: { id: string } }) => {
   const router = useRouter()
-  const loadedArticle = async () => {
+  const loadedArticle = async (): Promise<
+    GetArticleResponseInterface | undefined
+  > => {
     try {
       const res = await getArticleById(id)
-      return res
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`)
+      }
+
+      return res.json()
     } catch (error) {
       console.log(error)
     }
