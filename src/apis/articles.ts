@@ -29,6 +29,18 @@ interface GetArticlesResponseInterface {
   articles: GetArticleInterface[]
 }
 
+export const createArticleById = async (article: ArticleInterface) => {
+  const res = await fetch(`${API_URL}/api/articles`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(article),
+  })
+
+  return res
+}
+
 export const getArticleById = async (
   id: string,
 ): Promise<GetArticleResponseInterface | undefined> => {
@@ -75,3 +87,5 @@ export const putArticleById = async (
 
   return res
 }
+
+export const deleteArticleById = async () => {}
