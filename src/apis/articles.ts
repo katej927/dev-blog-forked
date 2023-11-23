@@ -29,7 +29,7 @@ export interface GetArticlesResponseInterface {
   articles: GetArticleInterface[]
 }
 
-export const createArticleById = async (article: ArticleInterface) => {
+export const createArticle = async (article: ArticleInterface) => {
   const res = await fetch(`${API_URL}/api/articles`, {
     method: 'POST',
     headers: {

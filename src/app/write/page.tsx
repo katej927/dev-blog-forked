@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
-import { ArticleInterface, createArticleById } from '@/apis/articles'
+import { ArticleInterface, createArticle } from '@/apis/articles'
 
 const DynamicArticleForm = dynamic(
   () => {
@@ -24,7 +24,7 @@ const WritePage = () => {
     }
 
     try {
-      const res = await createArticleById(article)
+      const res = await createArticle(article)
 
       if (!res.ok) {
         throw new Error('Failed to create an article')
