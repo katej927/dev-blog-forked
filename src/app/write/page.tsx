@@ -3,8 +3,7 @@
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
-import { ArticleInterface } from '@/apis/articles'
-import { API_URL } from '@/constants/common'
+import { ArticleInterface, createArticle } from '@/apis/articles'
 
 const DynamicArticleForm = dynamic(
   () => {
@@ -25,20 +24,14 @@ const WritePage = () => {
     }
 
     try {
-      const res = await fetch(`${API_URL}/api/articles`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title, content }),
-      })
+      const res = await createArticle(article)
 
-      if (res.ok) {
-        const { message: articleId } = await res.json()
-        router.push(`/${articleId}`)
-      } else {
+      if (!res.ok) {
         throw new Error('Failed to create an article')
       }
+
+      const { message: articleId } = await res.json()
+      router.push(`/${articleId}`)
     } catch (error) {
       console.log(error)
     }

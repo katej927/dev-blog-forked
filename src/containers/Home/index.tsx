@@ -1,9 +1,24 @@
 import Link from 'next/link'
 
-import { getArticles } from '@/apis/articles'
+import { getArticles, GetArticlesResponseInterface } from '@/apis/articles'
 
 const Home = async () => {
-  const data = await getArticles()
+  const loadedArticles = async (): Promise<
+    GetArticlesResponseInterface | undefined
+  > => {
+    try {
+      const res = await getArticles()
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch articles')
+      }
+
+      return res.json()
+    } catch (error) {
+      console.log('Error loading articles:', error)
+    }
+  }
+  const data = await loadedArticles()
 
   if (!data) return
 

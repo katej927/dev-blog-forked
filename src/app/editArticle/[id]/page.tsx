@@ -1,42 +1,53 @@
 'use client'
 
-import { use } from 'react'
-import { useRouter } from 'next/navigation'
+import { notFound, useRouter } from 'next/navigation'
 
-import { API_URL } from '@/constants/common'
-import { ArticleInterface, getArticleById } from '@/apis/articles'
+import {
+  ArticleInterface,
+  getArticleById,
+  GetArticleResponseInterface,
+  putArticleById,
+} from '@/apis/articles'
 
 import ArticleForm from '@/components/ArticleForm'
-import NotFound from '../../not-found'
 
-const EditArticle = ({ params: { id } }: { params: { id: string } }) => {
+const EditArticle = async ({ params: { id } }: { params: { id: string } }) => {
   const router = useRouter()
-  const data = use(getArticleById(id))
+  const loadedArticle = async (): Promise<
+    GetArticleResponseInterface | undefined
+  > => {
+    try {
+      const res = await getArticleById(id)
 
-  if (!data) return <NotFound />
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`)
+      }
+
+      return res.json()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const data = await loadedArticle()
+  if (!data) return notFound()
   const {
     article: { title: originalTitle, content: originalContent },
   } = data
 
   const handleSubmit = async (article: ArticleInterface) => {
-    const { title, content } = article
+    const { title: newTitle, content: newContent } = article
 
-    if (!title || !content) {
+    if (!newTitle || !newContent) {
       alert('Title and description are required')
       return
     }
 
     try {
-      const res = await fetch(`${API_URL}/api/articles/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ newTitle: title, newContent: content }),
-      })
+      const res = await putArticleById(id, { newTitle, newContent })
 
       if (!res.ok) {
-        throw new Error('Failed to update article')
+        throw new Error(`HTTP error! Status: ${res.status}`)
       }
 
       router.push(`/${id}`)

@@ -1,8 +1,20 @@
 import { API_URL } from '../constants/common'
 
+const API_ARTICLE_URL = `${API_URL}/api/articles`
+
+export interface ArticleContentInterface {
+  text: string
+  html: string
+}
+
 export interface ArticleInterface {
   title: string
-  content: { text: string; html: string }
+  content: ArticleContentInterface
+}
+
+export interface RevisedArticleInterface {
+  newTitle: string
+  newContent: ArticleContentInterface
 }
 
 export interface GetArticleInterface extends ArticleInterface {
@@ -11,46 +23,61 @@ export interface GetArticleInterface extends ArticleInterface {
   updatedAt: string
 }
 
-interface GetArticleResponseInterface {
+export interface GetArticleResponseInterface {
   article: GetArticleInterface
 }
 
-interface GetArticlesResponseInterface {
+export interface GetArticlesResponseInterface {
   articles: GetArticleInterface[]
 }
 
-export const getArticleById = async (
-  id: string,
-): Promise<GetArticleResponseInterface | undefined> => {
-  try {
-    const res = await fetch(`${API_URL}/api/articles/${id}`, {
-      cache: 'no-store',
-    })
+export const createArticle = async (article: ArticleInterface) => {
+  const res = await fetch(API_ARTICLE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(article),
+  })
 
-    if (!res.ok) {
-      throw new Error('Failed to fetch an article.')
-    }
-
-    return res.json()
-  } catch (error) {
-    console.log(error)
-  }
+  return res
 }
 
-export const getArticles = async (): Promise<
-  GetArticlesResponseInterface | undefined
-> => {
-  try {
-    const res = await fetch(`${API_URL}/api/articles`, {
-      cache: 'no-store',
-    })
+export const getArticleById = async (id: string) => {
+  const res = await fetch(`${API_ARTICLE_URL}/${id}`, {
+    cache: 'no-store',
+  })
 
-    if (!res.ok) {
-      throw new Error('Failed to fetch articles')
-    }
+  return res
+}
 
-    return res.json()
-  } catch (error) {
-    console.log('Error loading articles:', error)
-  }
+export const getArticles = async () => {
+  const res = await fetch(API_ARTICLE_URL, {
+    cache: 'no-store',
+  })
+
+  return res
+}
+
+export const putArticleById = async (
+  id: string,
+  revisedArticle: RevisedArticleInterface,
+) => {
+  const res = await fetch(`${API_ARTICLE_URL}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(revisedArticle),
+  })
+
+  return res
+}
+
+export const deleteArticleById = async (id: string) => {
+  const res = await fetch(`${API_ARTICLE_URL}?id=${id}`, {
+    method: 'DELETE',
+  })
+
+  return res
 }
