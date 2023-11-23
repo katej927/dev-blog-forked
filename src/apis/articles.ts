@@ -1,5 +1,7 @@
 import { API_URL } from '../constants/common'
 
+const API_ARTICLE_URL = `${API_URL}/api/articles`
+
 export interface ArticleContentInterface {
   text: string
   html: string
@@ -30,7 +32,7 @@ export interface GetArticlesResponseInterface {
 }
 
 export const createArticle = async (article: ArticleInterface) => {
-  const res = await fetch(`${API_URL}/api/articles`, {
+  const res = await fetch(API_ARTICLE_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -42,7 +44,7 @@ export const createArticle = async (article: ArticleInterface) => {
 }
 
 export const getArticleById = async (id: string) => {
-  const res = await fetch(`${API_URL}/api/articles/${id}`, {
+  const res = await fetch(`${API_ARTICLE_URL}/${id}`, {
     cache: 'no-store',
   })
 
@@ -50,7 +52,7 @@ export const getArticleById = async (id: string) => {
 }
 
 export const getArticles = async () => {
-  const res = await fetch(`${API_URL}/api/articles`, {
+  const res = await fetch(API_ARTICLE_URL, {
     cache: 'no-store',
   })
 
@@ -61,7 +63,7 @@ export const putArticleById = async (
   id: string,
   revisedArticle: RevisedArticleInterface,
 ) => {
-  const res = await fetch(`${API_URL}/api/articles/${id}`, {
+  const res = await fetch(`${API_ARTICLE_URL}/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -73,7 +75,7 @@ export const putArticleById = async (
 }
 
 export const deleteArticleById = async (id: string) => {
-  const res = await fetch(`${API_URL}/api/articles?id=${id}`, {
+  const res = await fetch(`${API_ARTICLE_URL}?id=${id}`, {
     method: 'DELETE',
   })
 
