@@ -59,7 +59,7 @@ jobs:
             console.log('pr', pr, 'issues2', issues2)
 
             github.rest.issues.createComment({
-              issue_number: ${{env.GITHUB_PR_NUMEBR}},
+              issue_number: pr,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: "🚀 Preview : [Link](${{env.DEPLOYMENT_URL}})"
