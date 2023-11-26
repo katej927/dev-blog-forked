@@ -1,13 +1,16 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import useDebounce from '@/hooks/useDebounce'
 
 const Search = () => {
   const router = useRouter()
-  const [searchTerm, setSearchTerm] = useState<string>('')
+  const searchParams = useSearchParams()
+  const defaultSearchTerm = searchParams.get('q')
+
+  const [searchTerm, setSearchTerm] = useState<string>(defaultSearchTerm ?? '')
   const debouncedSearchTerm = useDebounce(searchTerm)
 
   useEffect(() => {
@@ -24,6 +27,7 @@ const Search = () => {
       <input
         placeholder="search article..."
         onChange={handleChangeSearchTerm}
+        value={searchTerm}
       />
     </div>
   )
