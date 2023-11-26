@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 import useDebounce from '@/hooks/useDebounce'
 
@@ -13,7 +13,14 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState<string>(defaultSearchTerm ?? '')
   const debouncedSearchTerm = useDebounce(searchTerm)
 
+  const initialRender = useRef(true)
+
   useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false
+      return
+    }
+
     router.push(`/${debouncedSearchTerm ? `?q=${debouncedSearchTerm}` : ''}`)
   }, [debouncedSearchTerm, router])
 
