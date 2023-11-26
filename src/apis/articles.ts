@@ -51,7 +51,7 @@ export const getArticleById = async (id: string) => {
   return res
 }
 
-export const getArticles = async (searchTerm: string | undefined) => {
+export const getArticles = async (searchTerm?: string) => {
   const res = await fetch(
     `${API_ARTICLE_URL}${
       searchTerm ? `?searchTerm=${encodeURIComponent(searchTerm)}` : ''
