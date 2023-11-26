@@ -3,13 +3,16 @@
 import { useRouter } from 'next/navigation'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
+import useDebounce from '@/hooks/useDebounce'
+
 const Search = () => {
   const router = useRouter()
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState<string>('')
+  const debouncedSearchTerm = useDebounce(searchTerm)
 
   useEffect(() => {
-    router.push(`/?q=${searchTerm}`)
-  }, [searchTerm, router])
+    router.push(`/${debouncedSearchTerm ? `?q=${debouncedSearchTerm}` : ''}`)
+  }, [debouncedSearchTerm, router])
 
   const handleChangeSearchTerm = ({
     target: { value },
