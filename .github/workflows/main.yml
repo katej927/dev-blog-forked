@@ -36,7 +36,6 @@ jobs:
       - name: Comment URL to PR
         env:
           DEPLOYMENT_URL: ${{needs.Deploy-Preview.outputs.deploymentUrl}}
-          GITHUB_PR_NUMEBR: ${{github.event.pull_request.number}}
         uses: actions/github-script@v6
         id: my-script
         with:
