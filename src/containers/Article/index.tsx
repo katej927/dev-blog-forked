@@ -1,5 +1,3 @@
-'use client'
-
 import dayjs from 'dayjs'
 import Link from 'next/link'
 
@@ -7,6 +5,7 @@ import { GetArticleInterface } from '@/apis/articles'
 
 import DeleteButton from './DeleteButton'
 import ArticleContent from '@/components/ArticleContent'
+import Comments from './Comments'
 
 interface Props {
   article: GetArticleInterface
@@ -29,6 +28,7 @@ const Article = ({
       <div>
         내용: <ArticleContent contentHtml={html} />
       </div>
+      <Comments />
     </div>
   )
 }
