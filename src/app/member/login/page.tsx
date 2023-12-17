@@ -8,6 +8,7 @@ const LoginPage = () => {
         errorMessage="Error Message"
         authenticationSwitchMessage="아직 회원이 아니세요?"
         submitButtonMessage="로그인"
+        authenticationSwitchLink="/member/register"
       />
     </div>
   )

@@ -4,6 +4,7 @@ interface Props {
   authenticationType: '로그인' | '회원가입'
   errorMessage: string
   authenticationSwitchMessage: string
+  authenticationSwitchLink: string
   submitButtonMessage: string
 }
 
@@ -11,6 +12,7 @@ const AuthenticationForm = ({
   authenticationType,
   errorMessage,
   authenticationSwitchMessage,
+  authenticationSwitchLink,
   submitButtonMessage,
 }: Props) => {
   return (
@@ -24,7 +26,7 @@ const AuthenticationForm = ({
           <button>{submitButtonMessage}</button>
 
           <div style={{ color: 'red' }}>{errorMessage}</div>
-          <Link href={'/member/register'}>
+          <Link href={authenticationSwitchLink}>
             {authenticationSwitchMessage} <span>{authenticationType}</span>
           </Link>
         </form>
