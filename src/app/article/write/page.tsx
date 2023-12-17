@@ -38,11 +38,23 @@ const WritePage = () => {
   }
 
   return (
-    <DynamicArticleForm
-      title={''}
-      content={{ text: '', html: '' }}
-      onSubmit={handleSubmit}
-    />
+    <>
+      <div>
+        <div>
+          Name: <span>John</span>
+        </div>
+        <div>
+          Email: <span>john@gmail.com</span>
+        </div>
+        <button>Log Out</button>
+      </div>
+      <br />
+      <DynamicArticleForm
+        title={''}
+        content={{ text: '', html: '' }}
+        onSubmit={handleSubmit}
+      />
+    </>
   )
 }
 
