@@ -28,7 +28,7 @@ const AuthenticationForm = ({
           <input type="password" placeholder="Password" />
           <button>{submitButtonMessage}</button>
 
-          <div style={{ color: 'red' }}>{errorMessage}</div>
+          {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
           <span>
             {authenticationSwitchMessage}
             <Link href={authenticationSwitchLink}>
