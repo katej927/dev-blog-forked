@@ -1,14 +1,23 @@
 import Link from 'next/link'
-import { ChangeEvent, useState, SyntheticEvent } from 'react'
+import { ChangeEvent, SyntheticEvent } from 'react'
 
 interface Props {
   authenticationType: '로그인' | '회원가입'
   authenticationSwitchMessage: string
   authenticationSwitchLink: string
   submitButtonMessage: string
-  initialName?: string
-  initialEmail?: string
-  initialPassword?: string
+  name: string
+  email: string
+  password: string
+  errorMessage: string
+  onChangeFullName?: ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => void
+  onChangeEmail: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void
+  onChangePassword: ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => void
+  onSubmit: (e: SyntheticEvent<HTMLFormElement>) => void
 }
 
 const AuthenticationForm = ({
@@ -16,55 +25,39 @@ const AuthenticationForm = ({
   authenticationSwitchMessage,
   authenticationSwitchLink,
   submitButtonMessage,
-  initialName,
-  initialEmail,
-  initialPassword,
+  name,
+  email,
+  password,
+  errorMessage,
+  onChangeFullName,
+  onChangeEmail,
+  onChangePassword,
+  onSubmit,
 }: Props) => {
-  const [name, setName] = useState<string>(initialName ?? '')
-  const [email, setEmail] = useState<string>(initialEmail ?? '')
-  const [password, setPassword] = useState<string>(initialPassword ?? '')
-  const [errorMessage, setErrorMessage] = useState<string>('')
-
-  const handleChangeFullName = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => setName(value)
-
-  const handleChangeEmail = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => setEmail(value)
-
-  const handleChangePassword = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => setPassword(value)
-
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
-
   return (
     <div>
       <div>
         <h1>{authenticationType}</h1>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           {authenticationType === '회원가입' && (
             <input
               type="text"
               placeholder="Full Name"
-              onChange={handleChangeFullName}
+              onChange={onChangeFullName}
               value={name}
             />
           )}
           <input
             type="text"
             placeholder="Email"
-            onChange={handleChangeEmail}
+            onChange={onChangeEmail}
             value={email}
           />
           <input
             type="password"
             placeholder="Password"
-            onChange={handleChangePassword}
+            onChange={onChangePassword}
             value={password}
           />
 
