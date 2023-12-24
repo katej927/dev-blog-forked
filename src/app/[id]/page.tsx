@@ -1,6 +1,9 @@
 import { notFound } from 'next/navigation'
 
-import { getArticleById, GetArticleResponseInterface } from '@/apis/articles'
+import {
+  getArticleById,
+  GetArticleResponseInterface,
+} from '@/apis/articles/route'
 import Article from '@/containers/Article'
 
 const ArticlePage = async ({ params }: { params: { id: string } }) => {

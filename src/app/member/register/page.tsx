@@ -24,6 +24,10 @@ const RegisterPage = () => {
 
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (!name || !email || !password) {
+      setErrorMessage('All fields are necessary.')
+    }
   }
 
   return (

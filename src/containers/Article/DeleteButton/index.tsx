@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
-import { deleteArticleById } from '@/apis/articles'
+import { deleteArticleById } from '@/apis/articles/route'
 
 const DeleteButton = ({ id }: { id: string }) => {
   const router = useRouter()

@@ -1,4 +1,4 @@
-import { API_URL } from '../constants/common'
+import { API_URL } from '../../constants/common'
 
 const API_ARTICLE_URL = `${API_URL}/api/articles`
 

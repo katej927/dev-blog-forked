@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { GetArticlesResponseInterface } from '@/apis/articles'
+import { GetArticlesResponseInterface } from '@/apis/articles/route'
 
 import Search from './Search'
 

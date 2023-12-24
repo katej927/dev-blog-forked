@@ -1,4 +1,7 @@
-import { GetArticlesResponseInterface, getArticles } from '@/apis/articles'
+import {
+  GetArticlesResponseInterface,
+  getArticles,
+} from '@/apis/articles/route'
 import Home from '@/containers/Home'
 
 const HomePage = async ({

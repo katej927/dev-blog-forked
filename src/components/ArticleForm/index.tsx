@@ -2,7 +2,7 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react'
 
-import { ArticleInterface } from '@/apis/articles'
+import { ArticleInterface } from '@/apis/articles/route'
 
 import Editor from './Editor'
 import ArticleContent from '../ArticleContent'

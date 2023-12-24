@@ -6,7 +6,7 @@ interface Props {
   authenticationSwitchMessage: string
   authenticationSwitchLink: string
   submitButtonMessage: string
-  name: string
+  name?: string
   email: string
   password: string
   errorMessage: string

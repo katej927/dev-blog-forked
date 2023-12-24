@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
-import { ArticleInterface, createArticle } from '@/apis/articles'
+import { ArticleInterface, createArticle } from '@/apis/articles/route'
 
 const DynamicArticleForm = dynamic(
   () => {

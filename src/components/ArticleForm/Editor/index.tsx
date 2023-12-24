@@ -4,7 +4,7 @@ import { useMemo, useRef } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-import { ArticleInterface } from '@/apis/articles'
+import { ArticleInterface } from '@/apis/articles/route'
 
 import { formats, convertModules } from './_shared'
 
