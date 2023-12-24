@@ -22,12 +22,20 @@ const RegisterPage = () => {
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => setPassword(value)
 
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!name || !email || !password) {
       setErrorMessage('All fields are necessary.')
     }
+
+    try {
+      await fetch('api/athenticaton/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      })
+    } catch (error) {}
   }
 
   return (

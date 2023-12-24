@@ -3,7 +3,7 @@
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-import { ArticleInterface } from '@/apis/articles/route'
+import { ArticleInterface } from '@/apis/articles'
 
 interface Props {
   contentHtml: ArticleInterface['content']['html']

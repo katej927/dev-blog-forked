@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import Link from 'next/link'
 
-import { GetArticleInterface } from '@/apis/articles/route'
+import { GetArticleInterface } from '@/apis/articles'
 
 import DeleteButton from './DeleteButton'
 import ArticleContent from '@/components/ArticleContent'

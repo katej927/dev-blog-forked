@@ -7,7 +7,7 @@ import {
   getArticleById,
   GetArticleResponseInterface,
   putArticleById,
-} from '@/apis/articles/route'
+} from '@/apis/articles'
 
 import ArticleForm from '@/components/ArticleForm'
 
