@@ -13,7 +13,7 @@ const Home = ({ data }: Props) => {
     <main>
       <Search />
       {data.articles?.map(({ title, content, _id }, idx) => (
-        <Link key={`${title}-${idx}`} href={`/${_id}`}>
+        <Link key={`${title}-${idx}`} href={`/article/${_id}`}>
           <div style={{ border: '1px solid black' }}>
             <div>{title}</div>
             <div>{content?.text}</div>
