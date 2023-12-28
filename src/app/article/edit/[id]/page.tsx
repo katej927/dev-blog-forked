@@ -26,6 +26,7 @@ const ArticleEditPage = async ({
 
   const data = await loadedArticle()
   if (!data) return notFound()
+
   const { article } = data
 
   return <ArticleEdit article={article} />
