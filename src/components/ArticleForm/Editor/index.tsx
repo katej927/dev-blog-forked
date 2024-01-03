@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css'
 
 import { ArticleInterface } from '@/apis/articles'
 
-import { formats, convertModules } from './_shared'
+import { FORMATS, convertModules } from './_shared'
 
 interface Props {
   contentHtml: ArticleInterface['content']['html']
@@ -28,7 +28,7 @@ const Editor = ({ contentHtml, onChangeContent }: Props) => {
         onChangeContent({ text: editor.getText(), html: editor.getHTML() })
       }
       modules={modules}
-      formats={formats}
+      formats={FORMATS}
       ref={(element) => {
         if (element !== null) {
           quillRef.current = element

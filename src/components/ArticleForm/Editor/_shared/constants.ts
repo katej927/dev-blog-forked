@@ -1,4 +1,4 @@
-export const toolbars = [
+export const TOOL_BARS = [
   [{ header: [1, 2, 3, 4, false] }],
   ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
   [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
@@ -6,7 +6,7 @@ export const toolbars = [
   [{ align: [] }, { color: [] }, { background: [] }],
 ]
 
-export const formats = [
+export const FORMATS = [
   'header',
   'bold',
   'italic',
