@@ -39,18 +39,18 @@ const Editor = ({ contentHtml, onChangeContent }: Props) => {
         /**
          * Firebase Method : uploadBytes, getDownloadURL
          */
-        await uploadBytes(storageRef, file).then((snapshot) => {
-          getDownloadURL(snapshot.ref).then((url) => {
-            /**
-             * 이미지 URL 에디터에 삽입
-             */
-            editor.insertEmbed(range.index, 'image', url)
-            /**
-             * URL 삽입 후 커서를 이미지 뒷 칸으로 이동
-             */
-            editor.setSelection(range.index + 1, 0)
-          })
-        })
+
+        const snapShot = await uploadBytes(storageRef, file)
+        const url = await getDownloadURL(snapShot.ref)
+
+        /**
+         * 이미지 URL 에디터에 삽입
+         */
+        editor.insertEmbed(range.index, 'image', url)
+        /**
+         * URL 삽입 후 커서를 이미지 뒷 칸으로 이동
+         */
+        editor.setSelection(range.index + 1, 0)
       } catch (error) {
         console.log(error)
       }
