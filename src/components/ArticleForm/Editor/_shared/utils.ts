@@ -1,8 +1,8 @@
-import { toolbars } from './constants'
+import { TOOL_BARS } from './constants'
 
 export const convertModules = (imageHandler: () => void) => ({
   toolbar: {
-    container: toolbars,
+    container: TOOL_BARS,
     handlers: {
       image: imageHandler,
     },
