@@ -55,8 +55,6 @@ jobs:
 
             const pr = context.issue.number || issues.data[0].number || issues2.data[0].number
 
-            console.log('pr', pr, 'issues2', issues2)
-
             github.rest.issues.createComment({
               issue_number: pr,
               owner: context.repo.owner,
