@@ -35,7 +35,9 @@ const Register = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
       })
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
