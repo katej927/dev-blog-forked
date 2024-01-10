@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 
 import { getArticleById, GetArticleResponseInterface } from '@/apis/articles'
-import Article from '@/containers/Article'
+import ArticleRead from '@/containers/Article/Read'
 
-const ArticlePage = async ({ params }: { params: { id: string } }) => {
+const ArticleReadPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params
 
   const loadedArticle = async (): Promise<
@@ -26,6 +26,6 @@ const ArticlePage = async ({ params }: { params: { id: string } }) => {
 
   const { article } = data
 
-  return <Article article={article} />
+  return <ArticleRead article={article} />
 }
-export default ArticlePage
+export default ArticleReadPage
