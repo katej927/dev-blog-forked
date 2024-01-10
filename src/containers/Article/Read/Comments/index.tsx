@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 
-import { COMMENT_ATTRIBUTES } from './_shared'
+import { COMMENT_ATTRIBUTES } from '../../Comments/_shared'
 
 const Comments = () => {
   const ref = useRef<HTMLDivElement>(null)
