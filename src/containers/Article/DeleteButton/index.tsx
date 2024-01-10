@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
-import { API_URL } from '@/src/constants/common'
+import { deleteArticleById } from '@/apis/articles'
 
 const DeleteButton = ({ id }: { id: string }) => {
   const router = useRouter()
@@ -13,9 +13,7 @@ const DeleteButton = ({ id }: { id: string }) => {
     if (!confirmed) return
 
     try {
-      const res = await fetch(`${API_URL}/api/articles?id=${id}`, {
-        method: 'DELETE',
-      })
+      const res = await deleteArticleById(id)
 
       if (!res.ok) {
         throw new Error('Failed to delete an article.')

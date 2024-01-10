@@ -53,8 +53,6 @@ jobs:
               repo: context.repo.repo,
             })
 
-            console.log('issues: ',issues, 'context.issue', context.issue, 'issues2: ',issues2)
-
             const pr = context.issue.number || issues.data[0].number || issues2.data[0].number
 
             github.rest.issues.createComment({

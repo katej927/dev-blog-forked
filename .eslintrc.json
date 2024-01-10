@@ -129,12 +129,7 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": [
-          "**/*.test.tsx",
-          "**/*.stories.*",
-          "**/.storybook/**/*.*",
-          "setupTests.ts"
-        ],
+        "devDependencies": true,
         "peerDependencies": true
       }
     ],
@@ -150,7 +145,7 @@
     ],
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
-      "warn",
+      "error",
       { "argsIgnorePattern": "^_" }
     ],
     "no-shadow": "off",
@@ -177,8 +172,8 @@
     "consistent-return": "off",
     "no-restricted-syntax": ["off", "ForOfStatement"], // disallow specified syntax(ex. WithStatement)
     "prefer-arrow-callback": "error", // Require using arrow functions for callbacks
-    "require-await": "error",
-    "arrow-parens": ["error", "as-needed"], // a => {}
+    "require-await": "warn",
+    "arrow-parens": ["warn", "as-needed"], // a => {}
     "no-param-reassign": ["error", { "props": false }],
     "no-unused-expressions": [
       "error",
