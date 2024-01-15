@@ -41,8 +41,9 @@ const Register = () => {
       })
 
       if (res.ok) {
-        const form = e.target
-        form.reset()
+        setName('')
+        setEmail('')
+        setPassword('')
       } else {
         console.log('User registration failed')
       }
