@@ -17,7 +17,9 @@ interface Props {
   onChangePassword: ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => void
-  onSubmit: (e: SyntheticEvent<HTMLFormElement>) => void
+  onSubmit: (
+    e: SyntheticEvent<HTMLFormElement> & { target: HTMLFormElement },
+  ) => void
 }
 
 const AuthenticationForm = ({

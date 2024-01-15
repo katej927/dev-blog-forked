@@ -2,6 +2,8 @@
 
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 
+import { API_URL } from '@/constants/common'
+
 import AuthenticationForm from '@/components/AuthenticationForm'
 
 const Register = () => {
@@ -22,7 +24,9 @@ const Register = () => {
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => setPassword(value)
 
-  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: SyntheticEvent<HTMLFormElement> & { target: HTMLFormElement },
+  ) => {
     e.preventDefault()
 
     if (!name || !email || !password) {
@@ -30,13 +34,20 @@ const Register = () => {
     }
 
     try {
-      await fetch('api/athenticaton/register', {
+      const res = await fetch(`${API_URL}/api/authentication/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
       })
+
+      if (res.ok) {
+        const form = e.target
+        form.reset()
+      } else {
+        console.log('User registration failed')
+      }
     } catch (error) {
-      console.log(error)
+      console.log('Error during registration: ', error)
     }
   }
 
