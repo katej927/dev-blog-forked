@@ -2,7 +2,7 @@
 
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 
-import { API_URL } from '@/constants/common'
+import { registerAccount } from '@/apis/authentication'
 
 import AuthenticationForm from '@/components/AuthenticationForm'
 
@@ -34,11 +34,7 @@ const Register = () => {
     }
 
     try {
-      const res = await fetch(`${API_URL}/api/authentication/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
-      })
+      const res = await registerAccount({ name, email, password })
 
       if (res.ok) {
         setName('')
