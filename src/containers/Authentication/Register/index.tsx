@@ -52,7 +52,7 @@ const Register = () => {
     <AuthenticationForm
       authenticationType="회원가입"
       authenticationSwitchMessage="이미 회원이시라면?"
-      authenticationSwitchLink="/member/login"
+      authenticationSwitchLink="/authentication/login"
       submitButtonMessage="가입하기"
       name={name}
       email={email}

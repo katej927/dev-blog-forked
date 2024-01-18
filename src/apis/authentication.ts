@@ -2,15 +2,13 @@ import { API_URL } from '@/constants/common'
 
 const API_AUTHENTICATION_URL = `${API_URL}/api/authentication`
 
-interface AccountInfomationInterface {
+interface AccountInfoInterface {
   name: string
   email: string
   password: string
 }
 
-export const registerAccount = async (
-  accountInfo: AccountInfomationInterface,
-) => {
+export const registerAccount = async (accountInfo: AccountInfoInterface) => {
   const res = await fetch(`${API_AUTHENTICATION_URL}/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
