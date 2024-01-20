@@ -1,6 +1,7 @@
 'use client'
 
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { confirmUserExists, registerAccount } from '@/apis/authentication'
 
@@ -11,6 +12,8 @@ const Register = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
+
+  const router = useRouter()
 
   const handleChangeFullName = ({
     target: { value },
@@ -52,6 +55,8 @@ const Register = () => {
         setName('')
         setEmail('')
         setPassword('')
+
+        router.push('/authentication/login')
       } else {
         console.log('User registration failed')
       }
