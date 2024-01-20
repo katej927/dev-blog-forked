@@ -34,16 +34,21 @@ const Register = () => {
     }
 
     try {
-      const res = await confirmUserExists({ email })
-      const { user } = await res.json()
+      const resUserExists = await confirmUserExists({ email })
+      const { user } = await resUserExists.json()
 
       if (user) {
         setErrorMessage('User already exists.')
+        return
       }
 
-      const res = await registerAccount({ name, email, password })
+      const resRegisterAccount = await registerAccount({
+        name,
+        email,
+        password,
+      })
 
-      if (res.ok) {
+      if (resRegisterAccount.ok) {
         setName('')
         setEmail('')
         setPassword('')
