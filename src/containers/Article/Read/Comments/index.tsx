@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef } from 'react'
 
+import { COMMENT_ATTRIBUTES } from './_shared'
+
 const Comments = () => {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -15,17 +17,9 @@ const Comments = () => {
     scriptElem.async = true
     scriptElem.crossOrigin = 'anonymous'
 
-    scriptElem.setAttribute('data-repo', 'katej927/dev-blog-forked')
-    scriptElem.setAttribute('data-repo-id', 'R_kgDOKg1Esw')
-    scriptElem.setAttribute('data-category', 'Comments')
-    scriptElem.setAttribute('data-category-id', 'DIC_kwDOKg1Es84CbSIt')
-    scriptElem.setAttribute('data-mapping', 'pathname')
-    scriptElem.setAttribute('data-strict', '0')
-    scriptElem.setAttribute('data-reactions-enabled', '1')
-    scriptElem.setAttribute('data-emit-metadata', '1')
-    scriptElem.setAttribute('data-input-position', 'top')
-    scriptElem.setAttribute('data-theme', 'preferred_color_scheme')
-    scriptElem.setAttribute('data-lang', 'en')
+    for (const [type, value] of Object.entries(COMMENT_ATTRIBUTES)) {
+      scriptElem.setAttribute(type, value)
+    }
 
     ref.current.appendChild(scriptElem)
   }, [])
