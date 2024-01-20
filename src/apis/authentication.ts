@@ -1,6 +1,4 @@
-import { API_URL } from '@/constants/common'
-
-const API_AUTHENTICATION_URL = `${API_URL}/api/authentication`
+import { API_AUTHENTICATION_URL } from '@/constants/common'
 
 interface AccountInfoInterface {
   name: string
