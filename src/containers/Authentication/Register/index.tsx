@@ -37,6 +37,10 @@ const Register = () => {
       const res = await confirmUserExists({ email })
       const { user } = await res.json()
 
+      if (user) {
+        setErrorMessage('User already exists.')
+      }
+
       const res = await registerAccount({ name, email, password })
 
       if (res.ok) {
