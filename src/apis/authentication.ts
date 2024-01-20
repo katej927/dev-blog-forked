@@ -17,3 +17,13 @@ export const registerAccount = async (accountInfo: AccountInfoInterface) => {
 
   return res
 }
+
+export const confirmUserExists = async ({ email }: { email: string }) => {
+  const res = await fetch(`${API_AUTHENTICATION_URL}/userExists`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  })
+
+  return res
+}

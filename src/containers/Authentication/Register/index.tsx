@@ -2,7 +2,7 @@
 
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 
-import { registerAccount } from '@/apis/authentication'
+import { confirmUserExists, registerAccount } from '@/apis/authentication'
 
 import AuthenticationForm from '@/components/AuthenticationForm'
 
@@ -34,6 +34,9 @@ const Register = () => {
     }
 
     try {
+      const res = await confirmUserExists({ email })
+      const { user } = await res.json()
+
       const res = await registerAccount({ name, email, password })
 
       if (res.ok) {

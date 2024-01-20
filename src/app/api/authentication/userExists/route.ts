@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 import { connectMongoDB } from '@/libs/mongodb'
 import User from '@/models/user'
@@ -8,6 +8,12 @@ export async function POST(request: NextRequest) {
     await connectMongoDB()
 
     const { email } = await request.json()
-    await User.findOne({ email }).select('_id')
-  } catch (error) {}
+    const user = await User.findOne({ email }).select('_id')
+
+    console.log('user: ', user)
+
+    return NextResponse.json({ user })
+  } catch (error) {
+    console.log(error)
+  }
 }
