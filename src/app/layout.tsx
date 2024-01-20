@@ -5,6 +5,7 @@ import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 import Navbar from '@/components/Navbar'
+import { AuthProvider } from './Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,10 +18,12 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <div>
-          <Navbar />
-          {children}
-        </div>
+        <AuthProvider>
+          <div>
+            <Navbar />
+            {children}
+          </div>
+        </AuthProvider>
       </body>
     </html>
   )
