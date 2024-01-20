@@ -1,9 +1,10 @@
 import NextAuth from 'next-auth/next'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import { AuthOptions } from 'next-auth'
 
 import { API_AUTHENTICATION_URL } from '@/constants/common'
 
-const authOptions = {
+const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
