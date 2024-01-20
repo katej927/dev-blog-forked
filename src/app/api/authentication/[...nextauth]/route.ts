@@ -21,7 +21,7 @@ const authOptions: AuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: `${API_AUTHENTICATION_URL}/register`,
+    signIn: `${API_AUTHENTICATION_URL}/login`,
   },
 }
 

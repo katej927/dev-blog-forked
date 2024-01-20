@@ -27,9 +27,7 @@ const Register = () => {
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => setPassword(value)
 
-  const handleSubmit = async (
-    e: SyntheticEvent<HTMLFormElement> & { target: HTMLFormElement },
-  ) => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!name || !email || !password) {
