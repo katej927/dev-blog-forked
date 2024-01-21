@@ -28,6 +28,11 @@ const Login = () => {
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    if (!email || !password) {
+      setErrorMessage('All fields are necessary.')
+      return
+    }
+
     try {
       const res = await signIn('credentials', {
         email,
@@ -37,6 +42,7 @@ const Login = () => {
 
       if (res?.error) {
         setErrorMessage('Invalid Credentials')
+        return
       }
 
       router.replace('/')
