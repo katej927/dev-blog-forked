@@ -1,4 +1,4 @@
-import Register from '@/containers/Authentication/Register'
+import Register from '@/containers/Auth/Register'
 
 const RegisterPage = () => {
   return <Register />

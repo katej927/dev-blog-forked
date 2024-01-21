@@ -4,7 +4,7 @@ import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
-import AuthenticationForm from '@/components/AuthenticationForm'
+import AuthForm from '@/components/AuthForm'
 
 const Login = () => {
   const [email, setEmail] = useState<string>('')
@@ -53,11 +53,11 @@ const Login = () => {
 
   return (
     <div>
-      <AuthenticationForm
-        authenticationType="로그인"
-        authenticationSwitchMessage="아직 회원이 아니라면?"
+      <AuthForm
+        authType="로그인"
+        authSwitchMessage="아직 회원이 아니라면?"
         submitButtonMessage="로그인"
-        authenticationSwitchLink="/auth/register"
+        authSwitchLink="/auth/register"
         onChangeEmail={handleChangeEmail}
         onChangePassword={handleChangePassword}
         onSubmit={handleSubmit}

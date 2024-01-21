@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { ChangeEvent, SyntheticEvent } from 'react'
 
 interface Props {
-  authenticationType: '로그인' | '회원가입'
-  authenticationSwitchMessage: string
-  authenticationSwitchLink: string
+  authType: '로그인' | '회원가입'
+  authSwitchMessage: string
+  authSwitchLink: string
   submitButtonMessage: string
   name?: string
   email: string
@@ -22,10 +22,10 @@ interface Props {
   ) => void
 }
 
-const AuthenticationForm = ({
-  authenticationType,
-  authenticationSwitchMessage,
-  authenticationSwitchLink,
+const authForm = ({
+  authType,
+  authSwitchMessage,
+  authSwitchLink,
   submitButtonMessage,
   name,
   email,
@@ -39,10 +39,10 @@ const AuthenticationForm = ({
   return (
     <div>
       <div>
-        <h1>{authenticationType}</h1>
+        <h1>{authType}</h1>
 
         <form onSubmit={onSubmit}>
-          {authenticationType === '회원가입' && (
+          {authType === '회원가입' && (
             <input
               type="text"
               placeholder="Full Name"
@@ -68,9 +68,9 @@ const AuthenticationForm = ({
           {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
 
           <span>
-            {authenticationSwitchMessage}
-            <Link href={authenticationSwitchLink}>
-              {authenticationType === '로그인' ? '회원가입' : '로그인'}
+            {authSwitchMessage}
+            <Link href={authSwitchLink}>
+              {authType === '로그인' ? '회원가입' : '로그인'}
             </Link>
           </span>
         </form>
@@ -79,4 +79,4 @@ const AuthenticationForm = ({
   )
 }
 
-export default AuthenticationForm
+export default authForm

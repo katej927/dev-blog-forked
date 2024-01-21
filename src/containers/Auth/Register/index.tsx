@@ -3,9 +3,9 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { confirmUserExists, registerAccount } from '@/apis/authentication'
+import { confirmUserExists, registerAccount } from '@/apis/auth'
 
-import AuthenticationForm from '@/components/AuthenticationForm'
+import AuthForm from '@/components/AuthForm'
 
 const Register = () => {
   const [name, setName] = useState<string>('')
@@ -64,10 +64,10 @@ const Register = () => {
   }
 
   return (
-    <AuthenticationForm
-      authenticationType="회원가입"
-      authenticationSwitchMessage="이미 회원이시라면?"
-      authenticationSwitchLink="/auth/login"
+    <AuthForm
+      authType="회원가입"
+      authSwitchMessage="이미 회원이시라면?"
+      authSwitchLink="/auth/login"
       submitButtonMessage="가입하기"
       name={name}
       email={email}
