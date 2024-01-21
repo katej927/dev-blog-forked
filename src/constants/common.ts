@@ -3,4 +3,4 @@ export const API_URL =
     ? process.env.NEXT_PUBLIC_DEV_URL
     : process.env.NEXT_PUBLIC_PROD_URL
 
-export const API_AUTHENTICATION_URL = `${API_URL}/api/authentication`
+export const API_AUTHENTICATION_URL = `${API_URL}/api/auth`
