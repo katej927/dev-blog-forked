@@ -57,7 +57,7 @@ const Login = () => {
         authenticationType="로그인"
         authenticationSwitchMessage="아직 회원이 아니라면?"
         submitButtonMessage="로그인"
-        authenticationSwitchLink="/authentication/register"
+        authenticationSwitchLink="/auth/register"
         onChangeEmail={handleChangeEmail}
         onChangePassword={handleChangePassword}
         onSubmit={handleSubmit}

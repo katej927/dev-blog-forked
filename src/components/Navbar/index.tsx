@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav style={{ display: 'flex' }}>
       <Link href={'/'}>Home</Link>
       <Link href={'/article/write'}>Write</Link>
-      <Link href={'/authentication/login'}>Login</Link>
+      <Link href={'/auth/login'}>Login</Link>
       <button onClick={() => signOut()}>Log Out</button>
     </nav>
   )

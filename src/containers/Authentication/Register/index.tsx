@@ -54,7 +54,7 @@ const Register = () => {
         setEmail('')
         setPassword('')
 
-        router.push('/authentication/login')
+        router.push('/auth/login')
       } else {
         console.log('User registration failed')
       }
@@ -67,7 +67,7 @@ const Register = () => {
     <AuthenticationForm
       authenticationType="회원가입"
       authenticationSwitchMessage="이미 회원이시라면?"
-      authenticationSwitchLink="/authentication/login"
+      authenticationSwitchLink="/auth/login"
       submitButtonMessage="가입하기"
       name={name}
       email={email}
