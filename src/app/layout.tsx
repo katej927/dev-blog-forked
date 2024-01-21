@@ -5,7 +5,7 @@ import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 import Navbar from '@/components/Navbar'
-import { AuthProvider } from './Providers'
+import { AuthProvider } from '../providers/auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
