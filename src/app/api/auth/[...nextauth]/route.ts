@@ -4,7 +4,6 @@ import { AuthOptions } from 'next-auth'
 import bcrypt from 'bcryptjs'
 
 import { connectMongoDB } from '@/libs/mongodb'
-import { API_AUTHENTICATION_URL } from '@/constants/common'
 import User from '@/models/user'
 import { AccountInfoInterface } from '@/types'
 
