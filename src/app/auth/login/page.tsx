@@ -1,14 +1,14 @@
-import { getServerSession } from 'next-auth'
-import { redirect } from 'next/navigation'
+// import { getServerSession } from 'next-auth'
+// import { redirect } from 'next/navigation'
 
 import Login from '@/containers/Auth/Login'
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
 const LoginPage = async () => {
-  const session = await getServerSession(authOptions)
+  // const session = await getServerSession(authOptions)
 
-  if (session) redirect('/')
+  // if (session) redirect('/')
 
   return <Login />
 }
