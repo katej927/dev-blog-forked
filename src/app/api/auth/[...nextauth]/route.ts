@@ -9,7 +9,7 @@ import { AccountInfoInterface } from '@/types'
 
 type CredentialsType = Pick<AccountInfoInterface, 'email' | 'password'>
 
-const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
