@@ -15,7 +15,11 @@ export const authOptions: AuthOptions = {
       name: 'credentials',
       credentials: {},
 
+      /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+      // @ts-ignore
       async authorize(credentials: CredentialsType) {
+        if (!credentials) throw new Error('no credentials to log in as')
+
         const { email, password } = credentials
 
         try {
