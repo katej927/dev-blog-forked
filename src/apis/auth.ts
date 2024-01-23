@@ -1,5 +1,7 @@
-import { API_AUTHENTICATION_URL } from '@/constants/common'
+import { API_URL } from '@/constants/common'
 import { AccountInfoInterface } from '@/types'
+
+const API_AUTHENTICATION_URL = `${API_URL}/api/auth`
 
 export const registerAccount = async (accountInfo: AccountInfoInterface) => {
   const res = await fetch(`${API_AUTHENTICATION_URL}/register`, {
