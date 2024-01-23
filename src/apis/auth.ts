@@ -13,7 +13,9 @@ export const registerAccount = async (accountInfo: AccountInfoInterface) => {
   return res
 }
 
-export const confirmUserExists = async ({ email }: { email: string }) => {
+export const confirmUserExists = async ({
+  email,
+}: Pick<AccountInfoInterface, 'email'>) => {
   const res = await fetch(`${API_AUTHENTICATION_URL}/userExists`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
