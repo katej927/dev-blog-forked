@@ -22,7 +22,7 @@ interface Props {
   ) => void
 }
 
-const authForm = ({
+const AuthForm = ({
   authType,
   authSwitchMessage,
   authSwitchLink,
@@ -79,4 +79,4 @@ const authForm = ({
   )
 }
 
-export default authForm
+export default AuthForm
