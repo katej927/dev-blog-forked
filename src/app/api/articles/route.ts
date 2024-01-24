@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import connectMongoDB from '@/libs/mongodb'
+import { connectMongoDB } from '@/libs/mongodb'
 import Article from '@/models/article'
 
 export const POST = async (request: NextRequest) => {
