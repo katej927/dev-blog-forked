@@ -1,10 +1,11 @@
+import { MutableRefObject } from 'react'
 import { ImageResize } from 'quill-image-resize-module-ts'
 import ReactQuill, { Quill } from 'react-quill'
-import { storage } from '@/Firebase'
+// eslint-disable-next-line import/order
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage'
-
+import { storage } from '@/Firebase'
 import { TOOL_BARS } from './constants'
-import { MutableRefObject } from 'react'
+
 Quill.register('modules/ImageResize', ImageResize)
 
 const imageHandler = (quillRef: MutableRefObject<ReactQuill | undefined>) => {
