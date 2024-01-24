@@ -30,7 +30,6 @@ const imageHandler = (quillRef: MutableRefObject<ReactQuill | undefined>) => {
         /**
          * Firebase Method : uploadBytes, getDownloadURL
          */
-
         const snapShot = await uploadBytes(storageRef, file)
         const url = await getDownloadURL(snapShot.ref)
 
