@@ -1,6 +1,5 @@
 import { ImageResize } from 'quill-image-resize-module-ts'
 import { Quill } from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
 
 import { TOOL_BARS } from './constants'
 Quill.register('modules/ImageResize', ImageResize)
@@ -14,6 +13,6 @@ export const convertModules = (imageHandler: () => void) => ({
   },
   ImageResize: {
     parchment: Quill.import('parchment'),
-    modules: ['Resize', 'DisplaySize', 'Toolbar'],
+    modules: ['Resize', 'DisplaySize'],
   },
 })
