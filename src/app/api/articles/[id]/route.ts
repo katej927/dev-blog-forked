@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { connectMongoDB } from '@/libs/mongodb'
-import { Article } from '@/models/article'
+import { Article, ArticleContent } from '@/models/article'
 
 export const PUT = async (
   request: NextRequest,
@@ -11,9 +11,20 @@ export const PUT = async (
     params: { id: string }
   },
 ) => {
-  const { newTitle: title, newContent: content } = await request.json()
+  const {
+    newTitle: title,
+    newContent: { text, html },
+  } = await request.json()
+
   await connectMongoDB()
-  await Article.findByIdAndUpdate(id, { title, content })
+
+  const { content: contentId } = await Article.findByIdAndUpdate(id, { title })
+
+  await ArticleContent.findByIdAndUpdate(contentId, {
+    text,
+    html,
+  })
+
   return NextResponse.json({ message: 'Article updated' }, { status: 200 })
 }
 
