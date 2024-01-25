@@ -5,15 +5,15 @@ import { GetArticleInterface } from '@/apis/articles'
 import Search from './Search'
 
 interface Props {
-  data: GetArticleInterface[] | undefined
+  articles: GetArticleInterface[] | undefined
 }
 
-const Home = ({ data }: Props) => {
+const Home = ({ articles }: Props) => {
   return (
     <main>
       <Search />
-      {data ? (
-        data.map(({ title, content, _id }, idx) => (
+      {articles ? (
+        articles.map(({ title, content, _id }, idx) => (
           <Link key={`${title}-${idx}`} href={`/article/${_id}`}>
             <div style={{ border: '1px solid black' }}>
               <div>{title}</div>

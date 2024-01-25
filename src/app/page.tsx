@@ -32,9 +32,9 @@ const HomePage = async ({
       console.log('Error loading articles:', error)
     }
   }
-  const data = await loadedArticles()
+  const articles = await loadedArticles()
 
-  return <Home data={data} />
+  return <Home articles={articles} />
 }
 
 export default HomePage
