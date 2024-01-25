@@ -13,11 +13,10 @@ const Home = ({ articles }: Props) => {
     <main>
       <Search />
       {articles ? (
-        articles.map(({ title, content, _id }, idx) => (
-          <Link key={`${title}-${idx}`} href={`/article/${_id}`}>
+        articles.map(({ title, content: contentId, _id }) => (
+          <Link key={_id} href={`/article/${contentId}`}>
             <div style={{ border: '1px solid black' }}>
               <div>{title}</div>
-              <div>{content?.text}</div>
             </div>
           </Link>
         ))

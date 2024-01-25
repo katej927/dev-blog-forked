@@ -14,7 +14,7 @@ const articleContentSchema = new Schema({
 const articleSchema = new Schema(
   {
     title: { type: String, required: true },
-    articleContentId: {
+    content: {
       type: Schema.Types.ObjectId,
       ref: 'ArticleContent',
       required: true,

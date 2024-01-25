@@ -17,7 +17,7 @@ export const POST = async (request: NextRequest) => {
   })
   const { _id: articleId } = await Article.create({
     title,
-    articleContentId,
+    content: articleContentId,
   })
 
   return NextResponse.json({ message: articleId.toString() }, { status: 201 })
@@ -36,7 +36,7 @@ export const GET = async (request: NextRequest) => {
   }
 
   const articles = searchTerm
-    ? await Article.find(searchCondition)
+    ? await Article.find(searchCondition).populate('content')
     : await Article.find()
 
   return NextResponse.json({ articles })
