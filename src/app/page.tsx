@@ -9,7 +9,7 @@ const HomePage = async ({
   const { q: searchTerm } = searchParams
 
   const loadedArticles = async (): Promise<
-    GetArticlesResponseInterface | undefined
+    GetArticlesResponseInterface['articles'] | undefined
   > => {
     try {
       const res = await getArticles(searchTerm)
@@ -18,14 +18,21 @@ const HomePage = async ({
         throw new Error('Failed to fetch articles')
       }
 
-      return res.json()
+      const { articles }: GetArticlesResponseInterface = await res.json()
+
+      if (!articles.length) return undefined
+
+      const latestSortedResult = articles.sort(
+        (a, b) =>
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+      )
+
+      return latestSortedResult
     } catch (error) {
       console.log('Error loading articles:', error)
     }
   }
   const data = await loadedArticles()
-
-  if (!data) return
 
   return <Home data={data} />
 }
