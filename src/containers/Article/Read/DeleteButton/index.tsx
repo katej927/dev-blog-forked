@@ -16,6 +16,7 @@ const DeleteButton = ({ id }: { id: string }) => {
       const res = await deleteArticleById(id)
 
       if (!res.ok) {
+        router.push('/')
         throw new Error('Failed to delete an article.')
       }
 

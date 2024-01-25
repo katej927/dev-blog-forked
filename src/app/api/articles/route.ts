@@ -44,7 +44,11 @@ export const GET = async (request: NextRequest) => {
 
 export const DELETE = async (request: NextRequest) => {
   const id = request.nextUrl.searchParams.get('id')
+
   await connectMongoDB()
-  await Article.findByIdAndDelete(id)
+
+  const { content: contentId } = await Article.findByIdAndDelete(id)
+  await ArticleContent.findByIdAndDelete(contentId)
+
   return NextResponse.json({ message: 'Article deleted' }, { status: 200 })
 }
