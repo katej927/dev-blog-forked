@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { connectMongoDB } from '@/libs/mongodb'
-import Article from '@/models/article'
+import { Article } from '@/models/article'
 
 export const PUT = async (
   request: NextRequest,
@@ -26,6 +26,7 @@ export const GET = async (
   },
 ) => {
   await connectMongoDB()
-  const article = await Article.findOne({ _id: id })
+  const article = await Article.findOne({ _id: id }).populate('content')
+
   return NextResponse.json({ article }, { status: 200 })
 }
