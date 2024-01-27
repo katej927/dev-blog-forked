@@ -1,16 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { connectMongoDB } from '@/libs/mongodb'
-import Article from '@/models/article'
+import { Article, ArticleContent } from '@/models/article'
+import { ArticleInterface } from '@/apis/articles'
 
 export const POST = async (request: NextRequest) => {
-  const { title, content } = await request.json()
+  const {
+    title,
+    content: { text, html },
+  }: ArticleInterface = await request.json()
   await connectMongoDB()
 
-  const createdInfo = await Article.create({ title, content })
-  const { _id } = createdInfo
+  const { _id: articleContentId } = await ArticleContent.create({
+    text,
+    html,
+  })
+  const { _id: articleId } = await Article.create({
+    title,
+    content: articleContentId,
+  })
 
-  return NextResponse.json({ message: _id.toString() }, { status: 201 })
+  return NextResponse.json({ message: articleId.toString() }, { status: 201 })
 }
 
 export const GET = async (request: NextRequest) => {
@@ -26,7 +36,7 @@ export const GET = async (request: NextRequest) => {
   }
 
   const articles = searchTerm
-    ? await Article.find(searchCondition)
+    ? await Article.find(searchCondition).populate('content')
     : await Article.find()
 
   return NextResponse.json({ articles })
@@ -34,7 +44,11 @@ export const GET = async (request: NextRequest) => {
 
 export const DELETE = async (request: NextRequest) => {
   const id = request.nextUrl.searchParams.get('id')
+
   await connectMongoDB()
-  await Article.findByIdAndDelete(id)
+
+  const { content: contentId } = await Article.findByIdAndDelete(id)
+  await ArticleContent.findByIdAndDelete(contentId)
+
   return NextResponse.json({ message: 'Article deleted' }, { status: 200 })
 }

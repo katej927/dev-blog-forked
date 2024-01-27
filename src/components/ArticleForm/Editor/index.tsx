@@ -9,10 +9,11 @@ import { ArticleInterface } from '@/apis/articles'
 import { storage } from '@/Firebase'
 
 import { FORMATS, convertModules } from './_shared'
+import { HandleChangeNewContentType } from '../_shared'
 
 interface Props {
   contentHtml: ArticleInterface['content']['html']
-  onChangeContent: (value: ArticleInterface['content']) => void
+  onChangeContent: (content: HandleChangeNewContentType) => void
 }
 
 const Editor = ({ contentHtml, onChangeContent }: Props) => {
@@ -66,7 +67,10 @@ const Editor = ({ contentHtml, onChangeContent }: Props) => {
       theme="snow"
       style={{ height: '600px' }}
       onChange={(value, delta, source, editor) =>
-        onChangeContent({ text: editor.getText(), html: editor.getHTML() })
+        onChangeContent({
+          text: editor.getText(),
+          html: editor.getHTML(),
+        })
       }
       modules={modules}
       formats={FORMATS}
