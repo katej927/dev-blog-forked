@@ -4,7 +4,7 @@ const API_ARTICLE_URL_FOR_SSR = `${API_URL_FOR_SSR}/api/articles`
 const API_ARTICLE_URL_FOR_CSR = `${API_URL_FOR_CSR}/api/articles`
 
 export interface ArticleContentInterface {
-  _id: string
+  _id?: string
   text: string
   html: string
 }
