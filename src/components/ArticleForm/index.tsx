@@ -11,13 +11,13 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   const [newContent, setNewContent] = useState<NewContentType>(content)
 
   const handleChangeNewTitle = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => setNewTitle(value)
+    target: { value: changedNewTitle },
+  }: ChangeEvent<HTMLInputElement>) => setNewTitle(changedNewTitle)
 
   const handleChangeNewContent = (
-    content: Pick<NewContentType, 'html' | 'text'>,
+    changedNewContent: Pick<NewContentType, 'html' | 'text'>,
   ) => {
-    setNewContent((prev) => ({ ...prev, ...content }))
+    setNewContent((prev) => ({ ...prev, ...changedNewContent }))
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
