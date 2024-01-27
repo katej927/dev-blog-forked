@@ -9,7 +9,7 @@ import { ArticleInterface } from '@/apis/articles'
 import { storage } from '@/Firebase'
 
 import { FORMATS, convertModules } from './_shared'
-import { HandleChangeNewContentType } from '..'
+import { HandleChangeNewContentType } from '../_shared'
 
 interface Props {
   contentHtml: ArticleInterface['content']['html']

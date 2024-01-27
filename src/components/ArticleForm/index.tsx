@@ -2,21 +2,11 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react'
 
-import { ArticleInterface } from '@/apis/articles'
-
 import Editor from './Editor'
 import ArticleContent from '../ArticleContent'
+import { ArticleFormProps, NewContentType, NewTitleType } from './_shared'
 
-interface Props extends ArticleInterface {
-  onSubmit: (article: ArticleInterface) => Promise<void>
-}
-
-type NewTitleType = ArticleInterface['title']
-type NewContentType = ArticleInterface['content']
-
-export type HandleChangeNewContentType = Pick<NewContentType, 'html' | 'text'>
-
-const ArticleForm = ({ title, content, onSubmit }: Props) => {
+const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   const [newTitle, setNewTitle] = useState<NewTitleType>(title)
   const [newContent, setNewContent] = useState<NewContentType>(content)
 
