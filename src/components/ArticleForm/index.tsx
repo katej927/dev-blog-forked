@@ -11,17 +11,23 @@ interface Props extends ArticleInterface {
   onSubmit: (article: ArticleInterface) => Promise<void>
 }
 
+type NewTitleType = ArticleInterface['title']
+type NewContentType = ArticleInterface['content']
+
+export type HandleChangeNewContentType = Pick<NewContentType, 'html' | 'text'>
+
 const ArticleForm = ({ title, content, onSubmit }: Props) => {
-  const [newTitle, setNewTitle] = useState<ArticleInterface['title']>(title)
-  const [newContent, setNewContent] =
-    useState<ArticleInterface['content']>(content)
+  const [newTitle, setNewTitle] = useState<NewTitleType>(title)
+  const [newContent, setNewContent] = useState<NewContentType>(content)
 
   const handleChangeNewTitle = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => setNewTitle(value)
 
-  const handleChangeNewContent = (value: ArticleInterface['content']) => {
-    setNewContent(value)
+  const handleChangeNewContent = (
+    content: Pick<NewContentType, 'html' | 'text'>,
+  ) => {
+    setNewContent((prev) => ({ ...prev, ...content }))
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
