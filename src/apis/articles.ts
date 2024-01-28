@@ -29,8 +29,13 @@ export interface GetArticleResponseInterface {
   article: GetArticleInterface
 }
 
+export interface ArticleOfGetArticlesResponseInterface
+  extends Omit<GetArticleInterface, 'content'> {
+  content: Pick<ArticleContentInterface, '_id'>
+}
+
 export interface GetArticlesResponseInterface {
-  articles: GetArticleInterface[]
+  articles: ArticleOfGetArticlesResponseInterface[]
 }
 
 export const createArticle = async (article: ArticleInterface) => {
