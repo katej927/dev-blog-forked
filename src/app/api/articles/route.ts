@@ -56,11 +56,11 @@ export const GET = async (request: NextRequest) => {
         },
         {
           $project: {
+            _id: 1,
             title: 1,
             content: { _id: 1 },
             createdAt: 1,
             updatedAt: 1,
-            __v: 1,
           },
         },
       ])
