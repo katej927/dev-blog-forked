@@ -36,7 +36,34 @@ export const GET = async (request: NextRequest) => {
   }
 
   const articles = searchTerm
-    ? await Article.find(searchCondition).populate('content')
+    ? await Article.aggregate([
+        {
+          $lookup: {
+            from: 'articlecontents',
+            localField: 'content',
+            foreignField: '_id',
+            as: 'content',
+          },
+        },
+        {
+          $unwind: {
+            path: '$content',
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+        {
+          $match: searchCondition,
+        },
+        {
+          $project: {
+            _id: 1,
+            title: 1,
+            content: { _id: 1 },
+            createdAt: 1,
+            updatedAt: 1,
+          },
+        },
+      ])
     : await Article.find()
 
   return NextResponse.json({ articles })

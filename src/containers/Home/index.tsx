@@ -1,11 +1,11 @@
 import Link from 'next/link'
 
-import { GetArticleInterface } from '@/apis/articles'
+import { ArticleOfGetArticlesResponseInterface } from '@/apis/articles'
 
 import Search from './Search'
 
 interface Props {
-  articles: GetArticleInterface[] | undefined
+  articles: ArticleOfGetArticlesResponseInterface[] | undefined
 }
 
 const Home = ({ articles }: Props) => {
