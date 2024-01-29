@@ -3,7 +3,9 @@
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
-import { ArticleInterface, createArticle } from '@/apis/articles'
+// TODO: 주석 수정
+// import { ArticleInterface, createArticle } from '@/apis/articles'
+import { ArticleTitleContentType } from '@/components/ArticleForm/_shared/types'
 
 const DynamicArticleForm = dynamic(
   () => {
@@ -15,7 +17,7 @@ const DynamicArticleForm = dynamic(
 const ArticleWrite = () => {
   const router = useRouter()
 
-  const handleSubmit = async (article: ArticleInterface) => {
+  const handleSubmit = async (article: ArticleTitleContentType) => {
     const { title, content } = article
 
     if (!title || !content) {
@@ -24,14 +26,13 @@ const ArticleWrite = () => {
     }
 
     try {
-      const res = await createArticle(article)
-
-      if (!res.ok) {
-        throw new Error('Failed to create an article')
-      }
-
-      const { message: articleId } = await res.json()
-      router.push(`${articleId}`)
+      // TODO: 주석 수정
+      // const res = await createArticle(article)
+      // if (!res.ok) {
+      //   throw new Error('Failed to create an article')
+      // }
+      // const { message: articleId } = await res.json()
+      // router.push(`${articleId}`)
     } catch (error) {
       console.log(error)
     }
