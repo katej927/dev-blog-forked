@@ -11,6 +11,7 @@ interface Props {
   article: GetArticleInterface
 }
 
+// TODO: 카테고리 수정
 const ArticleEdit = ({ article: { title, content, _id: id } }: Props) => {
   const router = useRouter()
 

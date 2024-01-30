@@ -29,6 +29,9 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <button type="submit">Publish</button>
+      <div>
+        tmp 카테고리 : <input type="text" placeholder="Text Category..." />
+      </div>
       <input
         onChange={handleChangeNewTitle}
         value={newTitle}

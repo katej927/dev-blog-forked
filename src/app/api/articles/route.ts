@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { connectMongoDB } from '@/libs/mongodb'
-import { Article, ArticleContent } from '@/models/article'
+import { Article, ArticleContent, Category } from '@/models/article'
 import { ArticleInterface } from '@/apis/articles'
 
 export const POST = async (request: NextRequest) => {
   const {
     title,
     content: { text, html },
+    category,
   }: ArticleInterface = await request.json()
   await connectMongoDB()
 
@@ -15,10 +16,19 @@ export const POST = async (request: NextRequest) => {
     text,
     html,
   })
+
   const { _id: articleId } = await Article.create({
     title,
     content: articleContentId,
   })
+
+  let foundCategory = await Category.findOne({ categoryName: category })
+  if (foundCategory) {
+    foundCategory.articles.push(articleId)
+    await foundCategory.save()
+  } else {
+    await Category.create({ categoryName: category, articles: [articleId] })
+  }
 
   return NextResponse.json({ message: articleId.toString() }, { status: 201 })
 }
