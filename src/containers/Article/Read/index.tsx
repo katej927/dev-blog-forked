@@ -1,9 +1,8 @@
 import dayjs from 'dayjs'
-import Link from 'next/link'
 
 import { GetArticleInterface } from '@/apis/articles'
 
-import DeleteButton from './DeleteButton'
+import EditButtons from './EditButtons'
 import ArticleContent from '@/components/ArticleContent'
 import Comments from './Comments'
 
@@ -22,8 +21,7 @@ const Article = ({
   return (
     <div>
       <h2>제목: {title}</h2>
-      <Link href={`edit/${_id}`}>수정</Link>
-      <DeleteButton id={_id} />
+      <EditButtons id={_id} />
       <div>수정 일자: {dayjs(updatedAt).format('YYYY-MM-DD')}</div>
       <div>
         내용: <ArticleContent contentHtml={html} />

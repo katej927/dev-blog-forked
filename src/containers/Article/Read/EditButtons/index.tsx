@@ -1,10 +1,13 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 import { deleteArticleById } from '@/apis/articles'
+import useIsLogin from '@/hooks/useIsLogin'
 
-const DeleteButton = ({ id }: { id: string }) => {
+const EditButtons = ({ id }: { id: string }) => {
+  const { isLoggedin } = useIsLogin()
   const router = useRouter()
 
   const handleClickDeleteButton = async () => {
@@ -26,6 +29,12 @@ const DeleteButton = ({ id }: { id: string }) => {
     }
   }
 
-  return <button onClick={handleClickDeleteButton}>DeleteButton</button>
+  if (!isLoggedin) return
+  return (
+    <>
+      <Link href={`edit/${id}`}>수정</Link>
+      <button onClick={handleClickDeleteButton}>삭제</button>
+    </>
+  )
 }
-export default DeleteButton
+export default EditButtons
