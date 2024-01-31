@@ -1,5 +1,7 @@
+import styles from './index.module.css'
+
 function ArticleSetupModal() {
-  return <div>ArticleSetupModal</div>
+  return <div className={styles.container}>카테고리 설정</div>
 }
 
 export default ArticleSetupModal
