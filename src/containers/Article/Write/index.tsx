@@ -16,13 +16,6 @@ const ArticleWrite = () => {
   const router = useRouter()
 
   const handleSubmit = async (article: ArticleInterface) => {
-    const { title, content } = article
-
-    if (!title || !content) {
-      alert('Title and content are required')
-      return
-    }
-
     try {
       const res = await createArticle(article)
 

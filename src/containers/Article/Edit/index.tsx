@@ -20,11 +20,6 @@ const ArticleEdit = ({ article: { title, content, _id: id } }: Props) => {
   const handleSubmit = async (editedArticle: ArticleInterface) => {
     const { title: newTitle, content: newContent } = editedArticle
 
-    if (!newTitle || !newContent) {
-      alert('Title and description are required')
-      return
-    }
-
     try {
       const res = await putArticleById(id, { newTitle, newContent })
 

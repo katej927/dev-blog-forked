@@ -24,15 +24,25 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
     setNewContent((prev) => ({ ...prev, ...changedNewContent }))
   }
 
+  // TODO: 차후 수정 필요
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     onSubmit({ title: newTitle, content: newContent })
   }
 
+  const handleSubmitTitleContent = () => {
+    if (!newTitle || !newContent) {
+      alert('Title and content are required')
+      return
+    }
+
+    setShowModal(true)
+  }
+
   return (
     <form onSubmit={handleSubmit}>
-      <button type="button" onClick={() => setShowModal(true)}>
+      <button type="button" onClick={handleSubmitTitleContent}>
         Publish
       </button>
       <input
