@@ -22,13 +22,14 @@ export const POST = async (request: NextRequest) => {
     content: articleContentId,
   })
 
-  let foundCategory = await Category.findOne({ categoryName: category })
-  if (foundCategory) {
-    foundCategory.articles.push(articleId)
-    await foundCategory.save()
-  } else {
-    await Category.create({ categoryName: category, articles: [articleId] })
-  }
+  // TODO: 수정 필요
+  // let foundCategory = await Category.findOne({ categoryName: category })
+  // if (foundCategory) {
+  //   foundCategory.articles.push(articleId)
+  //   await foundCategory.save()
+  // } else {
+  //   await Category.create({ categoryName: category, articles: [articleId] })
+  // }
 
   return NextResponse.json({ message: articleId.toString() }, { status: 201 })
 }
