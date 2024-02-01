@@ -1,5 +1,5 @@
-import { Category } from '@/models/article'
 import connectMongoDB from '@/libs/mongodb'
+import Category from '@/models/category'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const POST = async (request: NextRequest) => {
@@ -24,6 +24,8 @@ export const POST = async (request: NextRequest) => {
 
 export const GET = async () => {
   try {
+    await connectMongoDB()
+
     const categories = await Category.find({})
 
     return NextResponse.json(categories)

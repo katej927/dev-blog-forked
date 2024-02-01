@@ -1,10 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
 
-const categorySchema = new Schema({
-  categoryName: { type: String, required: true },
-  articles: [{ type: Schema.Types.ObjectId, ref: 'Article' }],
-})
-
 const articleContentSchema = new Schema({
   text: {
     type: String,
@@ -33,9 +28,6 @@ const articleSchema = new Schema(
   { timestamps: true },
 )
 
-const Category =
-  mongoose.models.Category || mongoose.model('Category', categorySchema)
-
 const ArticleContent =
   mongoose.models.ArticleContent ||
   mongoose.model('ArticleContent', articleContentSchema)
@@ -43,4 +35,4 @@ const ArticleContent =
 const Article =
   mongoose.models.Article || mongoose.model('Article', articleSchema)
 
-export { Article, ArticleContent, Category }
+export { Article, ArticleContent }
