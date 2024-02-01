@@ -12,7 +12,7 @@ export interface ArticleContentInterface {
 export interface ArticleInterface {
   title: string
   content: ArticleContentInterface
-  category: string
+  category: string | null
 }
 
 export interface RevisedArticleInterface {

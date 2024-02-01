@@ -22,7 +22,7 @@ const articleSchema = new Schema(
     category: {
       type: Schema.Types.ObjectId,
       ref: 'Category',
-      required: true,
+      required: false,
     },
   },
   { timestamps: true },
