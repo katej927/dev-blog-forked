@@ -4,6 +4,7 @@ import { ArticleInterface } from './articles'
 const API_CATEGORY_URL = `${API_URL_FOR_CSR}/api/categories`
 
 interface CategoryInterface {
+  _id: string
   categoryName: string
   articles: ArticleInterface[]
 }
@@ -25,6 +26,21 @@ export const createCategory = async (
 export const getCategories = async () => {
   const res = await fetch(`${API_CATEGORY_URL}`, {
     cache: 'no-cache',
+  })
+
+  return res
+}
+
+export const putCategoryById = async ({
+  _id,
+  categoryName,
+}: Pick<CategoryInterface, 'categoryName' | '_id'>) => {
+  const res = await fetch(`${API_CATEGORY_URL}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ categoryName }),
   })
 
   return res
