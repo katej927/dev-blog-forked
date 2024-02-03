@@ -55,7 +55,7 @@ export const putCategoryById = async ({
 }
 
 export const deleteCategoryById = async (id: string) => {
-  const res = await fetch(`${API_CATEGORY_URL}?id=${id}`, {
+  const res = await fetch(`${API_CATEGORY_URL}/${id}`, {
     method: 'DELETE',
   })
 

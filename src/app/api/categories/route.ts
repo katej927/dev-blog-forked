@@ -35,31 +35,3 @@ export const GET = async () => {
     return NextResponse.json({ error: 'Failed to fetch categories.' })
   }
 }
-
-export const DELETE = async (request: any) => {
-  const categoryId = request.nextUrl.searchParams.get('id')
-
-  try {
-    await connectMongoDB()
-
-    await Article.updateMany(
-      { category: categoryId },
-      { $set: { category: null } },
-    )
-
-    await Category.deleteOne({ _id: categoryId })
-
-    return NextResponse.json(
-      { message: 'Category and associated articles deleted' },
-      { status: 200 },
-    )
-  } catch (error) {
-    console.error('An error occurred while deleting the category: ', error)
-    return NextResponse.json(
-      {
-        message: 'Error occurred while deleting the category',
-      },
-      { status: 500 },
-    )
-  }
-}

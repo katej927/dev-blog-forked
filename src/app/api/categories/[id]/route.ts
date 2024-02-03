@@ -1,4 +1,5 @@
 import connectMongoDB from '@/libs/mongodb'
+import { Article } from '@/models/article'
 import Category from '@/models/category'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -48,4 +49,33 @@ export const GET = async (
   const category = await Category.findOne({ _id: id }).populate('articles')
 
   return NextResponse.json({ category }, { status: 200 })
+}
+
+export const DELETE = async (
+  request: NextRequest,
+  { params: { id: categoryId } }: { params: { id: string } },
+) => {
+  try {
+    await connectMongoDB()
+
+    await Article.updateMany(
+      { category: categoryId },
+      { $set: { category: null } },
+    )
+
+    await Category.deleteOne({ _id: categoryId })
+
+    return NextResponse.json(
+      { message: 'Category and associated articles deleted' },
+      { status: 200 },
+    )
+  } catch (error) {
+    console.error('An error occurred while deleting the category: ', error)
+    return NextResponse.json(
+      {
+        message: 'Error occurred while deleting the category',
+      },
+      { status: 500 },
+    )
+  }
 }
