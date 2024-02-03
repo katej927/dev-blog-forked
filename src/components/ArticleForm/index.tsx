@@ -5,17 +5,12 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import Editor from './Editor'
 import ArticleContent from '../ArticleContent'
 import { ArticleFormProps, NewContentType, NewTitleType } from './_shared'
-// import {
-//   createCategory,
-//   deleteCategoryById,
-//   putCategoryById,
-// } from '@/apis/categories'
 
 const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   const [newTitle, setNewTitle] = useState<NewTitleType>(title)
   const [newContent, setNewContent] = useState<NewContentType>(content)
 
-  const [tmpCategory, setTmpCategory] = useState('65bb9dd07139d9556e3124b3')
+  const [tmpCategory, setTmpCategory] = useState('65bb9ebe7139d9556e3124bb')
 
   const handleChangeNewTitle = ({
     target: { value: changedNewTitle },
@@ -39,7 +34,7 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   // }: ChangeEvent<HTMLInputElement>) => setTmpCategory(value)
 
   // const handleClickCategory = async () => {
-  //   const res = await deleteCategoryById('65bb9dd07139d9556e3124b3')
+  //   const res = await getCategoryById('65bb9ebe7139d9556e3124bb')
   //   const categories = await res.json()
   //   console.log('categories', categories)
   // }

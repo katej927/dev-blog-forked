@@ -23,6 +23,14 @@ export const createCategory = async (
   return res
 }
 
+export const getCategoryById = async (id: string) => {
+  const res = await fetch(`${API_CATEGORY_URL}/${id}`, {
+    cache: 'no-cache',
+  })
+
+  return res
+}
+
 export const getCategories = async () => {
   const res = await fetch(`${API_CATEGORY_URL}`, {
     cache: 'no-cache',

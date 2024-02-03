@@ -30,11 +30,7 @@ export const PUT = async (
 
 export const GET = async (
   request: NextRequest,
-  {
-    params: { id },
-  }: {
-    params: { id: string }
-  },
+  { params: { id } }: { params: { id: string } },
 ) => {
   await connectMongoDB()
   const article = await Article.findOne({ _id: id }).populate('content')

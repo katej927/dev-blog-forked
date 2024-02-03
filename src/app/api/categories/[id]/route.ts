@@ -39,3 +39,13 @@ export const PUT = async (
     )
   }
 }
+
+export const GET = async (
+  request: NextRequest,
+  { params: { id } }: { params: { id: string } },
+) => {
+  await connectMongoDB()
+  const category = await Category.findOne({ _id: id }).populate('articles')
+
+  return NextResponse.json({ category }, { status: 200 })
+}
