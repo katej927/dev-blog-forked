@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { connectMongoDB } from '@/libs/mongodb'
-import { Article, ArticleContent, Category } from '@/models/article'
+import { Article, ArticleContent } from '@/models/article'
 import { ArticleInterface } from '@/apis/articles'
+// import Category from '@/models/category'
 
 export const POST = async (request: NextRequest) => {
   const {
@@ -20,15 +21,17 @@ export const POST = async (request: NextRequest) => {
   const { _id: articleId } = await Article.create({
     title,
     content: articleContentId,
+    // category,
   })
 
   // TODO: 수정 필요
-  // let foundCategory = await Category.findOne({ categoryName: category })
-  // if (foundCategory) {
-  //   foundCategory.articles.push(articleId)
-  //   await foundCategory.save()
-  // } else {
-  //   await Category.create({ categoryName: category, articles: [articleId] })
+  // const updateResult = await Category.updateOne(
+  //   { categoryName: category },
+  //   { $push: { articles: articleId } },
+  // )
+
+  // if (updateResult.modifiedCount === 0) {
+  //   throw new Error(`Category '${category}' does not exist`)
   // }
 
   return NextResponse.json({ message: articleId.toString() }, { status: 201 })

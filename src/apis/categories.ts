@@ -35,12 +35,20 @@ export const putCategoryById = async ({
   _id,
   categoryName,
 }: Pick<CategoryInterface, 'categoryName' | '_id'>) => {
-  const res = await fetch(`${API_CATEGORY_URL}`, {
+  const res = await fetch(`${API_CATEGORY_URL}/${_id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ categoryName }),
+  })
+
+  return res
+}
+
+export const deleteCategoryById = async (id: string) => {
+  const res = await fetch(`${API_CATEGORY_URL}?id=${id}`, {
+    method: 'DELETE',
   })
 
   return res

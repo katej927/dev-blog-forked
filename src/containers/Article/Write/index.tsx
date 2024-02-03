@@ -4,8 +4,7 @@ import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
 // TODO: 주석 수정
-// import { ArticleInterface, createArticle } from '@/apis/articles'
-import { ArticleTitleContentType } from '@/components/ArticleForm/_shared/types'
+import { ArticleInterface, createArticle } from '@/apis/articles'
 
 const DynamicArticleForm = dynamic(
   () => {
@@ -17,7 +16,7 @@ const DynamicArticleForm = dynamic(
 const ArticleWrite = () => {
   const router = useRouter()
 
-  const handleSubmit = async (article: ArticleTitleContentType) => {
+  const handleSubmit = async (article: ArticleInterface) => {
     const { title, content } = article
 
     if (!title || !content) {
@@ -42,6 +41,7 @@ const ArticleWrite = () => {
     <DynamicArticleForm
       title={''}
       content={{ text: '', html: '' }}
+      category={''}
       onSubmit={handleSubmit}
     />
   )

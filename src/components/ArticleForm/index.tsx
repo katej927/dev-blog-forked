@@ -5,13 +5,17 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import Editor from './Editor'
 import ArticleContent from '../ArticleContent'
 import { ArticleFormProps, NewContentType, NewTitleType } from './_shared'
-// import { putCategoryById } from '@/apis/categories'
+// import {
+//   createCategory,
+//   deleteCategoryById,
+//   putCategoryById,
+// } from '@/apis/categories'
 
 const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   const [newTitle, setNewTitle] = useState<NewTitleType>(title)
   const [newContent, setNewContent] = useState<NewContentType>(content)
 
-  // const [tmpCategory, setTmpCategory] = useState('')
+  const [tmpCategory, setTmpCategory] = useState('')
 
   const handleChangeNewTitle = ({
     target: { value: changedNewTitle },
@@ -26,7 +30,7 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    onSubmit({ title: newTitle, content: newContent })
+    onSubmit({ title: newTitle, content: newContent, category: tmpCategory })
   }
 
   // TODO: 추후 삭제
@@ -35,10 +39,7 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   // }: ChangeEvent<HTMLInputElement>) => setTmpCategory(value)
 
   // const handleClickCategory = async () => {
-  //   const res = await putCategoryById({
-  //     _id: '65b8ebd67618f4fe119883eb',
-  //     categoryName: '카테고리 3',
-  //   })
+  //   const res = await deleteCategoryById('65bb3c4d967178af40a39783')
   //   const categories = await res.json()
   //   console.log('categories', categories)
   // }

@@ -5,8 +5,8 @@ export type ArticleTitleContentType = Pick<
   'title' | 'content'
 >
 
-export interface ArticleFormProps extends ArticleTitleContentType {
-  onSubmit: (article: ArticleTitleContentType) => Promise<void>
+export interface ArticleFormProps extends ArticleInterface {
+  onSubmit: (article: ArticleInterface) => Promise<void>
 }
 
 export type NewTitleType = ArticleInterface['title']
