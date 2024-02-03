@@ -23,7 +23,7 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    onSubmit({ title: newTitle, content: newContent, category: tmpCategory })
+    onSubmit({ title: newTitle, content: newContent, category: '' })
   }
 
   return (
