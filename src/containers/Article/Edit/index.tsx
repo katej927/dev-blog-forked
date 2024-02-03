@@ -2,10 +2,13 @@
 
 import { useRouter } from 'next/navigation'
 
-import { GetArticleInterface, putArticleById } from '@/apis/articles'
+import {
+  ArticleInterface,
+  GetArticleInterface,
+  putArticleById,
+} from '@/apis/articles'
 
 import ArticleForm from '@/components/ArticleForm'
-import { ArticleTitleContentType } from '@/components/ArticleForm/_shared/types'
 
 interface Props {
   article: GetArticleInterface
@@ -15,7 +18,7 @@ interface Props {
 const ArticleEdit = ({ article: { title, content, _id: id } }: Props) => {
   const router = useRouter()
 
-  const handleSubmit = async (editedArticle: ArticleTitleContentType) => {
+  const handleSubmit = async (editedArticle: ArticleInterface) => {
     const { title: newTitle, content: newContent } = editedArticle
 
     if (!newTitle || !newContent) {
@@ -36,6 +39,13 @@ const ArticleEdit = ({ article: { title, content, _id: id } }: Props) => {
     }
   }
 
-  return <ArticleForm title={title} content={content} onSubmit={handleSubmit} />
+  return (
+    <ArticleForm
+      title={title}
+      content={content}
+      category={''}
+      onSubmit={handleSubmit}
+    />
+  )
 }
 export default ArticleEdit
