@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
-// TODO: 주석 수정
+// TODO: 카테고리 수정
 import { ArticleInterface, createArticle } from '@/apis/articles'
 
 const DynamicArticleForm = dynamic(
@@ -25,13 +25,13 @@ const ArticleWrite = () => {
     }
 
     try {
-      // TODO: 주석 수정
-      // const res = await createArticle(article)
-      // if (!res.ok) {
-      //   throw new Error('Failed to create an article')
-      // }
-      // const { message: articleId } = await res.json()
-      // router.push(`${articleId}`)
+      // TODO: 카테고리 수정
+      const res = await createArticle(article)
+      if (!res.ok) {
+        throw new Error('Failed to create an article')
+      }
+      const { message: articleId } = await res.json()
+      router.push(`${articleId}`)
     } catch (error) {
       console.log(error)
     }
