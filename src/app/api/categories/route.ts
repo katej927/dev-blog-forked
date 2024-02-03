@@ -1,7 +1,7 @@
-import connectMongoDB from '@/libs/mongodb'
-import { Article } from '@/models/article'
-import Category from '@/models/category'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { connectMongoDB } from '@/libs/mongodb'
+import Category from '@/models/category'
 
 export const POST = async (request: NextRequest) => {
   const { categoryName } = await request.json()

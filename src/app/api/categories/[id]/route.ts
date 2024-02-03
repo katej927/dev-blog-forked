@@ -1,7 +1,8 @@
-import connectMongoDB from '@/libs/mongodb'
+import { NextRequest, NextResponse } from 'next/server'
+
+import { connectMongoDB } from '@/libs/mongodb'
 import { Article } from '@/models/article'
 import Category from '@/models/category'
-import { NextRequest, NextResponse } from 'next/server'
 
 export const PUT = async (
   request: NextRequest,
