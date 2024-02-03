@@ -83,7 +83,7 @@ export const GET = async (request: NextRequest) => {
       ])
     : await Article.find()
 
-  return NextResponse.json({ articles })
+  return NextResponse.json({ articles }, { status: 200 })
 }
 
 export const DELETE = async (request: NextRequest) => {
