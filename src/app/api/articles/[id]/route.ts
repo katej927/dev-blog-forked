@@ -1,8 +1,8 @@
-import Category from '@/models/category'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { connectMongoDB } from '@/libs/mongodb'
+import Category from '@/models/category'
 import { Article, ArticleContent } from '@/models/article'
+import { connectMongoDB } from '@/libs/mongodb'
 import { RevisedArticleInterface } from '@/apis/articles'
 
 export const PUT = async (
