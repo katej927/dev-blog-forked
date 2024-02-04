@@ -12,11 +12,13 @@ export interface ArticleContentInterface {
 export interface ArticleInterface {
   title: string
   content: ArticleContentInterface
+  category: string | null
 }
 
 export interface RevisedArticleInterface {
   newTitle: string
   newContent: ArticleContentInterface
+  newCategory: string | null
 }
 
 export interface GetArticleInterface extends ArticleInterface {

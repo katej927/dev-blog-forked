@@ -3,10 +3,10 @@
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-import { ArticleInterface } from '@/apis/articles'
+import { ArticleContentInterface } from '@/apis/articles'
 
 interface Props {
-  contentHtml: ArticleInterface['content']['html']
+  contentHtml: ArticleContentInterface['html']
 }
 
 const ArticleContent = ({ contentHtml }: Props) => {

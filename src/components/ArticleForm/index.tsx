@@ -28,7 +28,12 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    onSubmit({ title: newTitle, content: newContent })
+    // TODO: 카테고리 수정
+    onSubmit({
+      title: newTitle,
+      content: newContent,
+      category: '',
+    })
   }
 
   const handleSubmitTitleContent = () => {

@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { connectMongoDB } from '@/libs/mongodb'
+import Category from '@/models/category'
 import { Article, ArticleContent } from '@/models/article'
+import { connectMongoDB } from '@/libs/mongodb'
+import { RevisedArticleInterface } from '@/apis/articles'
 
 export const PUT = async (
   request: NextRequest,
@@ -14,27 +16,39 @@ export const PUT = async (
   const {
     newTitle: title,
     newContent: { text, html },
-  } = await request.json()
+    newCategory: category,
+  }: RevisedArticleInterface = await request.json()
 
   await connectMongoDB()
 
-  const { content: contentId } = await Article.findByIdAndUpdate(id, { title })
+  const { content: contentId, _id: articleId } =
+    await Article.findByIdAndUpdate(id, {
+      title,
+      category,
+    })
 
   await ArticleContent.findByIdAndUpdate(contentId, {
     text,
     html,
   })
 
+  await Category.findOneAndUpdate(
+    { articles: articleId },
+    { $pull: { articles: articleId } },
+  )
+
+  if (category) {
+    await Category.findByIdAndUpdate(category, {
+      $addToSet: { articles: articleId },
+    })
+  }
+
   return NextResponse.json({ message: 'Article updated' }, { status: 200 })
 }
 
 export const GET = async (
   request: NextRequest,
-  {
-    params: { id },
-  }: {
-    params: { id: string }
-  },
+  { params: { id } }: { params: { id: string } },
 ) => {
   await connectMongoDB()
   const article = await Article.findOne({ _id: id }).populate('content')
