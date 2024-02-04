@@ -1,3 +1,4 @@
+import Category from '@/models/category'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { connectMongoDB } from '@/libs/mongodb'
@@ -20,14 +21,24 @@ export const PUT = async (
 
   await connectMongoDB()
 
-  const { content: contentId } = await Article.findByIdAndUpdate(id, {
-    title,
-    category,
-  })
+  const { content: contentId, _id: articleId } =
+    await Article.findByIdAndUpdate(id, {
+      title,
+      category,
+    })
 
   await ArticleContent.findByIdAndUpdate(contentId, {
     text,
     html,
+  })
+
+  await Category.findOneAndUpdate(
+    { articles: articleId },
+    { $pull: { articles: articleId } },
+  )
+
+  await Category.findByIdAndUpdate(category, {
+    $addToSet: { articles: articleId },
   })
 
   return NextResponse.json({ message: 'Article updated' }, { status: 200 })

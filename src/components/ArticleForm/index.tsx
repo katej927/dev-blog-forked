@@ -24,7 +24,11 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
     e.preventDefault()
 
     // TODO: 카테고리 수정
-    onSubmit({ title: newTitle, content: newContent, category: '' })
+    onSubmit({
+      title: newTitle,
+      content: newContent,
+      category: '',
+    })
   }
 
   return (
