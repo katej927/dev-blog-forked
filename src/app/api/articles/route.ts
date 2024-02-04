@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { connectMongoDB } from '@/libs/mongodb'
-import { Article, ArticleContent } from '@/models/article'
 import { ArticleInterface } from '@/apis/articles'
+import { Article, ArticleContent } from '@/models/article'
+import Category from '@/models/category'
 
 export const POST = async (request: NextRequest) => {
   const {
     title,
     content: { text, html },
+    category,
   }: ArticleInterface = await request.json()
   await connectMongoDB()
 
@@ -15,10 +17,23 @@ export const POST = async (request: NextRequest) => {
     text,
     html,
   })
+
   const { _id: articleId } = await Article.create({
     title,
     content: articleContentId,
+    category,
   })
+
+  if (category) {
+    const updateResult = await Category.updateOne(
+      { _id: category },
+      { $push: { articles: articleId } },
+    )
+
+    if (updateResult.modifiedCount === 0) {
+      throw new Error(`Category '${category}' does not exist`)
+    }
+  }
 
   return NextResponse.json({ message: articleId.toString() }, { status: 201 })
 }
@@ -66,7 +81,7 @@ export const GET = async (request: NextRequest) => {
       ])
     : await Article.find()
 
-  return NextResponse.json({ articles })
+  return NextResponse.json({ articles }, { status: 200 })
 }
 
 export const DELETE = async (request: NextRequest) => {
@@ -74,8 +89,20 @@ export const DELETE = async (request: NextRequest) => {
 
   await connectMongoDB()
 
-  const { content: contentId } = await Article.findByIdAndDelete(id)
+  const {
+    content: contentId,
+    _id: articleId,
+    category,
+  } = await Article.findByIdAndDelete(id)
+
   await ArticleContent.findByIdAndDelete(contentId)
+
+  if (category) {
+    await Category.findOneAndUpdate(
+      { articles: articleId },
+      { $pull: { articles: articleId } },
+    )
+  }
 
   return NextResponse.json({ message: 'Article deleted' }, { status: 200 })
 }

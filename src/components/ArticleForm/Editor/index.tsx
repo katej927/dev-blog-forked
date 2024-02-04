@@ -4,13 +4,13 @@ import { useMemo, useRef } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-import { ArticleInterface } from '@/apis/articles'
+import { ArticleContentInterface } from '@/apis/articles'
 
 import { FORMATS, convertModules } from './_shared'
 import { HandleChangeNewContentType } from '../_shared'
 
 interface Props {
-  contentHtml: ArticleInterface['content']['html']
+  contentHtml: ArticleContentInterface['html']
   onChangeContent: (content: HandleChangeNewContentType) => void
 }
 

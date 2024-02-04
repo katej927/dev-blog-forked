@@ -19,6 +19,11 @@ const articleSchema = new Schema(
       ref: 'ArticleContent',
       required: true,
     },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+      required: false,
+    },
   },
   { timestamps: true },
 )

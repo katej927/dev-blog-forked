@@ -14,11 +14,18 @@ interface Props {
   article: GetArticleInterface
 }
 
-const ArticleEdit = ({ article: { title, content, _id: id } }: Props) => {
+// TODO: 카테고리 수정
+const ArticleEdit = ({
+  article: { title, content, _id: id, category },
+}: Props) => {
   const router = useRouter()
 
   const handleSubmit = async (editedArticle: ArticleInterface) => {
-    const { title: newTitle, content: newContent } = editedArticle
+    const {
+      title: newTitle,
+      content: newContent,
+      category: newCategory,
+    } = editedArticle
 
     if (!newTitle || !newContent) {
       alert('Title and description are required')
@@ -26,7 +33,11 @@ const ArticleEdit = ({ article: { title, content, _id: id } }: Props) => {
     }
 
     try {
-      const res = await putArticleById(id, { newTitle, newContent })
+      const res = await putArticleById(id, {
+        newTitle,
+        newContent,
+        newCategory,
+      })
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`)
@@ -38,6 +49,13 @@ const ArticleEdit = ({ article: { title, content, _id: id } }: Props) => {
     }
   }
 
-  return <ArticleForm title={title} content={content} onSubmit={handleSubmit} />
+  return (
+    <ArticleForm
+      title={title}
+      content={content}
+      category={category}
+      onSubmit={handleSubmit}
+    />
+  )
 }
 export default ArticleEdit
