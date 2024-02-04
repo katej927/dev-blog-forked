@@ -18,6 +18,7 @@ export interface ArticleInterface {
 export interface RevisedArticleInterface {
   newTitle: string
   newContent: ArticleContentInterface
+  newCategory: string | null
 }
 
 export interface GetArticleInterface extends ArticleInterface {
