@@ -24,17 +24,15 @@ export const POST = async (request: NextRequest) => {
     category,
   })
 
-  if (category === null) {
-    return NextResponse.json({ message: articleId.toString() }, { status: 201 })
-  }
+  if (category) {
+    const updateResult = await Category.updateOne(
+      { _id: category },
+      { $push: { articles: articleId } },
+    )
 
-  const updateResult = await Category.updateOne(
-    { _id: category },
-    { $push: { articles: articleId } },
-  )
-
-  if (updateResult.modifiedCount === 0) {
-    throw new Error(`Category '${category}' does not exist`)
+    if (updateResult.modifiedCount === 0) {
+      throw new Error(`Category '${category}' does not exist`)
+    }
   }
 
   return NextResponse.json({ message: articleId.toString() }, { status: 201 })
@@ -91,8 +89,20 @@ export const DELETE = async (request: NextRequest) => {
 
   await connectMongoDB()
 
-  const { content: contentId } = await Article.findByIdAndDelete(id)
+  const {
+    content: contentId,
+    _id: articleId,
+    category,
+  } = await Article.findByIdAndDelete(id)
+
   await ArticleContent.findByIdAndDelete(contentId)
+
+  if (category) {
+    await Category.findOneAndUpdate(
+      { articles: articleId },
+      { $pull: { articles: articleId } },
+    )
+  }
 
   return NextResponse.json({ message: 'Article deleted' }, { status: 200 })
 }
