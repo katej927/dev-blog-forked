@@ -17,16 +17,18 @@ export const PUT = async (
   try {
     await connectMongoDB()
 
-    const existingCategory = await Category.findById(id)
+    const existingCategory = await Category.findOneAndUpdate(
+      { _id: id },
+      { categoryName },
+      { new: true },
+    )
+
     if (!existingCategory) {
       return NextResponse.json(
         { error: 'Category not found.' },
         { status: 404 },
       )
     }
-
-    existingCategory.categoryName = categoryName
-    await existingCategory.save()
 
     console.log('Category updated: ', existingCategory)
     return NextResponse.json(
