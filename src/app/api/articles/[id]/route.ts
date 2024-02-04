@@ -37,9 +37,11 @@ export const PUT = async (
     { $pull: { articles: articleId } },
   )
 
-  await Category.findByIdAndUpdate(category, {
-    $addToSet: { articles: articleId },
-  })
+  if (category) {
+    await Category.findByIdAndUpdate(category, {
+      $addToSet: { articles: articleId },
+    })
+  }
 
   return NextResponse.json({ message: 'Article updated' }, { status: 200 })
 }
