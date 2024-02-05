@@ -3,7 +3,7 @@ import { ArticleInterface } from './articles'
 
 const API_CATEGORY_URL = `${API_URL_FOR_CSR}/api/categories`
 
-interface CategoryInterface {
+export interface CategoryInterface {
   _id: string
   categoryName: string
   articles: ArticleInterface[]
