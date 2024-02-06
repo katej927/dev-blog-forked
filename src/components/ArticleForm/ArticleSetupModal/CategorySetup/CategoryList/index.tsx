@@ -4,10 +4,13 @@ import { loadCategories } from './_shared'
 
 interface Props {
   updateSelectedCategory: (id: string | null) => void
+  updateShowCategoriesToUnshown: () => void
 }
 
-function CategoryList({ updateSelectedCategory }: Props) {
-  const [showCategories, setShowCategories] = useState<boolean>(false)
+function CategoryList({
+  updateSelectedCategory,
+  updateShowCategoriesToUnshown,
+}: Props) {
   const [categories, setCategories] = useState<CategoryInterface[]>([])
 
   const [newCategoryName, setNewCategoryName] = useState<string>()
@@ -50,7 +53,7 @@ function CategoryList({ updateSelectedCategory }: Props) {
 
   const handleClickSelectCategoryButton = () => {
     updateSelectedCategory(selectedCategory)
-    setShowCategories(false)
+    updateShowCategoriesToUnshown()
   }
 
   return (
@@ -81,7 +84,7 @@ function CategoryList({ updateSelectedCategory }: Props) {
           <div>카테고리가 없습니다.</div>
         )}
       </ul>
-      <button type="button" onClick={() => setShowCategories(false)}>
+      <button type="button" onClick={() => updateShowCategoriesToUnshown()}>
         취소
       </button>
       <button type="button" onClick={handleClickSelectCategoryButton}>

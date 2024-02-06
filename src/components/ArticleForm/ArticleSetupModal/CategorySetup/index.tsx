@@ -8,12 +8,17 @@ interface Props {
 function CategorySetup({ updateSelectedCategory }: Props) {
   const [showCategories, setShowCategories] = useState<boolean>(false)
 
+  const updateShowCategoriesToUnshown = () => setShowCategories(false)
+
   return (
     <div>
       <h3>카테고리 설정</h3>
 
       {showCategories ? (
-        <CategoryList updateSelectedCategory={updateSelectedCategory} />
+        <CategoryList
+          updateSelectedCategory={updateSelectedCategory}
+          updateShowCategoriesToUnshown={updateShowCategoriesToUnshown}
+        />
       ) : (
         <button type="button" onClick={() => setShowCategories(true)}>
           카테고리에 추가하기
