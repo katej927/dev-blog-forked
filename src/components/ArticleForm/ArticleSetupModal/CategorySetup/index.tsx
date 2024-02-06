@@ -24,7 +24,6 @@ function ArticleSetupModal() {
         throw new Error('Failed to create a category.')
       }
 
-      // TODO: [리팩토링] 리액트 쿼리로
       const categories = await loadCategories()
       setCategories(categories ?? [])
 
