@@ -2,11 +2,17 @@ import { useState, ChangeEvent } from 'react'
 import { CategoryInterface, createCategory } from '@/apis/categories'
 import { loadCategories } from './_shared'
 
-function ArticleSetupModal() {
+interface Props {
+  updateSelectedCategory: (id: string | null) => void
+}
+
+function CategorySetup({ updateSelectedCategory }: Props) {
   const [showCategories, setShowCategories] = useState<boolean>(false)
   const [categories, setCategories] = useState<CategoryInterface[]>([])
 
   const [newCategoryName, setNewCategoryName] = useState<string>()
+
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
   const handleChangeNewCategoryName = ({
     target: { value },
@@ -31,6 +37,11 @@ function ArticleSetupModal() {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const handleClickSelectCategoryButton = () => {
+    updateSelectedCategory(selectedCategory)
+    setShowCategories(false)
   }
 
   const handleClickAddingCategoryButton = async () => {
@@ -67,7 +78,9 @@ function ArticleSetupModal() {
           <ul>
             {categories.length ? (
               categories.map(({ _id, categoryName }) => (
-                <li key={_id}>{categoryName}</li>
+                <li key={_id} onClick={() => setSelectedCategory(_id)}>
+                  {categoryName}
+                </li>
               ))
             ) : (
               <div>카테고리가 없습니다.</div>
@@ -76,7 +89,9 @@ function ArticleSetupModal() {
           <button type="button" onClick={() => setShowCategories(false)}>
             취소
           </button>
-          <button type="button">선택하기</button>
+          <button type="button" onClick={handleClickSelectCategoryButton}>
+            선택하기
+          </button>
         </section>
       ) : (
         <button type="button" onClick={handleClickAddingCategoryButton}>
@@ -87,4 +102,4 @@ function ArticleSetupModal() {
   )
 }
 
-export default ArticleSetupModal
+export default CategorySetup
