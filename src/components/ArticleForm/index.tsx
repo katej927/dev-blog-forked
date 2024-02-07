@@ -12,7 +12,7 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   const [newTitle, setNewTitle] = useState<NewTitleType>(title)
   const [newContent, setNewContent] = useState<NewContentType>(content)
 
-  const [showModal, setShowModal] = useState<boolean>(false)
+  const [isShowModal, setIsShowModal] = useState<boolean>(false)
 
   const handleChangeNewTitle = ({
     target: { value: changedNewTitle },
@@ -42,7 +42,7 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
       return
     }
 
-    setShowModal(true)
+    setIsShowModal(true)
   }
 
   return (
@@ -63,7 +63,7 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
         />
         <ArticleContent contentHtml={newContent.html} />
       </div>
-      {showModal && createPortal(<ArticleSetupModal />, document.body)}
+      {isShowModal && createPortal(<ArticleSetupModal />, document.body)}
     </form>
   )
 }
