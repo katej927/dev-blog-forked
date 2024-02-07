@@ -1,0 +1,5 @@
+.category {
+  &.active {
+    background-color: red;
+  }
+}

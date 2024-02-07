@@ -2,6 +2,10 @@ import { useState, ChangeEvent, useEffect } from 'react'
 import { CategoryInterface, createCategory } from '@/apis/categories'
 import { loadCategories } from './_shared'
 import { SelectedCategoryType } from '../../_shared'
+import classNames from 'classnames/bind'
+import styles from './CategoryList.module.css'
+
+const cx = classNames.bind(styles)
 
 interface Props {
   updateSelectedCategory: (selectedCategory: SelectedCategoryType) => void
@@ -10,9 +14,7 @@ interface Props {
 
 function CategoryList({ updateSelectedCategory, toggleCategoryList }: Props) {
   const [categories, setCategories] = useState<CategoryInterface[]>([])
-
   const [newCategoryName, setNewCategoryName] = useState<string>()
-
   const [clickedCategory, setClickedCategory] =
     useState<SelectedCategoryType>(null)
 
@@ -78,6 +80,9 @@ function CategoryList({ updateSelectedCategory, toggleCategoryList }: Props) {
             <li
               key={_id}
               onClick={() => setClickedCategory({ categoryName, _id })}
+              className={cx('category', {
+                active: clickedCategory?._id === _id,
+              })}
             >
               {categoryName}
             </li>
