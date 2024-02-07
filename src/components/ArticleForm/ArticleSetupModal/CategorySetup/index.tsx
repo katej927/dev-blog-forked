@@ -17,6 +17,8 @@ function CategorySetup({ updateSelectedCategory, selectedCategory }: Props) {
 
   const toggleCategoryList = () => setIsShowCategoryList(!isShowCategoryList)
 
+  const handleClickRemoveCategory = () => updateSelectedCategory(null)
+
   return (
     <div>
       <h3>카테고리 설정</h3>
@@ -31,7 +33,9 @@ function CategorySetup({ updateSelectedCategory, selectedCategory }: Props) {
         })}
       >
         <div>{selectedCategory?.categoryName}</div>
-        <button type="button">시리즈에서 제거</button>
+        <button type="button" onClick={handleClickRemoveCategory}>
+          카테고리에서 제거
+        </button>
       </div>
       <button
         type="button"
