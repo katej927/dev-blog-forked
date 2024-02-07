@@ -20,6 +20,7 @@ function CategorySetup({ updateSelectedCategory, selectedCategory }: Props) {
         <CategoryList
           updateSelectedCategory={updateSelectedCategory}
           toggleCategoryList={toggleCategoryList}
+          renderIf={isShowCategoryList}
         />
       ) : selectedCategory ? (
         <div>

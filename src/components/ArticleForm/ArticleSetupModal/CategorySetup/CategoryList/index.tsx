@@ -13,9 +13,16 @@ const cx = classNames.bind(styles)
 interface Props {
   updateSelectedCategory: (selectedCategory: SelectedCategoryType) => void
   toggleCategoryList: () => void
+  renderIf: boolean
 }
 
-function CategoryList({ updateSelectedCategory, toggleCategoryList }: Props) {
+function CategoryList({
+  updateSelectedCategory,
+  toggleCategoryList,
+  renderIf,
+}: Props) {
+  if (!renderIf) return
+
   const [categories, setCategories] = useState<CategoryInterface[]>([])
   const [newCategoryName, setNewCategoryName] = useState<string>()
   const [clickedCategory, setClickedCategory] =
