@@ -12,7 +12,10 @@ function ArticleSetupModal() {
 
   return (
     <div className={styles.container}>
-      <CategorySetup updateSelectedCategory={updateSelectedCategory} />
+      <CategorySetup
+        updateSelectedCategory={updateSelectedCategory}
+        selectedCategory={selectedCategory}
+      />
     </div>
   )
 }

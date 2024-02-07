@@ -1,7 +1,10 @@
 import { useState, ChangeEvent, useEffect } from 'react'
+
 import { CategoryInterface, createCategory } from '@/apis/categories'
+
 import { loadCategories } from './_shared'
 import { SelectedCategoryType } from '../../_shared'
+
 import classNames from 'classnames/bind'
 import styles from './CategoryList.module.css'
 
