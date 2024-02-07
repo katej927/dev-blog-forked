@@ -1,9 +1,10 @@
 import { useState, ChangeEvent, useEffect } from 'react'
 import { CategoryInterface, createCategory } from '@/apis/categories'
 import { loadCategories } from './_shared'
+import { SelectedCategoryType } from '../../_shared'
 
 interface Props {
-  updateSelectedCategory: (id: string | null) => void
+  updateSelectedCategory: (selectedCategory: SelectedCategoryType) => void
   updateShowCategoriesToUnshown: () => void
 }
 
@@ -15,7 +16,8 @@ function CategoryList({
 
   const [newCategoryName, setNewCategoryName] = useState<string>()
 
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [selectedCategory, setSelectedCategory] =
+    useState<SelectedCategoryType>(null)
 
   const getCategories = async () => {
     const res = await loadCategories()
@@ -76,7 +78,10 @@ function CategoryList({
       <ul>
         {categories.length ? (
           categories.map(({ _id, categoryName }) => (
-            <li key={_id} onClick={() => setSelectedCategory(_id)}>
+            <li
+              key={_id}
+              onClick={() => setSelectedCategory({ categoryName, _id })}
+            >
               {categoryName}
             </li>
           ))

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import CategoryList from './CategoryList'
+import { SelectedCategoryType } from '../_shared'
 
 interface Props {
-  updateSelectedCategory: (id: string | null) => void
+  updateSelectedCategory: (selectedCategory: SelectedCategoryType) => void
 }
 
 function CategorySetup({ updateSelectedCategory }: Props) {

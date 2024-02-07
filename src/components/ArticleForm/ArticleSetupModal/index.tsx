@@ -1,11 +1,14 @@
 import styles from './index.module.css'
 import CategorySetup from './CategorySetup'
 import { useState } from 'react'
+import { SelectedCategoryType } from './_shared'
 
 function ArticleSetupModal() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [selectedCategory, setSelectedCategory] =
+    useState<SelectedCategoryType>(null)
 
-  const updateSelectedCategory = (id: string | null) => setSelectedCategory(id)
+  const updateSelectedCategory = (selectedCategory: SelectedCategoryType) =>
+    setSelectedCategory(selectedCategory)
 
   return (
     <div className={styles.container}>
