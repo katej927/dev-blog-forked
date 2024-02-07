@@ -7,21 +7,21 @@ interface Props {
 }
 
 function CategorySetup({ updateSelectedCategory }: Props) {
-  const [showCategories, setShowCategories] = useState<boolean>(false)
+  const [isShowCategoryList, setIsShowCategoryList] = useState<boolean>(false)
 
-  const updateShowCategoriesToUnshown = () => setShowCategories(false)
+  const toggleCategoryList = () => setIsShowCategoryList(!isShowCategoryList)
 
   return (
     <div>
       <h3>카테고리 설정</h3>
 
-      {showCategories ? (
+      {isShowCategoryList ? (
         <CategoryList
           updateSelectedCategory={updateSelectedCategory}
-          updateShowCategoriesToUnshown={updateShowCategoriesToUnshown}
+          toggleCategoryList={toggleCategoryList}
         />
       ) : (
-        <button type="button" onClick={() => setShowCategories(true)}>
+        <button type="button" onClick={() => setIsShowCategoryList(true)}>
           카테고리에 추가하기
         </button>
       )}

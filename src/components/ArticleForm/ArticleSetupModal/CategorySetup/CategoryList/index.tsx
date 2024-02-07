@@ -5,27 +5,24 @@ import { SelectedCategoryType } from '../../_shared'
 
 interface Props {
   updateSelectedCategory: (selectedCategory: SelectedCategoryType) => void
-  updateShowCategoriesToUnshown: () => void
+  toggleCategoryList: () => void
 }
 
-function CategoryList({
-  updateSelectedCategory,
-  updateShowCategoriesToUnshown,
-}: Props) {
+function CategoryList({ updateSelectedCategory, toggleCategoryList }: Props) {
   const [categories, setCategories] = useState<CategoryInterface[]>([])
 
   const [newCategoryName, setNewCategoryName] = useState<string>()
 
-  const [selectedCategory, setSelectedCategory] =
+  const [clickedCategory, setClickedCategory] =
     useState<SelectedCategoryType>(null)
 
-  const getCategories = async () => {
+  const getAndUpdateCategories = async () => {
     const res = await loadCategories()
     setCategories(res ?? [])
   }
 
   useEffect(() => {
-    getCategories()
+    getAndUpdateCategories()
   }, [])
 
   const handleChangeNewCategoryName = ({
@@ -54,8 +51,8 @@ function CategoryList({
   }
 
   const handleClickSelectCategoryButton = () => {
-    updateSelectedCategory(selectedCategory)
-    updateShowCategoriesToUnshown()
+    updateSelectedCategory(clickedCategory)
+    toggleCategoryList()
   }
 
   return (
@@ -80,7 +77,7 @@ function CategoryList({
           categories.map(({ _id, categoryName }) => (
             <li
               key={_id}
-              onClick={() => setSelectedCategory({ categoryName, _id })}
+              onClick={() => setClickedCategory({ categoryName, _id })}
             >
               {categoryName}
             </li>
@@ -89,7 +86,7 @@ function CategoryList({
           <div>카테고리가 없습니다.</div>
         )}
       </ul>
-      <button type="button" onClick={() => updateShowCategoriesToUnshown()}>
+      <button type="button" onClick={() => toggleCategoryList()}>
         취소
       </button>
       <button type="button" onClick={handleClickSelectCategoryButton}>
