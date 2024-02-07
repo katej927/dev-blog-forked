@@ -2,7 +2,7 @@ import { useState } from 'react'
 import CategoryList from './CategoryList'
 import { SelectedCategoryType } from '../_shared'
 
-import styles from './CategorySetup.module.css'
+import styles from './index.module.css'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
