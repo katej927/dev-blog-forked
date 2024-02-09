@@ -18,7 +18,6 @@ const ArticleWrite = () => {
 
   const handleSubmit = async (article: ArticleInterface) => {
     try {
-      // TODO: 카테고리 수정
       const res = await createArticle(article)
       if (!res.ok) {
         throw new Error('Failed to create an article')

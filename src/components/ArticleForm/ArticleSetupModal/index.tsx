@@ -19,7 +19,7 @@ function ArticleSetupModal({ title, content, onSubmit }: Props) {
     onSubmit({
       title,
       content,
-      category: selectedCategory ? selectedCategory._id : null,
+      category: selectedCategory?._id ?? null,
     })
   }
 
