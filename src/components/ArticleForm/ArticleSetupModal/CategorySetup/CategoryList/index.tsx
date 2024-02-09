@@ -104,7 +104,11 @@ function CategoryList({
       <button type="button" onClick={() => toggleCategoryList()}>
         취소
       </button>
-      <button type="button" onClick={handleClickSelectCategoryButton}>
+      <button
+        type="button"
+        onClick={handleClickSelectCategoryButton}
+        disabled={!clickedCategory}
+      >
         선택하기
       </button>
     </section>
