@@ -1,11 +1,6 @@
 import { ArticleInterface } from '@/apis/articles'
 
-export type ArticleTitleContentType = Pick<
-  ArticleInterface,
-  'title' | 'content'
->
-
-export interface ArticleFormProps extends ArticleInterface {
+export interface Props extends ArticleInterface {
   onSubmit: (article: ArticleInterface) => Promise<void>
 }
 

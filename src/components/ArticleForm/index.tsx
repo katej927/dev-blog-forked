@@ -1,14 +1,14 @@
 'use client'
 
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import Editor from './Editor'
 import ArticleContent from '../ArticleContent'
-import { ArticleFormProps, NewContentType, NewTitleType } from './_shared'
+import { Props, NewContentType, NewTitleType } from './_shared'
 import { createPortal } from 'react-dom'
 import ArticleSetupModal from './ArticleSetupModal'
 
-const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
+const ArticleForm = ({ title, content, onSubmit }: Props) => {
   const [newTitle, setNewTitle] = useState<NewTitleType>(title)
   const [newContent, setNewContent] = useState<NewContentType>(content)
 
@@ -24,18 +24,6 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
     setNewContent((prev) => ({ ...prev, ...changedNewContent }))
   }
 
-  // TODO: 차후 수정 필요
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    // TODO: 카테고리 수정
-    onSubmit({
-      title: newTitle,
-      content: newContent,
-      category: '',
-    })
-  }
-
   const handleSubmitTitleContent = () => {
     if (!newTitle || !newContent) {
       alert('Title and content are required')
@@ -46,9 +34,9 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <main>
       <button type="button" onClick={handleSubmitTitleContent}>
-        Publish
+        출간하기
       </button>
       <input
         onChange={handleChangeNewTitle}
@@ -63,8 +51,16 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
         />
         <ArticleContent contentHtml={newContent.html} />
       </div>
-      {isShowModal && createPortal(<ArticleSetupModal />, document.body)}
-    </form>
+      {isShowModal &&
+        createPortal(
+          <ArticleSetupModal
+            title={newTitle}
+            content={newContent}
+            onSubmit={onSubmit}
+          />,
+          document.body,
+        )}
+    </main>
   )
 }
 export default ArticleForm

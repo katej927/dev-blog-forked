@@ -1,5 +1,5 @@
 export type {
-  ArticleFormProps,
+  Props,
   NewTitleType,
   NewContentType,
   HandleChangeNewContentType,
