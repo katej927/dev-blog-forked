@@ -33,7 +33,7 @@ const ArticleWrite = () => {
     <DynamicArticleForm
       title={''}
       content={{ text: '', html: '' }}
-      category={''}
+      category={null}
       onSubmit={handleSubmit}
     />
   )
