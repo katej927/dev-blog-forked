@@ -21,19 +21,8 @@ const ArticleEdit = ({
   const router = useRouter()
 
   const handleSubmit = async (editedArticle: ArticleDetailInterface) => {
-    const { title, content, category } = editedArticle
-
-    if (!title || !content) {
-      alert('Title and description are required')
-      return
-    }
-
     try {
-      const res = await putArticleById(id, {
-        title,
-        content,
-        category,
-      })
+      const res = await putArticleById(id, editedArticle)
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`)
