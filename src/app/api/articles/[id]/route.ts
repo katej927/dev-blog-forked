@@ -51,7 +51,10 @@ export const GET = async (
   { params: { id } }: { params: { id: string } },
 ) => {
   await connectMongoDB()
-  const article = await Article.findOne({ _id: id }).populate('content')
+  const article = await Article.findOne({ _id: id }).populate([
+    'content',
+    'category',
+  ])
 
   return NextResponse.json({ article }, { status: 200 })
 }
