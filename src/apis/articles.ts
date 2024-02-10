@@ -22,24 +22,6 @@ export interface ArticleDetailInterface {
   category: CategoryInterface | null
 }
 
-// export interface ArticleInterface {
-//   title: string
-//   content: ArticleContentInterface
-//   category: string | null
-// }
-
-// export interface RevisedArticleInterface {
-//   newTitle: string
-//   newContent: ArticleContentInterface
-//   newCategory: string | null
-// }
-
-// export interface GetArticleInterface extends ArticleInterface {
-//   _id: string
-//   createdAt: string
-//   updatedAt: string
-// }
-
 export interface GetSimpleArticleInterface extends ArticleSimpleInterface {
   _id: string
   createdAt: string
@@ -60,7 +42,6 @@ export interface GetArticlesResponseInterface {
   articles: GetSimpleArticleInterface[]
 }
 
-// content : 디테일 / category : string
 export const createArticle = async (article: ArticleDetailInterface) => {
   const res = await fetch(API_ARTICLE_URL_FOR_CSR, {
     method: 'POST',
@@ -73,7 +54,6 @@ export const createArticle = async (article: ArticleDetailInterface) => {
   return res
 }
 
-// content : 디테일 / category : 디테일
 export const getArticleById = async (id: string) => {
   const res = await fetch(`${API_ARTICLE_URL_FOR_SSR}/${id}`, {
     cache: 'no-store',
@@ -82,7 +62,6 @@ export const getArticleById = async (id: string) => {
   return res
 }
 
-// content : 심플 / category : 심플
 export const getArticles = async (searchTerm?: string) => {
   const res = await fetch(
     `${API_ARTICLE_URL_FOR_SSR}${
@@ -96,7 +75,6 @@ export const getArticles = async (searchTerm?: string) => {
   return res
 }
 
-// content : 디테일 / category : string
 export const putArticleById = async (
   id: string,
   revisedArticle: ArticleDetailInterface,
@@ -112,7 +90,6 @@ export const putArticleById = async (
   return res
 }
 
-// content : 심플 / category : 심플
 export const deleteArticleById = async (id: string) => {
   const res = await fetch(`${API_ARTICLE_URL_FOR_CSR}?id=${id}`, {
     method: 'DELETE',
