@@ -3,15 +3,15 @@
 import { useRouter } from 'next/navigation'
 
 import {
-  ArticleInterface,
-  GetArticleInterface,
+  ArticleDetailInterface,
+  GetDetailArticleInterface,
   putArticleById,
 } from '@/apis/articles'
 
 import ArticleForm from '@/components/ArticleForm'
 
 interface Props {
-  article: GetArticleInterface
+  article: GetDetailArticleInterface
 }
 
 // TODO: 카테고리 수정
@@ -20,23 +20,19 @@ const ArticleEdit = ({
 }: Props) => {
   const router = useRouter()
 
-  const handleSubmit = async (editedArticle: ArticleInterface) => {
-    const {
-      title: newTitle,
-      content: newContent,
-      category: newCategory,
-    } = editedArticle
+  const handleSubmit = async (editedArticle: ArticleDetailInterface) => {
+    const { title, content, category } = editedArticle
 
-    if (!newTitle || !newContent) {
+    if (!title || !content) {
       alert('Title and description are required')
       return
     }
 
     try {
       const res = await putArticleById(id, {
-        newTitle,
-        newContent,
-        newCategory,
+        title,
+        content,
+        category,
       })
 
       if (!res.ok) {

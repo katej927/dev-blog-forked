@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Category from '@/models/category'
 import { Article, ArticleContent } from '@/models/article'
 import { connectMongoDB } from '@/libs/mongodb'
-import { RevisedArticleInterface } from '@/apis/articles'
+import { ArticleDetailInterface } from '@/apis/articles'
 
 export const PUT = async (
   request: NextRequest,
@@ -14,10 +14,10 @@ export const PUT = async (
   },
 ) => {
   const {
-    newTitle: title,
-    newContent: { text, html },
-    newCategory: category,
-  }: RevisedArticleInterface = await request.json()
+    title,
+    content: { text, html },
+    category,
+  }: ArticleDetailInterface = await request.json()
 
   await connectMongoDB()
 

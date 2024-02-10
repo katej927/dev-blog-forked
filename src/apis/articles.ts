@@ -28,11 +28,11 @@ export interface ArticleDetailInterface {
 //   category: string | null
 // }
 
-export interface RevisedArticleInterface {
-  newTitle: string
-  newContent: ArticleContentInterface
-  newCategory: string | null
-}
+// export interface RevisedArticleInterface {
+//   newTitle: string
+//   newContent: ArticleContentInterface
+//   newCategory: string | null
+// }
 
 // export interface GetArticleInterface extends ArticleInterface {
 //   _id: string
@@ -57,7 +57,7 @@ export interface GetArticleResponseInterface {
 }
 
 export interface GetArticlesResponseInterface {
-  articles: GetDetailArticleInterface[]
+  articles: GetSimpleArticleInterface[]
 }
 
 // content : 디테일 / category : string
@@ -99,7 +99,7 @@ export const getArticles = async (searchTerm?: string) => {
 // content : 디테일 / category : string
 export const putArticleById = async (
   id: string,
-  revisedArticle: RevisedArticleInterface,
+  revisedArticle: ArticleDetailInterface,
 ) => {
   const res = await fetch(`${API_ARTICLE_URL_FOR_CSR}/${id}`, {
     method: 'PUT',
