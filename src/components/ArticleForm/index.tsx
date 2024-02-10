@@ -27,7 +27,7 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
     onSubmit({
       title: newTitle,
       content: newContent,
-      category: '',
+      category: null,
     })
   }
 

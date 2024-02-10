@@ -53,14 +53,15 @@ export interface GetDetailArticleInterface extends ArticleDetailInterface {
 }
 
 export interface GetArticleResponseInterface {
-  article: GetArticleInterface
+  article: GetDetailArticleInterface
 }
 
 export interface GetArticlesResponseInterface {
   articles: GetDetailArticleInterface[]
 }
 
-export const createArticle = async (article: ArticleInterface) => {
+// content : 디테일 / category : string
+export const createArticle = async (article: ArticleDetailInterface) => {
   const res = await fetch(API_ARTICLE_URL_FOR_CSR, {
     method: 'POST',
     headers: {
@@ -72,6 +73,7 @@ export const createArticle = async (article: ArticleInterface) => {
   return res
 }
 
+// content : 디테일 / category : 디테일
 export const getArticleById = async (id: string) => {
   const res = await fetch(`${API_ARTICLE_URL_FOR_SSR}/${id}`, {
     cache: 'no-store',
@@ -80,6 +82,7 @@ export const getArticleById = async (id: string) => {
   return res
 }
 
+// content : 심플 / category : 심플
 export const getArticles = async (searchTerm?: string) => {
   const res = await fetch(
     `${API_ARTICLE_URL_FOR_SSR}${
@@ -93,6 +96,7 @@ export const getArticles = async (searchTerm?: string) => {
   return res
 }
 
+// content : 디테일 / category : string
 export const putArticleById = async (
   id: string,
   revisedArticle: RevisedArticleInterface,
@@ -108,6 +112,7 @@ export const putArticleById = async (
   return res
 }
 
+// content : 심플 / category : 심플
 export const deleteArticleById = async (id: string) => {
   const res = await fetch(`${API_ARTICLE_URL_FOR_CSR}?id=${id}`, {
     method: 'DELETE',

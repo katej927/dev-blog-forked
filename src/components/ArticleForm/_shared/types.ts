@@ -1,15 +1,15 @@
-import { ArticleInterface } from '@/apis/articles'
+import { ArticleDetailInterface } from '@/apis/articles'
 
 export type ArticleTitleContentType = Pick<
-  ArticleInterface,
+  ArticleDetailInterface,
   'title' | 'content'
 >
 
-export interface ArticleFormProps extends ArticleInterface {
-  onSubmit: (article: ArticleInterface) => Promise<void>
+export interface ArticleFormProps extends ArticleDetailInterface {
+  onSubmit: (article: ArticleDetailInterface) => Promise<void>
 }
 
-export type NewTitleType = ArticleInterface['title']
-export type NewContentType = ArticleInterface['content']
+export type NewTitleType = ArticleDetailInterface['title']
+export type NewContentType = ArticleDetailInterface['content']
 
 export type HandleChangeNewContentType = Pick<NewContentType, 'html' | 'text'>
