@@ -4,11 +4,12 @@ import { useState } from 'react'
 import { SelectedCategoryType } from './_shared'
 import { ArticleInterface } from '@/apis/articles'
 
-interface Props extends Pick<ArticleInterface, 'title' | 'content'> {
+interface Props extends ArticleInterface {
   onSubmit: (article: ArticleInterface) => Promise<void>
 }
 
-function ArticleSetupModal({ title, content, onSubmit }: Props) {
+// TODO: 카테고리 수정
+function ArticleSetupModal({ title, content, category, onSubmit }: Props) {
   const [selectedCategory, setSelectedCategory] =
     useState<SelectedCategoryType>(null)
 

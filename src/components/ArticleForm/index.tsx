@@ -8,7 +8,7 @@ import { Props, NewContentType, NewTitleType } from './_shared'
 import { createPortal } from 'react-dom'
 import ArticleSetupModal from './ArticleSetupModal'
 
-const ArticleForm = ({ title, content, onSubmit }: Props) => {
+const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
   const [newTitle, setNewTitle] = useState<NewTitleType>(title)
   const [newContent, setNewContent] = useState<NewContentType>(content)
 
@@ -56,6 +56,7 @@ const ArticleForm = ({ title, content, onSubmit }: Props) => {
           <ArticleSetupModal
             title={newTitle}
             content={newContent}
+            category={category}
             onSubmit={onSubmit}
           />,
           document.body,
