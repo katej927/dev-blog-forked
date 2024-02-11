@@ -1,7 +1,11 @@
-import { ArticleDetailInterface } from '@/apis/articles'
+import {
+  ArticleDetailInterface,
+  DetailArticleCategoryIdInterface,
+  DetailArticleCategoryNameInterface,
+} from '@/apis/articles'
 
-export interface Props extends ArticleDetailInterface {
-  onSubmit: (article: ArticleDetailInterface) => Promise<void>
+export interface Props extends DetailArticleCategoryNameInterface {
+  onSubmit: (article: DetailArticleCategoryIdInterface) => Promise<void>
 }
 
 export type NewTitleType = ArticleDetailInterface['title']

@@ -22,13 +22,24 @@ export interface ArticleDetailInterface {
   category: CategoryInterface | null
 }
 
+export interface DetailArticleCategoryNameInterface
+  extends Omit<ArticleDetailInterface, 'category'> {
+  category: Pick<CategoryInterface, '_id' | 'categoryName'> | null
+}
+
+export interface DetailArticleCategoryIdInterface
+  extends Omit<ArticleDetailInterface, 'category'> {
+  category: string | null
+}
+
 export interface GetSimpleArticleInterface extends ArticleSimpleInterface {
   _id: string
   createdAt: string
   updatedAt: string
 }
 
-export interface GetDetailArticleInterface extends ArticleDetailInterface {
+export interface GetDetailArticleInterface
+  extends DetailArticleCategoryNameInterface {
   _id: string
   createdAt: string
   updatedAt: string
@@ -77,7 +88,7 @@ export const getArticles = async (searchTerm?: string) => {
 
 export const putArticleById = async (
   id: string,
-  revisedArticle: ArticleDetailInterface,
+  revisedArticle: DetailArticleCategoryIdInterface,
 ) => {
   const res = await fetch(`${API_ARTICLE_URL_FOR_CSR}/${id}`, {
     method: 'PUT',

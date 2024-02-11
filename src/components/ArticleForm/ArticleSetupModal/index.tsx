@@ -2,11 +2,7 @@ import styles from './index.module.css'
 import CategorySetup from './CategorySetup'
 import { useState } from 'react'
 import { SelectedCategoryType } from './_shared'
-import { ArticleInterface } from '@/apis/articles'
-
-interface Props extends ArticleInterface {
-  onSubmit: (article: ArticleInterface) => Promise<void>
-}
+import { Props } from '../_shared'
 
 // TODO: 카테고리 수정
 function ArticleSetupModal({ title, content, category, onSubmit }: Props) {

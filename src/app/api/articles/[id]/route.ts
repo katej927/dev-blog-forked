@@ -53,7 +53,7 @@ export const GET = async (
   await connectMongoDB()
   const article = await Article.findOne({ _id: id }).populate([
     'content',
-    'category',
+    { path: 'category', select: '_id categoryName' },
   ])
 
   return NextResponse.json({ article }, { status: 200 })
