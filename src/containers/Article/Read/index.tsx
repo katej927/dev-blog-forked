@@ -1,13 +1,13 @@
 import dayjs from 'dayjs'
 
-import { GetArticleInterface } from '@/apis/articles'
+import { GetDetailArticleInterface } from '@/apis/articles'
 
 import EditButtons from './EditButtons'
 import ArticleContent from '@/components/ArticleContent'
 import Comments from './Comments'
 
 interface Props {
-  article: GetArticleInterface
+  article: GetDetailArticleInterface
 }
 
 const Article = ({
