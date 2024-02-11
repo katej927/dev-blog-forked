@@ -4,7 +4,10 @@ import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
 // TODO: 카테고리 수정
-import { ArticleDetailInterface, createArticle } from '@/apis/articles'
+import {
+  DetailArticleCategoryIdInterface,
+  createArticle,
+} from '@/apis/articles'
 
 const DynamicArticleForm = dynamic(
   () => {
@@ -16,7 +19,7 @@ const DynamicArticleForm = dynamic(
 const ArticleWrite = () => {
   const router = useRouter()
 
-  const handleSubmit = async (article: ArticleDetailInterface) => {
+  const handleSubmit = async (article: DetailArticleCategoryIdInterface) => {
     try {
       const res = await createArticle(article)
       if (!res.ok) {

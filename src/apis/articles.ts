@@ -53,7 +53,9 @@ export interface GetArticlesResponseInterface {
   articles: GetSimpleArticleInterface[]
 }
 
-export const createArticle = async (article: ArticleDetailInterface) => {
+export const createArticle = async (
+  article: DetailArticleCategoryIdInterface,
+) => {
   const res = await fetch(API_ARTICLE_URL_FOR_CSR, {
     method: 'POST',
     headers: {
