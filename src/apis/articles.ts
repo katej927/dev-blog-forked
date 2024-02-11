@@ -1,5 +1,5 @@
 import { API_URL_FOR_SSR, API_URL_FOR_CSR } from '@/constants/common'
-import { CategoryInterface } from '@/apis/categories'
+import type { CategoryInterface } from '@/apis/categories'
 
 const API_ARTICLE_URL_FOR_SSR = `${API_URL_FOR_SSR}/api/articles`
 const API_ARTICLE_URL_FOR_CSR = `${API_URL_FOR_CSR}/api/articles`

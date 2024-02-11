@@ -1,12 +1,12 @@
 import { API_URL_FOR_CSR } from '@/constants/common'
-import { GetSimpleArticleInterface } from './articles'
+import type { GetSimpleArticleInterface } from '@/apis/articles'
 
 const API_CATEGORY_URL = `${API_URL_FOR_CSR}/api/categories`
 
 export interface CategoryInterface {
   _id: string
   categoryName: string
-  articles: GetSimpleArticleInterface[]
+  articles: GetSimpleArticleInterface | string[]
 }
 
 export const createCategory = async (
