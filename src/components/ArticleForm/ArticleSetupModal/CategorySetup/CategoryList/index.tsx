@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, ChangeEvent, useEffect } from 'react'
 
 import { CategoryInterface, createCategory } from '@/apis/categories'
@@ -21,8 +23,6 @@ function CategoryList({
   toggleCategoryList,
   renderIf,
 }: Props) {
-  if (!renderIf) return
-
   const [categories, setCategories] = useState<CategoryInterface[]>([])
   const [newCategoryName, setNewCategoryName] = useState<string>()
   const [clickedCategory, setClickedCategory] =
@@ -36,6 +36,8 @@ function CategoryList({
   useEffect(() => {
     getAndUpdateCategories()
   }, [])
+
+  if (!renderIf) return
 
   const handleChangeNewCategoryName = ({
     target: { value },
