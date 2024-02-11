@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { connectMongoDB } from '@/libs/mongodb'
-import { ArticleInterface } from '@/apis/articles'
+import { ArticleDetailInterface } from '@/apis/articles'
 import { Article, ArticleContent } from '@/models/article'
 import Category from '@/models/category'
 
@@ -10,7 +10,7 @@ export const POST = async (request: NextRequest) => {
     title,
     content: { text, html },
     category,
-  }: ArticleInterface = await request.json()
+  }: ArticleDetailInterface = await request.json()
   await connectMongoDB()
 
   const { _id: articleContentId } = await ArticleContent.create({

@@ -1,10 +1,10 @@
-import { ArticleInterface } from '@/apis/articles'
+import { ArticleDetailInterface } from '@/apis/articles'
 
-export interface Props extends ArticleInterface {
-  onSubmit: (article: ArticleInterface) => Promise<void>
+export interface Props extends ArticleDetailInterface {
+  onSubmit: (article: ArticleDetailInterface) => Promise<void>
 }
 
-export type NewTitleType = ArticleInterface['title']
-export type NewContentType = ArticleInterface['content']
+export type NewTitleType = ArticleDetailInterface['title']
+export type NewContentType = ArticleDetailInterface['content']
 
 export type HandleChangeNewContentType = Pick<NewContentType, 'html' | 'text'>

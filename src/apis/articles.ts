@@ -1,4 +1,5 @@
 import { API_URL_FOR_SSR, API_URL_FOR_CSR } from '@/constants/common'
+import type { CategoryInterface } from '@/apis/categories'
 
 const API_ARTICLE_URL_FOR_SSR = `${API_URL_FOR_SSR}/api/articles`
 const API_ARTICLE_URL_FOR_CSR = `${API_URL_FOR_CSR}/api/articles`
@@ -9,38 +10,39 @@ export interface ArticleContentInterface {
   html: string
 }
 
-export interface ArticleInterface {
+export interface ArticleSimpleInterface {
   title: string
-  content: ArticleContentInterface
+  content: Pick<ArticleContentInterface, '_id'>
   category: string | null
 }
 
-export interface RevisedArticleInterface {
-  newTitle: string
-  newContent: ArticleContentInterface
-  newCategory: string | null
+export interface ArticleDetailInterface {
+  title: string
+  content: ArticleContentInterface
+  category: CategoryInterface | null
 }
 
-export interface GetArticleInterface extends ArticleInterface {
+export interface GetSimpleArticleInterface extends ArticleSimpleInterface {
+  _id: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface GetDetailArticleInterface extends ArticleDetailInterface {
   _id: string
   createdAt: string
   updatedAt: string
 }
 
 export interface GetArticleResponseInterface {
-  article: GetArticleInterface
-}
-
-export interface ArticleOfGetArticlesResponseInterface
-  extends Omit<GetArticleInterface, 'content'> {
-  content: Pick<ArticleContentInterface, '_id'>
+  article: GetDetailArticleInterface
 }
 
 export interface GetArticlesResponseInterface {
-  articles: ArticleOfGetArticlesResponseInterface[]
+  articles: GetSimpleArticleInterface[]
 }
 
-export const createArticle = async (article: ArticleInterface) => {
+export const createArticle = async (article: ArticleDetailInterface) => {
   const res = await fetch(API_ARTICLE_URL_FOR_CSR, {
     method: 'POST',
     headers: {
@@ -75,7 +77,7 @@ export const getArticles = async (searchTerm?: string) => {
 
 export const putArticleById = async (
   id: string,
-  revisedArticle: RevisedArticleInterface,
+  revisedArticle: ArticleDetailInterface,
 ) => {
   const res = await fetch(`${API_ARTICLE_URL_FOR_CSR}/${id}`, {
     method: 'PUT',
