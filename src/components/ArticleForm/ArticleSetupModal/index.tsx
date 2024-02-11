@@ -7,7 +7,7 @@ import { Props } from '../_shared'
 // TODO: 카테고리 수정
 function ArticleSetupModal({ title, content, category, onSubmit }: Props) {
   const [selectedCategory, setSelectedCategory] =
-    useState<SelectedCategoryType>(null)
+    useState<SelectedCategoryType>(category)
 
   const updateSelectedCategory = (selectedCategory: SelectedCategoryType) =>
     setSelectedCategory(selectedCategory)
