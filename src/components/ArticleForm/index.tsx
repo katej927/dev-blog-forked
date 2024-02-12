@@ -1,11 +1,11 @@
 'use client'
 
 import { ChangeEvent, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import Editor from './Editor'
 import ArticleContent from '../ArticleContent'
 import { Props, NewContentType, NewTitleType } from './_shared'
-import { createPortal } from 'react-dom'
 import ArticleSetupModal from './ArticleSetupModal'
 
 const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
