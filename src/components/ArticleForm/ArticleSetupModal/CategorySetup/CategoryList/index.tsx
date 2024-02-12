@@ -7,7 +7,6 @@ import { CategoryInterface, createCategory } from '@/apis/categories'
 
 import { loadCategories } from './_shared'
 import { SelectedCategoryType } from '../../_shared'
-
 import styles from './index.module.css'
 
 const cx = classNames.bind(styles)

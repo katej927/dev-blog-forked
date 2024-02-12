@@ -1,9 +1,9 @@
 import { useState } from 'react'
+import classNames from 'classnames/bind'
+
 import CategoryList from './CategoryList'
 import { SelectedCategoryType } from '../_shared'
-
 import styles from './index.module.css'
-import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
