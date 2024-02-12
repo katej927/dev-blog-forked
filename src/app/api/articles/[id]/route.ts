@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Category from '@/models/category'
 import { Article, ArticleContent } from '@/models/article'
 import { connectMongoDB } from '@/libs/mongodb'
-import { ArticleDetailInterface } from '@/apis/articles'
+import { DetailArticleCategoryIdInterface } from '@/apis/articles'
 
 export const PUT = async (
   request: NextRequest,
@@ -17,7 +17,7 @@ export const PUT = async (
     title,
     content: { text, html },
     category,
-  }: ArticleDetailInterface = await request.json()
+  }: DetailArticleCategoryIdInterface = await request.json()
 
   await connectMongoDB()
 
@@ -51,7 +51,10 @@ export const GET = async (
   { params: { id } }: { params: { id: string } },
 ) => {
   await connectMongoDB()
-  const article = await Article.findOne({ _id: id }).populate('content')
+  const article = await Article.findOne({ _id: id }).populate([
+    'content',
+    { path: 'category', select: '_id categoryName' },
+  ])
 
   return NextResponse.json({ article }, { status: 200 })
 }

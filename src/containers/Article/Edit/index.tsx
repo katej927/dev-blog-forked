@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 
 import {
-  ArticleDetailInterface,
+  DetailArticleCategoryIdInterface,
   GetDetailArticleInterface,
   putArticleById,
 } from '@/apis/articles'
@@ -14,13 +14,14 @@ interface Props {
   article: GetDetailArticleInterface
 }
 
-// TODO: 카테고리 수정
 const ArticleEdit = ({
   article: { title, content, _id: id, category },
 }: Props) => {
   const router = useRouter()
 
-  const handleSubmit = async (editedArticle: ArticleDetailInterface) => {
+  const handleSubmit = async (
+    editedArticle: DetailArticleCategoryIdInterface,
+  ) => {
     try {
       const res = await putArticleById(id, editedArticle)
 

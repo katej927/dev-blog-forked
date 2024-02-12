@@ -1,0 +1,15 @@
+.selectedCategoryWrapper {
+  display: none;
+
+  &.renderIf {
+    display: inline-block;
+  }
+}
+
+.addCategoryButton {
+  display: none;
+
+  &.renderIf {
+    display: inline-block;
+  }
+}

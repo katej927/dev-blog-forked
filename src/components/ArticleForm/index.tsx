@@ -1,14 +1,18 @@
 'use client'
 
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import Editor from './Editor'
 import ArticleContent from '../ArticleContent'
-import { ArticleFormProps, NewContentType, NewTitleType } from './_shared'
+import { Props, NewContentType, NewTitleType } from './_shared'
+import ArticleSetupModal from './ArticleSetupModal'
 
-const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
+const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
   const [newTitle, setNewTitle] = useState<NewTitleType>(title)
   const [newContent, setNewContent] = useState<NewContentType>(content)
+
+  const [isShowModal, setIsShowModal] = useState<boolean>(false)
 
   const handleChangeNewTitle = ({
     target: { value: changedNewTitle },
@@ -20,20 +24,20 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
     setNewContent((prev) => ({ ...prev, ...changedNewContent }))
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmitTitleContent = () => {
+    if (!newTitle || !newContent) {
+      alert('Title and content are required')
+      return
+    }
 
-    // TODO: 카테고리 수정
-    onSubmit({
-      title: newTitle,
-      content: newContent,
-      category: null,
-    })
+    setIsShowModal(true)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit">Publish</button>
+    <main>
+      <button type="button" onClick={handleSubmitTitleContent}>
+        출간하기
+      </button>
       <input
         onChange={handleChangeNewTitle}
         value={newTitle}
@@ -47,7 +51,17 @@ const ArticleForm = ({ title, content, onSubmit }: ArticleFormProps) => {
         />
         <ArticleContent contentHtml={newContent.html} />
       </div>
-    </form>
+      {isShowModal &&
+        createPortal(
+          <ArticleSetupModal
+            title={newTitle}
+            content={newContent}
+            category={category}
+            onSubmit={onSubmit}
+          />,
+          document.body,
+        )}
+    </main>
   )
 }
 export default ArticleForm
