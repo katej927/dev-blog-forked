@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
-// TODO: 카테고리 수정
 import {
   DetailArticleCategoryIdInterface,
   createArticle,
@@ -22,9 +21,11 @@ const ArticleWrite = () => {
   const handleSubmit = async (article: DetailArticleCategoryIdInterface) => {
     try {
       const res = await createArticle(article)
+
       if (!res.ok) {
         throw new Error('Failed to create an article')
       }
+
       const { message: articleId } = await res.json()
       router.push(`${articleId}`)
     } catch (error) {

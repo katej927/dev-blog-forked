@@ -14,7 +14,6 @@ interface Props {
   article: GetDetailArticleInterface
 }
 
-// TODO: 카테고리 수정
 const ArticleEdit = ({
   article: { title, content, _id: id, category },
 }: Props) => {
