@@ -1,13 +1,13 @@
 'use client'
 
 import { useState, ChangeEvent, useEffect } from 'react'
+import classNames from 'classnames/bind'
 
 import { CategoryInterface, createCategory } from '@/apis/categories'
 
 import { loadCategories } from './_shared'
 import { SelectedCategoryType } from '../../_shared'
 
-import classNames from 'classnames/bind'
 import styles from './index.module.css'
 
 const cx = classNames.bind(styles)
@@ -55,8 +55,8 @@ function CategoryList({
         throw new Error('Failed to create a category.')
       }
 
-      const categories = await loadCategories()
-      setCategories(categories ?? [])
+      const updatedCategories = await loadCategories()
+      setCategories(updatedCategories ?? [])
 
       setNewCategoryName('')
     } catch (error) {
@@ -90,6 +90,7 @@ function CategoryList({
         {categories.length ? (
           categories.map(({ _id, categoryName }) => (
             <li
+              role="presentation"
               key={_id}
               onClick={() => setClickedCategory({ categoryName, _id })}
               className={cx('category', {
