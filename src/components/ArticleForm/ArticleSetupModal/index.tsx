@@ -1,15 +1,16 @@
-import styles from './index.module.css'
-import CategorySetup from './CategorySetup'
 import { useState } from 'react'
+
+import CategorySetup from './CategorySetup'
 import { SelectedCategoryType } from './_shared'
 import { Props } from '../_shared'
+import styles from './index.module.css'
 
 function ArticleSetupModal({ title, content, category, onSubmit }: Props) {
   const [selectedCategory, setSelectedCategory] =
     useState<SelectedCategoryType>(category)
 
-  const updateSelectedCategory = (selectedCategory: SelectedCategoryType) =>
-    setSelectedCategory(selectedCategory)
+  const updateSelectedCategory = (newCategory: SelectedCategoryType) =>
+    setSelectedCategory(newCategory)
 
   const handleClickPublishButton = () => {
     onSubmit({
