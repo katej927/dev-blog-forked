@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <nav style={{ display: 'flex' }}>
       <Link href={'/'}>Home</Link>
-      <Link href={'/category'}>Category</Link>
+      <Link href={'/categories'}>Categories</Link>
       {!isLoading && (
         <>
           {isLoggedin ? (

@@ -32,7 +32,7 @@ export const POST = async (request: NextRequest) => {
   }
 }
 
-export const GET = async () => {
+export const GET = async (articlesType: 'ids' | 'omit' | 'detail') => {
   try {
     await connectMongoDB()
 
