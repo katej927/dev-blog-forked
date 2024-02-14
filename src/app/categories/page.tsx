@@ -18,9 +18,10 @@ const CategoryPage = async () => {
       console.log(error)
     }
   }
-  const categories: GetCategoriesArticlesCountInterface = await loadCategories()
+  const categories: GetCategoriesArticlesCountInterface[] =
+    await loadCategories()
 
-  return <Categories />
+  return <Categories categories={categories} />
 }
 
 export default CategoryPage
