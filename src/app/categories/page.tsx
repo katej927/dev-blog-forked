@@ -1,5 +1,5 @@
 import { getCategories } from '@/apis/categories'
-import React from 'react'
+import Categories from '@/containers/Categories'
 
 const CategoryPage = async () => {
   const loadCategories = async () => {
@@ -17,7 +17,7 @@ const CategoryPage = async () => {
   }
   const data = await loadCategories()
 
-  return <div>CategoryPage</div>
+  return <Categories />
 }
 
 export default CategoryPage
