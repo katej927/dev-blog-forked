@@ -9,6 +9,8 @@ export interface CategoryInterface {
   articles: GetSimpleArticleInterface | string[]
 }
 
+export type CategoryArticlesType = 'ids' | 'omit' | 'detail'
+
 export const createCategory = async (
   categoryName: Pick<CategoryInterface, 'categoryName'>,
 ) => {
@@ -31,8 +33,8 @@ export const getCategoryById = async (id: string) => {
   return res
 }
 
-export const getCategories = async () => {
-  const res = await fetch(`${API_CATEGORY_URL}`, {
+export const getCategories = async (articlesType: CategoryArticlesType) => {
+  const res = await fetch(`${API_CATEGORY_URL}?articlesType=${articlesType}`, {
     cache: 'no-cache',
   })
 

@@ -2,7 +2,7 @@ import { CategoryInterface, getCategories } from '@/apis/categories'
 
 export const loadCategories = async () => {
   try {
-    const res = await getCategories()
+    const res = await getCategories('omit')
 
     if (!res.ok) {
       throw new Error('Failed to get categories.')

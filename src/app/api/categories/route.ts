@@ -32,11 +32,26 @@ export const POST = async (request: NextRequest) => {
   }
 }
 
-export const GET = async (articlesType: 'ids' | 'omit' | 'detail') => {
+export const GET = async (request: NextRequest) => {
+  const articlesType = request.nextUrl.searchParams.get('articlesType')
+
   try {
     await connectMongoDB()
 
-    const categories = await Category.find({})
+    let categories
+    switch (articlesType) {
+      case 'ids':
+        categories = await Category.find({})
+        break
+      case 'omit':
+        categories = await Category.find({}, '-articles')
+        break
+      case 'detail':
+        categories = await Category.find({}).populate('articles')
+        break
+      default:
+        throw new Error('Invalid articlesType')
+    }
 
     return NextResponse.json(categories)
   } catch (error) {

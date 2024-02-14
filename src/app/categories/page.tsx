@@ -4,7 +4,7 @@ import React from 'react'
 const CategoryPage = async () => {
   const loadCategories = async () => {
     try {
-      const res = await getCategories()
+      const res = await getCategories('detail')
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`)
@@ -16,7 +16,6 @@ const CategoryPage = async () => {
     }
   }
   const data = await loadCategories()
-  console.log('data', data)
 
   return <div>CategoryPage</div>
 }
