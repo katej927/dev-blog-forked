@@ -1,10 +1,13 @@
-import { getCategories } from '@/apis/categories'
+import {
+  GetCategoriesArticlesCountInterface,
+  getCategories,
+} from '@/apis/categories'
 import Categories from '@/containers/Categories'
 
 const CategoryPage = async () => {
   const loadCategories = async () => {
     try {
-      const res = await getCategories('detail')
+      const res = await getCategories('count')
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`)
@@ -15,7 +18,7 @@ const CategoryPage = async () => {
       console.log(error)
     }
   }
-  const data = await loadCategories()
+  const categories: GetCategoriesArticlesCountInterface = await loadCategories()
 
   return <Categories />
 }

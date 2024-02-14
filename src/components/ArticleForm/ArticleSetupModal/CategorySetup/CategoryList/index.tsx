@@ -3,7 +3,10 @@
 import { useState, ChangeEvent, useEffect } from 'react'
 import classNames from 'classnames/bind'
 
-import { CategoryInterface, createCategory } from '@/apis/categories'
+import {
+  GetCategoriesArticlesOmitInterface,
+  createCategory,
+} from '@/apis/categories'
 
 import { loadCategories } from './_shared'
 import { SelectedCategoryType } from '../../_shared'
@@ -22,7 +25,9 @@ function CategoryList({
   toggleCategoryList,
   renderIf,
 }: Props) {
-  const [categories, setCategories] = useState<CategoryInterface[]>([])
+  const [categories, setCategories] = useState<
+    GetCategoriesArticlesOmitInterface[]
+  >([])
   const [newCategoryName, setNewCategoryName] = useState<string>()
   const [clickedCategory, setClickedCategory] =
     useState<SelectedCategoryType>(null)

@@ -40,14 +40,32 @@ export const GET = async (request: NextRequest) => {
 
     let categories
     switch (articlesType) {
-      case 'ids':
-        categories = await Category.find({})
-        break
       case 'omit':
         categories = await Category.find({}, '-articles')
         break
-      case 'detail':
-        categories = await Category.find({}).populate('articles')
+      case 'count':
+        categories = await Category.aggregate([
+          {
+            $lookup: {
+              from: 'articles',
+              localField: 'articles',
+              foreignField: '_id',
+              as: 'articlesData',
+            },
+          },
+          {
+            $addFields: {
+              articleCount: { $size: '$articlesData' },
+              latestArticleTimestamp: { $max: '$articlesData.updatedAt' },
+            },
+          },
+          {
+            $project: {
+              articlesData: 0,
+              articles: 0,
+            },
+          },
+        ])
         break
       default:
         throw new Error('Invalid articlesType')

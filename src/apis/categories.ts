@@ -9,7 +9,16 @@ export interface CategoryInterface {
   articles: GetSimpleArticleInterface | string[]
 }
 
-export type CategoryArticlesType = 'ids' | 'omit' | 'detail'
+export type CategoryArticlesType = 'omit' | 'count'
+
+export interface GetCategoriesArticlesOmitInterface
+  extends Pick<CategoryInterface, '_id' | 'categoryName'> {}
+
+export interface GetCategoriesArticlesCountInterface
+  extends Pick<CategoryInterface, '_id' | 'categoryName'> {
+  articleCount: number
+  latestArticleTimestamp: string
+}
 
 export const createCategory = async (
   categoryName: Pick<CategoryInterface, 'categoryName'>,
