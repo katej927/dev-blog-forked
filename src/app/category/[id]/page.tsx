@@ -1,5 +1,5 @@
 import { getCategoryById } from '@/apis/categories'
-import React from 'react'
+import EachCategory from '@/containers/Category/Each'
 
 const EachCategoryPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params
@@ -20,7 +20,7 @@ const EachCategoryPage = async ({ params }: { params: { id: string } }) => {
 
   const { category } = await loadCategory()
 
-  return <div>CategoryPage</div>
+  return <EachCategory category={category} />
 }
 
 export default EachCategoryPage

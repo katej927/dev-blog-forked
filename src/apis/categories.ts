@@ -20,6 +20,11 @@ export interface GetCategoriesArticlesCountInterface
   latestArticleTimestamp: string
 }
 
+export interface GetCategoryByIdInterface
+  extends Pick<CategoryInterface, '_id' | 'categoryName'> {
+  articles: GetSimpleArticleInterface[]
+}
+
 export const createCategory = async (
   categoryName: Pick<CategoryInterface, 'categoryName'>,
 ) => {
