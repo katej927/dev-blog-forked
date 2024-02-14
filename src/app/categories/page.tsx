@@ -4,7 +4,7 @@ import {
 } from '@/apis/categories'
 import Categories from '@/containers/Categories'
 
-const CategoryPage = async () => {
+const CategoriesPage = async () => {
   const loadCategories = async () => {
     try {
       const res = await getCategories('count')
@@ -24,4 +24,4 @@ const CategoryPage = async () => {
   return <Categories categories={categories} />
 }
 
-export default CategoryPage
+export default CategoriesPage

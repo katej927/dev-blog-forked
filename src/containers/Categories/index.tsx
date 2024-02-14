@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 
 import { GetCategoriesArticlesCountInterface } from '@/apis/categories'
+import Link from 'next/link'
 
 interface Props {
   categories: GetCategoriesArticlesCountInterface[]
@@ -13,7 +14,7 @@ const Categories = ({ categories }: Props) => {
         <div>
           {categories.map(
             ({ _id, categoryName, articleCount, latestArticleTimestamp }) => (
-              <div key={_id}>
+              <Link key={_id} href={`/categories/${_id}`}>
                 <h4>{categoryName}</h4>
                 <div>
                   <span>{articleCount}개의 포스트</span>
@@ -24,7 +25,7 @@ const Categories = ({ categories }: Props) => {
                     </span>
                   )}
                 </div>
-              </div>
+              </Link>
             ),
           )}
         </div>
