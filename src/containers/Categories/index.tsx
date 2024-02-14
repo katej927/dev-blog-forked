@@ -10,7 +10,7 @@ const Categories = ({ categories }: Props) => {
   return (
     <section>
       {categories.length ? (
-        <section>
+        <div>
           {categories.map(
             ({ _id, categoryName, articleCount, latestArticleTimestamp }) => (
               <div key={_id}>
@@ -27,7 +27,7 @@ const Categories = ({ categories }: Props) => {
               </div>
             ),
           )}
-        </section>
+        </div>
       ) : (
         <div>아직 카테고리가 없습니다.</div>
       )}

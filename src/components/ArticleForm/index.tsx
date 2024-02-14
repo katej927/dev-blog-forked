@@ -34,7 +34,7 @@ const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
   }
 
   return (
-    <main>
+    <section>
       <button type="button" onClick={handleSubmitTitleContent}>
         출간하기
       </button>
@@ -61,7 +61,7 @@ const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
           />,
           document.body,
         )}
-    </main>
+    </section>
   )
 }
 export default ArticleForm
