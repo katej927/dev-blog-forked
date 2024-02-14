@@ -7,14 +7,14 @@ interface Props {
   categories: GetCategoriesArticlesCountInterface[]
 }
 
-const Categories = ({ categories }: Props) => {
+const CategoryList = ({ categories }: Props) => {
   return (
     <section>
       {categories.length ? (
         <div>
           {categories.map(
             ({ _id, categoryName, articleCount, latestArticleTimestamp }) => (
-              <Link key={_id} href={`/categories/${_id}`}>
+              <Link key={_id} href={`/category/${_id}`}>
                 <h4>{categoryName}</h4>
                 <div>
                   <span>{articleCount}개의 포스트</span>
@@ -36,4 +36,4 @@ const Categories = ({ categories }: Props) => {
   )
 }
 
-export default Categories
+export default CategoryList

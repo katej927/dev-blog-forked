@@ -2,9 +2,9 @@ import {
   GetCategoriesArticlesCountInterface,
   getCategories,
 } from '@/apis/categories'
-import Categories from '@/containers/Categories'
+import CategoryList from '@/containers/Category/List'
 
-const CategoriesPage = async () => {
+const CategoryListPage = async () => {
   const loadCategories = async () => {
     try {
       const res = await getCategories('count')
@@ -21,7 +21,7 @@ const CategoriesPage = async () => {
   const categories: GetCategoriesArticlesCountInterface[] =
     await loadCategories()
 
-  return <Categories categories={categories} />
+  return <CategoryList categories={categories} />
 }
 
-export default CategoriesPage
+export default CategoryListPage
