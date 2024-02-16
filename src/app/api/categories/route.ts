@@ -56,7 +56,7 @@ export const GET = async (request: NextRequest) => {
           {
             $addFields: {
               articleCount: { $size: '$articlesData' },
-              latestArticleTimestamp: { $max: '$articlesData.updatedAt' },
+              latestArticleTimestamp: { $max: '$articlesData.createdAt' },
             },
           },
           {
