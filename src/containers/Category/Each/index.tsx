@@ -1,6 +1,7 @@
-import { GetCategoryByIdInterface } from '@/apis/categories'
 import Link from 'next/link'
 import dayjs from 'dayjs'
+
+import { GetCategoryByIdInterface } from '@/apis/categories'
 
 interface Props {
   category: GetCategoryByIdInterface

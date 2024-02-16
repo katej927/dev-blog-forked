@@ -1,7 +1,7 @@
+import Link from 'next/link'
 import dayjs from 'dayjs'
 
 import { GetCategoriesArticlesCountInterface } from '@/apis/categories'
-import Link from 'next/link'
 
 interface Props {
   categories: GetCategoriesArticlesCountInterface[]
