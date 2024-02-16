@@ -9,7 +9,7 @@ export interface CategoryInterface {
   articles: GetSimpleArticleInterface | string[]
 }
 
-export type CategoryArticlesType = 'omit' | 'count'
+type CategoryArticlesType = 'omit' | 'count'
 
 export interface GetCategoriesArticlesOmitInterface
   extends Pick<CategoryInterface, '_id' | 'categoryName'> {}
