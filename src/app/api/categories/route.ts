@@ -32,11 +32,44 @@ export const POST = async (request: NextRequest) => {
   }
 }
 
-export const GET = async () => {
+export const GET = async (request: NextRequest) => {
+  const articlesType = request.nextUrl.searchParams.get('articlesType')
+
   try {
     await connectMongoDB()
 
-    const categories = await Category.find({})
+    let categories
+    switch (articlesType) {
+      case 'omit':
+        categories = await Category.find({}, '-articles')
+        break
+      case 'count':
+        categories = await Category.aggregate([
+          {
+            $lookup: {
+              from: 'articles',
+              localField: 'articles',
+              foreignField: '_id',
+              as: 'articlesData',
+            },
+          },
+          {
+            $addFields: {
+              articleCount: { $size: '$articlesData' },
+              latestArticleTimestamp: { $max: '$articlesData.createdAt' },
+            },
+          },
+          {
+            $project: {
+              articlesData: 0,
+              articles: 0,
+            },
+          },
+        ])
+        break
+      default:
+        throw new Error('Invalid articlesType')
+    }
 
     return NextResponse.json(categories)
   } catch (error) {

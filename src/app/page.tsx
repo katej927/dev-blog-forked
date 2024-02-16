@@ -22,12 +22,7 @@ const HomePage = async ({
 
       if (!articles.length) return undefined
 
-      const latestSortedResult = articles.sort(
-        (a, b) =>
-          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
-      )
-
-      return latestSortedResult
+      return articles
     } catch (error) {
       console.log('Error loading articles:', error)
     }

@@ -9,6 +9,22 @@ export interface CategoryInterface {
   articles: GetSimpleArticleInterface | string[]
 }
 
+type CategoryArticlesType = 'omit' | 'count'
+
+export interface GetCategoriesArticlesOmitInterface
+  extends Pick<CategoryInterface, '_id' | 'categoryName'> {}
+
+export interface GetCategoriesArticlesCountInterface
+  extends Pick<CategoryInterface, '_id' | 'categoryName'> {
+  articleCount: number
+  latestArticleTimestamp: string
+}
+
+export interface GetCategoryByIdInterface
+  extends Pick<CategoryInterface, '_id' | 'categoryName'> {
+  articles: GetSimpleArticleInterface[]
+}
+
 export const createCategory = async (
   categoryName: Pick<CategoryInterface, 'categoryName'>,
 ) => {
@@ -31,8 +47,8 @@ export const getCategoryById = async (id: string) => {
   return res
 }
 
-export const getCategories = async () => {
-  const res = await fetch(`${API_CATEGORY_URL}`, {
+export const getCategories = async (articlesType: CategoryArticlesType) => {
+  const res = await fetch(`${API_CATEGORY_URL}?articlesType=${articlesType}`, {
     cache: 'no-cache',
   })
 

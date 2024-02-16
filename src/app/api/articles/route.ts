@@ -78,8 +78,11 @@ export const GET = async (request: NextRequest) => {
             updatedAt: 1,
           },
         },
+        {
+          $sort: { createdAt: -1 },
+        },
       ])
-    : await Article.find()
+    : await Article.find().sort({ createdAt: -1 })
 
   return NextResponse.json({ articles }, { status: 200 })
 }

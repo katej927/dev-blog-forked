@@ -14,6 +14,7 @@ const Article = ({
   article: {
     title,
     _id,
+    createdAt,
     updatedAt,
     content: { html },
   },
@@ -22,6 +23,7 @@ const Article = ({
     <div>
       <h2>제목: {title}</h2>
       <EditButtons id={_id} />
+      <div>생성 일자: {dayjs(createdAt).format('YYYY-MM-DD')}</div>
       <div>수정 일자: {dayjs(updatedAt).format('YYYY-MM-DD')}</div>
       <div>
         내용: <ArticleContent contentHtml={html} />
