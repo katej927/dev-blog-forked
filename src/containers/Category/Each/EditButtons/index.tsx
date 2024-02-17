@@ -1,7 +1,8 @@
 'use client'
 
-import { deleteCategoryById } from '@/apis/categories'
 import { useRouter } from 'next/navigation'
+
+import { deleteCategoryById } from '@/apis/categories'
 
 interface Props {
   categoryId: string
