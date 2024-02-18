@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 import { GetCategoryByIdInterface } from '@/apis/categories'
 
-import EditButtons from './EditButtons'
+import EachCategoryHeader from './Header'
 
 interface Props {
   category: GetCategoryByIdInterface
@@ -13,7 +13,7 @@ const EachCategory = ({ category: { _id, categoryName, articles } }: Props) => {
   return (
     <section>
       <h1>{categoryName}</h1>
-      <EditButtons categoryId={_id} />
+      <EachCategoryHeader categoryId={_id} />
 
       {articles.length ? (
         <div>

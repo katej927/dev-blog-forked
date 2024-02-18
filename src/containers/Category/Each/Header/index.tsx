@@ -8,7 +8,7 @@ interface Props {
   categoryId: string
 }
 
-const EditButtons = ({ categoryId }: Props) => {
+const EachCategoryHeader = ({ categoryId }: Props) => {
   const router = useRouter()
 
   const handleClickDeleteCategoryButton = async () => {
@@ -32,7 +32,12 @@ const EditButtons = ({ categoryId }: Props) => {
     }
   }
 
-  return <button onClick={handleClickDeleteCategoryButton}>삭제</button>
+  return (
+    <div>
+      <button>수정</button>
+      <button onClick={handleClickDeleteCategoryButton}>삭제</button>
+    </div>
+  )
 }
 
-export default EditButtons
+export default EachCategoryHeader
