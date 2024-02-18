@@ -20,10 +20,10 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
     initCategoryName,
   )
 
-  const handleChangeCategoryName = ({
-    currentTarget: { innerText },
+  const handleInputCategoryName = ({
+    currentTarget: { textContent },
   }: FormEvent<HTMLHeadingElement>) => {
-    setCategoryName(innerText)
+    setCategoryName(textContent)
   }
 
   const handleClickEditButton = () => {
@@ -70,11 +70,11 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
     <div>
       <h1
         contentEditable={isCategoryNameEditable}
-        onChange={handleChangeCategoryName}
+        onInput={handleInputCategoryName}
         suppressContentEditableWarning
         placeholder="카테고리 이름을 1자 이상 적어주세요."
       >
-        {categoryName}
+        {initCategoryName}
       </h1>
       {isCategoryNameEditable ? (
         <button onClick={handleClickApplyButton} disabled={!categoryName}>
