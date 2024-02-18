@@ -17,7 +17,7 @@ const EachCategory = ({ category: { _id, categoryName, articles } }: Props) => {
       {articles.length ? (
         <div>
           {articles.map(({ _id: articleId, title, createdAt }, idx) => (
-            <Link key={articleId} href={`/article/${_id}`}>
+            <Link key={articleId} href={`/article/${articleId}`}>
               <h2>{`${idx + 1}. ${title}`}</h2>
               <div>{dayjs(createdAt).format('YYYY-MM-DD')}</div>
             </Link>

@@ -16,9 +16,11 @@ const EachCategoryHeader = ({ categoryName, categoryId }: Props) => {
   const [isCategoryNameEditable, setIsCategoryNameEditable] =
     useState<boolean>(false)
 
-  const handleClickEditButton = () => {}
+  const handleClickEditButton = () => {
+    setIsCategoryNameEditable(true)
+  }
 
-  const handleClickDeleteCategoryButton = async () => {
+  const handleClickDeleteButton = async () => {
     const confirmed = window.confirm(
       '정말 삭제하시겠습니까? 아티클들은 삭제되지 않습니다.',
     )
@@ -43,7 +45,7 @@ const EachCategoryHeader = ({ categoryName, categoryId }: Props) => {
     <div>
       <h1 contentEditable={isCategoryNameEditable}>{categoryName}</h1>
       <button onClick={handleClickEditButton}>수정</button>
-      <button onClick={handleClickDeleteCategoryButton}>삭제</button>
+      <button onClick={handleClickDeleteButton}>삭제</button>
     </div>
   )
 }
