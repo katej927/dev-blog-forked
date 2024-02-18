@@ -4,7 +4,7 @@ import { FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { deleteCategoryById } from '@/apis/categories'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 interface Props {
   initCategoryName: string
@@ -64,7 +64,9 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
         {categoryName}
       </h1>
       {isCategoryNameEditable ? (
-        <button onClick={handleClickApplyButton}>적용</button>
+        <button onClick={handleClickApplyButton} disabled={!categoryName}>
+          적용
+        </button>
       ) : (
         <>
           <button onClick={handleClickEditButton}>수정</button>
