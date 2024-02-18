@@ -3,13 +3,20 @@
 import { useRouter } from 'next/navigation'
 
 import { deleteCategoryById } from '@/apis/categories'
+import { useState } from 'react'
 
 interface Props {
+  categoryName: string
   categoryId: string
 }
 
-const EachCategoryHeader = ({ categoryId }: Props) => {
+const EachCategoryHeader = ({ categoryName, categoryId }: Props) => {
   const router = useRouter()
+
+  const [isCategoryNameEditable, setIsCategoryNameEditable] =
+    useState<boolean>(false)
+
+  const handleClickEditButton = () => {}
 
   const handleClickDeleteCategoryButton = async () => {
     const confirmed = window.confirm(
@@ -34,7 +41,8 @@ const EachCategoryHeader = ({ categoryId }: Props) => {
 
   return (
     <div>
-      <button>수정</button>
+      <h1 contentEditable={isCategoryNameEditable}>{categoryName}</h1>
+      <button onClick={handleClickEditButton}>수정</button>
       <button onClick={handleClickDeleteCategoryButton}>삭제</button>
     </div>
   )
