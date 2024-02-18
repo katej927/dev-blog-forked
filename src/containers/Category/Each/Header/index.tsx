@@ -1,20 +1,30 @@
 'use client'
 
+import { FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { deleteCategoryById } from '@/apis/categories'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 interface Props {
-  categoryName: string
+  initCategoryName: string
   categoryId: string
 }
 
-const EachCategoryHeader = ({ categoryName, categoryId }: Props) => {
+const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
   const router = useRouter()
 
   const [isCategoryNameEditable, setIsCategoryNameEditable] =
     useState<boolean>(false)
+  const [categoryName, setCategoryName] = useState<string | null>(
+    initCategoryName,
+  )
+
+  const handleInputCategoryName = ({
+    currentTarget: { textContent },
+  }: FormEvent<HTMLHeadingElement>) => {
+    setCategoryName(textContent)
+  }
 
   const handleClickEditButton = () => {
     setIsCategoryNameEditable(true)
@@ -41,11 +51,26 @@ const EachCategoryHeader = ({ categoryName, categoryId }: Props) => {
     }
   }
 
+  const handleClickApplyButton = () => {}
+
   return (
     <div>
-      <h1 contentEditable={isCategoryNameEditable}>{categoryName}</h1>
-      <button onClick={handleClickEditButton}>수정</button>
-      <button onClick={handleClickDeleteButton}>삭제</button>
+      <h1
+        contentEditable={isCategoryNameEditable}
+        onInput={handleInputCategoryName}
+        suppressContentEditableWarning
+        placeholder="카테고리 이름을 1자 이상 적어주세요."
+      >
+        {categoryName}
+      </h1>
+      {isCategoryNameEditable ? (
+        <button onClick={handleClickApplyButton}>적용</button>
+      ) : (
+        <>
+          <button onClick={handleClickEditButton}>수정</button>
+          <button onClick={handleClickDeleteButton}>삭제</button>
+        </>
+      )}
     </div>
   )
 }

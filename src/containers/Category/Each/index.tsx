@@ -12,7 +12,7 @@ interface Props {
 const EachCategory = ({ category: { _id, categoryName, articles } }: Props) => {
   return (
     <section>
-      <EachCategoryHeader categoryName={categoryName} categoryId={_id} />
+      <EachCategoryHeader initCategoryName={categoryName} categoryId={_id} />
 
       {articles.length ? (
         <div>
