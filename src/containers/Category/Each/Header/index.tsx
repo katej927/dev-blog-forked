@@ -3,7 +3,7 @@
 import { FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { deleteCategoryById } from '@/apis/categories'
+import { deleteCategoryById, putCategoryById } from '@/apis/categories'
 import { useState } from 'react'
 
 interface Props {
@@ -20,10 +20,10 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
     initCategoryName,
   )
 
-  const handleInputCategoryName = ({
-    currentTarget: { textContent },
+  const handleChangeCategoryName = ({
+    currentTarget: { innerText },
   }: FormEvent<HTMLHeadingElement>) => {
-    setCategoryName(textContent)
+    setCategoryName(innerText)
   }
 
   const handleClickEditButton = () => {
@@ -51,13 +51,26 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
     }
   }
 
-  const handleClickApplyButton = () => {}
+  const handleClickApplyButton = async () => {
+    if (!categoryName) return confirm('카테고리 이름을 입력해주세요.')
+
+    try {
+      const res = await putCategoryById({ _id: categoryId, categoryName })
+
+      if (!res.ok) {
+        router.push('/')
+        throw new Error('카테고리를 수정하는데 실패했습니다.')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div>
       <h1
         contentEditable={isCategoryNameEditable}
-        onInput={handleInputCategoryName}
+        onChange={handleChangeCategoryName}
         suppressContentEditableWarning
         placeholder="카테고리 이름을 1자 이상 적어주세요."
       >
