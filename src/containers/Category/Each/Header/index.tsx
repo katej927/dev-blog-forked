@@ -73,7 +73,6 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
         contentEditable={isCategoryNameEditable}
         onInput={handleInputCategoryName}
         suppressContentEditableWarning
-        placeholder="카테고리 이름을 1자 이상 적어주세요."
       >
         {initCategoryName}
       </h1>
