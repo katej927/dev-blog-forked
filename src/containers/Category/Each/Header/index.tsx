@@ -62,6 +62,8 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
         router.push('/')
         throw new Error('카테고리를 수정하는데 실패했습니다.')
       }
+
+      setIsCategoryNameEditable(false)
     } catch (error) {
       console.log(error)
     }
