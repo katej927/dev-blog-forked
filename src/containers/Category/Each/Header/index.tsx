@@ -1,10 +1,9 @@
 'use client'
 
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { deleteCategoryById, putCategoryById } from '@/apis/categories'
-import { useState } from 'react'
 import useIsLogin from '@/hooks/useIsLogin'
 
 interface Props {
@@ -54,7 +53,7 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
   }
 
   const handleClickApplyButton = async () => {
-    if (!categoryName) return confirm('카테고리 이름을 입력해주세요.')
+    if (!categoryName) return window.confirm('카테고리 이름을 입력해주세요.')
 
     try {
       const res = await putCategoryById({ _id: categoryId, categoryName })
