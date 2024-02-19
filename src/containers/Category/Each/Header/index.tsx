@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 
 import { deleteCategoryById, putCategoryById } from '@/apis/categories'
 import { useState } from 'react'
+import useIsLogin from '@/hooks/useIsLogin'
 
 interface Props {
   initCategoryName: string
@@ -13,6 +14,7 @@ interface Props {
 
 const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
   const router = useRouter()
+  const { isLoggedin } = useIsLogin()
 
   const [isCategoryNameEditable, setIsCategoryNameEditable] =
     useState<boolean>(false)
@@ -76,14 +78,18 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
       >
         {initCategoryName}
       </h1>
-      {isCategoryNameEditable ? (
-        <button onClick={handleClickApplyButton} disabled={!categoryName}>
-          적용
-        </button>
-      ) : (
+      {isLoggedin && (
         <>
-          <button onClick={handleClickEditButton}>수정</button>
-          <button onClick={handleClickDeleteButton}>삭제</button>
+          {isCategoryNameEditable ? (
+            <button onClick={handleClickApplyButton} disabled={!categoryName}>
+              적용
+            </button>
+          ) : (
+            <>
+              <button onClick={handleClickEditButton}>수정</button>
+              <button onClick={handleClickDeleteButton}>삭제</button>
+            </>
+          )}
         </>
       )}
     </div>
