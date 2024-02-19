@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 import { GetCategoryByIdInterface } from '@/apis/categories'
 
-import EditButtons from './EditButtons'
+import EachCategoryHeader from './Header'
 
 interface Props {
   category: GetCategoryByIdInterface
@@ -12,13 +12,12 @@ interface Props {
 const EachCategory = ({ category: { _id, categoryName, articles } }: Props) => {
   return (
     <section>
-      <h1>{categoryName}</h1>
-      <EditButtons categoryId={_id} />
+      <EachCategoryHeader initCategoryName={categoryName} categoryId={_id} />
 
       {articles.length ? (
         <div>
           {articles.map(({ _id: articleId, title, createdAt }, idx) => (
-            <Link key={articleId} href={`/article/${_id}`}>
+            <Link key={articleId} href={`/article/${articleId}`}>
               <h2>{`${idx + 1}. ${title}`}</h2>
               <div>{dayjs(createdAt).format('YYYY-MM-DD')}</div>
             </Link>
