@@ -1,13 +1,31 @@
+'use client'
+
 import Script from 'next/script'
-import React from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
+
+import { GTM_ID, pageview } from '@/libs/gtm'
 
 const Analytics = () => {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    if (pathname) {
+      pageview(pathname)
+    }
+  }, [pathname, searchParams])
+
+  if (process.env.NODE_ENV !== 'production') {
+    return null
+  }
+
   return (
     <>
       {/* <!-- Google Tag Manager (noscript) --> */}
       <noscript>
         <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
           height="0"
           width="0"
           style={{ display: 'none', visibility: 'hidden' }}
@@ -15,11 +33,14 @@ const Analytics = () => {
       </noscript>
       {/* <!-- End Google Tag Manager (noscript) --> */}
       {/* <!-- Google Tag Manager --> */}
-      <Script id="google-tag-management">{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      <Script
+        id="gtm-script"
+        strategy="afterInteractive"
+      >{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');`}</Script>
+})(window,document,'script','dataLayer','${GTM_ID}');`}</Script>
       {/* <!-- End Google Tag Manager --> */}
     </>
   )
