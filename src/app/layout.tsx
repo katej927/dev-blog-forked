@@ -1,11 +1,12 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 
 import type { Metadata } from 'next'
 
 import Navbar from '@/components/Navbar'
 import { AuthProvider } from '../providers/auth'
+import Analytics from './analytics'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +19,9 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="ko">
       <body className={inter.className}>
+        <Suspense>
+          <Analytics />
+        </Suspense>
         <AuthProvider>
           <div>
             <Navbar />
