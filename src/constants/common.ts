@@ -3,3 +3,5 @@ export const API_URL_FOR_CSR =
   process.env.NODE_ENV === 'development'
     ? process.env.NEXT_PUBLIC_DEV_URL
     : process.env.NEXT_PUBLIC_PROD_URL
+
+export const DOMAIN = process.env.NEXT_PUBLIC_PROD_URL
