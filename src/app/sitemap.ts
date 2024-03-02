@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+
 import { GetArticlesResponseInterface, getArticles } from '@/apis/articles'
 import {
   GetCategoriesArticlesCountInterface,
@@ -44,8 +45,8 @@ const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const categories = await loadCategories()
 
   const basicSitemap: MetadataRoute.Sitemap = [
-    { url: `${DOMAIN}`, lastModified: articles?.[0]['updatedAt'] },
-    { url: `${DOMAIN}/category`, lastModified: articles?.[0]['updatedAt'] },
+    { url: `${DOMAIN}`, lastModified: articles?.[0].updatedAt },
+    { url: `${DOMAIN}/category`, lastModified: articles?.[0].updatedAt },
   ]
 
   const articlesSitemap: MetadataRoute.Sitemap =

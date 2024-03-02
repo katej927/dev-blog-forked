@@ -1,13 +1,13 @@
-import './globals.css'
 import { Inter } from 'next/font/google'
 import { ReactNode, Suspense } from 'react'
 
 import type { Metadata } from 'next'
+import './globals.css'
+import { LAYOUT_METADATA } from '@/constants/metaDatas'
 
 import Navbar from '@/components/Navbar'
 import { AuthProvider } from '../providers/auth'
 import Analytics from './analytics'
-import { LAYOUT_METADATA } from '@/constants/metaDatas'
 
 const inter = Inter({ subsets: ['latin'] })
 
