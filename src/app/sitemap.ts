@@ -60,7 +60,7 @@ const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
       lastModified: latestArticleTimestamp,
     })) ?? []
 
-  return [...basicSitemap, ...articlesSitemap, ...categoriesSitemap]
+  return [...basicSitemap, ...categoriesSitemap, ...articlesSitemap]
 }
 
 export default Sitemap
