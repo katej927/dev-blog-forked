@@ -14,15 +14,13 @@ interface Props {
 
 const Home = ({ articles }: Props) => {
   return (
-    <main>
+    <main className={cx('wrapper')}>
       <Search />
       {articles ? (
         <ul className={cx('articlesWrapper')}>
           {articles.map(({ title, _id }) => (
-            <li style={{ border: '1px solid black' }}>
-              <Link key={_id} href={`/article/${_id}`}>
-                {title}
-              </Link>
+            <li key={_id} style={{ border: '1px solid black' }}>
+              <Link href={`/article/${_id}`}>{title}</Link>
             </li>
           ))}
         </ul>
