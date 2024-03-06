@@ -14,3 +14,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+:root {
+  --color-theme-blue: #3182f6;
+  --color-theme-gray: #979797;
+  --color-theme-black: #333333;
+}

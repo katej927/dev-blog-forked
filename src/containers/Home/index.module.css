@@ -9,4 +9,15 @@
 
 .articleWrapper {
   margin: 40px 0px;
+  &:hover .articleTitle {
+    color: var(--color-theme-blue);
+  }
+}
+
+.articleTitle {
+  color: var(--color-theme-black);
+}
+
+.articleTime {
+  color: var(--color-theme-gray);
 }

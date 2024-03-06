@@ -22,8 +22,8 @@ const Home = ({ articles }: Props) => {
           {articles.map(({ title, _id, createdAt }) => (
             <li key={_id} className={cx('articleWrapper')}>
               <Link href={`/article/${_id}`}>
-                <h2>{title}</h2>
-                <time dateTime={createdAt}>
+                <h2 className={cx('articleTitle')}>{title}</h2>
+                <time dateTime={createdAt} className={cx('articleTime')}>
                   {dayjs(createdAt).format('YYYY.MM.DD')}
                 </time>
               </Link>
