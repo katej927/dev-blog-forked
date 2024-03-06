@@ -3,7 +3,12 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
+import styles from './index.module.css'
+import classNames from 'classnames/bind'
+
 import useDebounce from '@/hooks/useDebounce'
+
+const cx = classNames.bind(styles)
 
 const Search = () => {
   const router = useRouter()
@@ -29,14 +34,14 @@ const Search = () => {
   }: ChangeEvent<HTMLInputElement>) => setSearchTerm(value)
 
   return (
-    <div>
+    <search className={cx('wrapper')}>
       Search:
       <input
         placeholder="search article..."
         onChange={handleChangeSearchTerm}
         value={searchTerm}
       />
-    </div>
+    </search>
   )
 }
 
