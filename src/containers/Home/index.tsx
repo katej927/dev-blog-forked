@@ -20,7 +20,7 @@ const Home = ({ articles }: Props) => {
       {articles ? (
         <ul className={cx('articlesWrapper')}>
           {articles.map(({ title, _id, createdAt }) => (
-            <li key={_id} style={{ border: '1px solid black' }}>
+            <li key={_id} className={cx('articleWrapper')}>
               <Link href={`/article/${_id}`}>
                 <h2>{title}</h2>
                 <time dateTime={createdAt}>

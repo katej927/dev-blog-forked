@@ -6,3 +6,7 @@
 .articlesWrapper {
   list-style-type: none;
 }
+
+.articleWrapper {
+  margin: 40px 0px;
+}
