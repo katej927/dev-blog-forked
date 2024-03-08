@@ -3,6 +3,11 @@
   margin: auto;
 }
 
+.searchWrapper {
+  display: flex;
+  justify-content: end;
+}
+
 .articlesWrapper {
   list-style-type: none;
 }

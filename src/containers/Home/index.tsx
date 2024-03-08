@@ -16,7 +16,9 @@ interface Props {
 const Home = ({ articles }: Props) => {
   return (
     <main className={cx('wrapper')}>
-      <Search />
+      <div className={cx('searchWrapper')}>
+        <Search />
+      </div>
       {articles ? (
         <ul className={cx('articlesWrapper')}>
           {articles.map(({ title, _id, createdAt }) => (

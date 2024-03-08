@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { FiSearch } from 'react-icons/fi'
 
 import styles from './index.module.css'
 import classNames from 'classnames/bind'
@@ -35,11 +36,12 @@ const Search = () => {
 
   return (
     <search className={cx('wrapper')}>
-      Search:
+      <FiSearch size={20} color="var(--color-theme-gray)" />
       <input
-        placeholder="search article..."
+        placeholder="검색어를 입력하세요"
         onChange={handleChangeSearchTerm}
         value={searchTerm}
+        className={cx('searchInput')}
       />
     </search>
   )
