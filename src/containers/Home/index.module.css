@@ -21,6 +21,7 @@
 
 .articleTitle {
   color: var(--color-theme-black);
+  transition: color 0.3s ease;
 }
 
 .articleTime {

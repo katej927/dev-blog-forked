@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: center;
   width: fit-content;
   padding: 5px;
   border: 1px solid var(--color-theme-gray);
@@ -9,7 +9,12 @@
 }
 
 .searchInput {
+  width: 160px;
+  height: 16px;
+  margin-left: 5px;
   color: var(--color-theme-gray);
+  font-size: 14px;
+  line-height: 16px;
   border: none;
 }
 
