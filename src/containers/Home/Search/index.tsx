@@ -2,8 +2,14 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { FiSearch } from 'react-icons/fi'
+import classNames from 'classnames/bind'
 
 import useDebounce from '@/hooks/useDebounce'
+
+import styles from './index.module.css'
+
+const cx = classNames.bind(styles)
 
 const Search = () => {
   const router = useRouter()
@@ -29,14 +35,15 @@ const Search = () => {
   }: ChangeEvent<HTMLInputElement>) => setSearchTerm(value)
 
   return (
-    <div>
-      Search:
+    <search className={cx('wrapper')}>
+      <FiSearch size={20} color="var(--color-theme-gray)" />
       <input
-        placeholder="search article..."
+        placeholder="검색어를 입력하세요"
         onChange={handleChangeSearchTerm}
         value={searchTerm}
+        className={cx('searchInput')}
       />
-    </div>
+    </search>
   )
 }
 

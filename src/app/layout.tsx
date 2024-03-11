@@ -21,10 +21,10 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           <Analytics />
         </Suspense>
         <AuthProvider>
-          <div>
+          <section>
             <Navbar />
-            {children}
-          </div>
+            <main className="childrenWrappper">{children}</main>
+          </section>
         </AuthProvider>
       </body>
     </html>

@@ -1,0 +1,29 @@
+.wrapper {
+  max-width: 980px;
+  margin: auto;
+}
+
+.searchWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.articlesWrapper {
+  list-style-type: none;
+}
+
+.articleWrapper {
+  margin: 40px 0px;
+  &:hover .articleTitle {
+    color: var(--color-theme-blue);
+  }
+}
+
+.articleTitle {
+  color: var(--color-theme-black);
+  transition: color 0.3s ease;
+}
+
+.articleTime {
+  color: var(--color-theme-gray);
+}

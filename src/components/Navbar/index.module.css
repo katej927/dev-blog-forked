@@ -1,0 +1,47 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: var(--z-index-1000);
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px;
+  background: rgba(25, 27, 31, 0.05);
+  backdrop-filter: saturate(180%) blur(15px);
+}
+
+.navMenuWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 980px;
+}
+
+.generalMenu {
+  margin-right: 10px;
+}
+
+.userMenuWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.writeWrapper {
+  display: flex;
+}
+
+.writeText {
+  margin-left: 8px;
+}
+
+.divisionLine {
+  width: 1px;
+  height: 10px;
+  margin: 0 10px;
+  background-color: var(--color-theme-gray);
+}
+
+.signoutIcon {
+  cursor: pointer;
+}
