@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import classNames from 'classnames/bind'
+import dayjs from 'dayjs'
 
 import { GetArticlesResponseInterface } from '@/apis/articles'
 
 import Search from './Search'
 import styles from './index.module.css'
-import dayjs from 'dayjs'
 
 const cx = classNames.bind(styles)
 

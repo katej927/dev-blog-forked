@@ -4,15 +4,14 @@ import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 import { IoIosLogOut } from 'react-icons/io'
 import { PiNotePencilLight } from 'react-icons/pi'
-
 import { BsStars } from 'react-icons/bs'
-
 import classNames from 'classnames/bind'
+
+import useIsLogin from '@/hooks/useIsLogin'
+
 import styles from './index.module.css'
 
 const cx = classNames.bind(styles)
-
-import useIsLogin from '@/hooks/useIsLogin'
 
 const Navbar = () => {
   const { isLoading, isLoggedin, session } = useIsLogin()

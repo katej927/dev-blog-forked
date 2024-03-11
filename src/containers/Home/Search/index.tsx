@@ -3,11 +3,11 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { FiSearch } from 'react-icons/fi'
-
-import styles from './index.module.css'
 import classNames from 'classnames/bind'
 
 import useDebounce from '@/hooks/useDebounce'
+
+import styles from './index.module.css'
 
 const cx = classNames.bind(styles)
 
