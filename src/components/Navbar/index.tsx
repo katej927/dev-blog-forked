@@ -46,7 +46,7 @@ const Navbar = () => {
                 <div className={cx('divisionLine')} />
                 <IoIosLogOut
                   size={20}
-                  className={cx('userMenu')}
+                  className={cx('userMenu', 'signoutIcon')}
                   onClick={() => signOut()}
                 />
               </div>
