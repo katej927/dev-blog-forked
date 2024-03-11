@@ -4,11 +4,26 @@
   right: 0;
   left: 0;
   display: flex;
-  padding: 20px;
+  justify-content: center;
+  padding: 20px 0px;
+  background: rgb(25 27 31 / 5%);
+  backdrop-filter: saturate(180%) blur(15px);
 }
 
-.userContentsWrapper {
+.navMenuWrapper {
   display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 980px;
+}
+
+.generalMenu {
+  margin-right: 10px;
+}
+
+.userMenuWrapper {
+  display: flex;
+  align-items: center;
 }
 
 .writeWrapper {
@@ -17,4 +32,11 @@
 
 .writeText {
   margin-left: 8px;
+}
+
+.divisionLine {
+  width: 1px;
+  height: 10px;
+  margin: 0 10px;
+  background-color: var(--color-theme-gray);
 }
