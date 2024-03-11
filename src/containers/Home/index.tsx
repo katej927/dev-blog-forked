@@ -15,7 +15,7 @@ interface Props {
 
 const Home = ({ articles }: Props) => {
   return (
-    <main className={cx('wrapper')}>
+    <div className={cx('wrapper')}>
       <div className={cx('searchWrapper')}>
         <Search />
       </div>
@@ -35,7 +35,7 @@ const Home = ({ articles }: Props) => {
       ) : (
         <div>작성된 글이 없습니다.</div>
       )}
-    </main>
+    </div>
   )
 }
 

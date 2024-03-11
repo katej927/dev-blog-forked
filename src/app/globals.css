@@ -15,6 +15,10 @@ a {
   text-decoration: none;
 }
 
+.childrenWrappper {
+  margin-top: 75px;
+}
+
 :root {
   --color-theme-blue: #3182f6;
   --color-theme-gray: #979797;
