@@ -22,12 +22,12 @@ const CategoryList = ({ categories }: Props) => {
               <Link key={_id} href={`/category/${_id}`}>
                 <h4>{categoryName}</h4>
                 <div>
-                  <span>{articleCount}개의 포스트</span>
+                  <span>{articleCount}개의 아티클</span>
                   {latestArticleTimestamp && (
                     <>
                       <span className={cx('categoryItem', 'dot')}>·</span>
-                      <span>
-                        마지막 업데이트
+                      <span className={cx('categoryItem', 'lastUpdatedAt')}>
+                        마지막 업데이트 &nbsp;
                         {dayjs(latestArticleTimestamp).format('YYYY.MM.DD')}
                       </span>
                     </>

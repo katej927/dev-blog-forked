@@ -1,3 +1,7 @@
 .dot {
   margin: 0px 5px;
 }
+
+.lastUpdatedAt {
+  color: var(--color-theme-gray);
+}
