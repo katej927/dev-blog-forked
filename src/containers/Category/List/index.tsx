@@ -3,9 +3,14 @@ import dayjs from 'dayjs'
 
 import { GetCategoriesArticlesCountInterface } from '@/apis/categories'
 
+import styles from './index.module.css'
+import classNames from 'classnames/bind'
+
 interface Props {
   categories: GetCategoriesArticlesCountInterface[]
 }
+
+const cx = classNames.bind(styles)
 
 const CategoryList = ({ categories }: Props) => {
   return (
@@ -19,10 +24,13 @@ const CategoryList = ({ categories }: Props) => {
                 <div>
                   <span>{articleCount}개의 포스트</span>
                   {latestArticleTimestamp && (
-                    <span>
-                      마지막 업데이트
-                      {dayjs(latestArticleTimestamp).format('YYYY.MM.DD')}
-                    </span>
+                    <>
+                      <span className={cx('categoryItem', 'dot')}>.</span>
+                      <span>
+                        마지막 업데이트
+                        {dayjs(latestArticleTimestamp).format('YYYY.MM.DD')}
+                      </span>
+                    </>
                   )}
                 </div>
               </Link>
