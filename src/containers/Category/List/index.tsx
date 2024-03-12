@@ -25,7 +25,7 @@ const CategoryList = ({ categories }: Props) => {
                   <span>{articleCount}개의 포스트</span>
                   {latestArticleTimestamp && (
                     <>
-                      <span className={cx('categoryItem', 'dot')}>.</span>
+                      <span className={cx('categoryItem', 'dot')}>·</span>
                       <span>
                         마지막 업데이트
                         {dayjs(latestArticleTimestamp).format('YYYY.MM.DD')}
