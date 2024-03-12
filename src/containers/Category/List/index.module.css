@@ -1,7 +1,29 @@
+.categoriesWrapper {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(2, calc(50% - (32px * 1 / 2)));
+}
+
+.categoryItemLinkWrapper {
+  display: flex;
+}
+
+.name {
+  font-size: 18px;
+}
+
+.categoryItemWrapper {
+  width: 300px;
+}
+
 .dot {
   margin: 0px 5px;
 }
 
 .lastUpdatedAt {
   color: var(--color-theme-gray);
+}
+
+.arrow {
+  margin: auto;
 }

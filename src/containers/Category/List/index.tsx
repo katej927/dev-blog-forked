@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import dayjs from 'dayjs'
+import { MdArrowForwardIos } from 'react-icons/md'
 
 import { GetCategoriesArticlesCountInterface } from '@/apis/categories'
 
@@ -16,23 +17,30 @@ const CategoryList = ({ categories }: Props) => {
   return (
     <section>
       {categories.length ? (
-        <div>
+        <div className={cx('categoriesWrapper')}>
           {categories.map(
             ({ _id, categoryName, articleCount, latestArticleTimestamp }) => (
-              <Link key={_id} href={`/category/${_id}`}>
-                <h4>{categoryName}</h4>
-                <div>
-                  <span>{articleCount}개의 아티클</span>
-                  {latestArticleTimestamp && (
-                    <>
-                      <span className={cx('categoryItem', 'dot')}>·</span>
-                      <span className={cx('categoryItem', 'lastUpdatedAt')}>
-                        마지막 업데이트 &nbsp;
-                        {dayjs(latestArticleTimestamp).format('YYYY.MM.DD')}
-                      </span>
-                    </>
-                  )}
+              <Link
+                key={_id}
+                href={`/category/${_id}`}
+                className={cx('categoryItemLinkWrapper')}
+              >
+                <div className={cx('categoryItemWrapper')}>
+                  <h4 className={cx('categoryItem', 'name')}>{categoryName}</h4>
+                  <div>
+                    <span>{articleCount}개의 아티클</span>
+                    {latestArticleTimestamp && (
+                      <>
+                        <span className={cx('categoryItem', 'dot')}>·</span>
+                        <span className={cx('categoryItem', 'lastUpdatedAt')}>
+                          마지막 업데이트 &nbsp;
+                          {dayjs(latestArticleTimestamp).format('YYYY.MM.DD')}
+                        </span>
+                      </>
+                    )}
+                  </div>
                 </div>
+                <MdArrowForwardIos className={cx('arrow')} />
               </Link>
             ),
           )}
