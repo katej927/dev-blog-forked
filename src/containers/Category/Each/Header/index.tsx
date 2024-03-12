@@ -2,14 +2,19 @@
 
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import classNames from 'classnames/bind'
 
 import { deleteCategoryById, putCategoryById } from '@/apis/categories'
 import useIsLogin from '@/hooks/useIsLogin'
+
+import styles from './index.module.css'
 
 interface Props {
   initCategoryName: string
   categoryId: string
 }
+
+const cx = classNames.bind(styles)
 
 const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
   const router = useRouter()
@@ -75,6 +80,7 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
         contentEditable={isCategoryNameEditable}
         onInput={handleInputCategoryName}
         suppressContentEditableWarning
+        className={cx('categoryTitle')}
       >
         {initCategoryName}
       </h1>
