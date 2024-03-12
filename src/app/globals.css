@@ -16,6 +16,8 @@ a {
 }
 
 .childrenWrappper {
+  max-width: 980px;
+  margin: auto;
   margin-top: 75px;
 }
 
