@@ -21,7 +21,7 @@ const CategoryList = ({ categories }: Props) => {
                   {latestArticleTimestamp && (
                     <span>
                       마지막 업데이트
-                      {dayjs(latestArticleTimestamp).format('YYYY-MM-DD')}
+                      {dayjs(latestArticleTimestamp).format('YYYY.MM.DD')}
                     </span>
                   )}
                 </div>
