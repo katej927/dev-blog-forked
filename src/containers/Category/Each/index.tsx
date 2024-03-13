@@ -1,12 +1,11 @@
 import Link from 'next/link'
 import dayjs from 'dayjs'
+import classNames from 'classnames/bind'
 
 import { GetCategoryByIdInterface } from '@/apis/categories'
 
 import EachCategoryHeader from './Header'
-
 import styles from './index.module.css'
-import classNames from 'classnames/bind'
 
 interface Props {
   category: GetCategoryByIdInterface

@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import dayjs from 'dayjs'
 import { MdArrowForwardIos } from 'react-icons/md'
+import classNames from 'classnames/bind'
 
 import { GetCategoriesArticlesCountInterface } from '@/apis/categories'
 
 import styles from './index.module.css'
-import classNames from 'classnames/bind'
 
 interface Props {
   categories: GetCategoriesArticlesCountInterface[]
