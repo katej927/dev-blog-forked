@@ -27,8 +27,10 @@ const EachCategory = ({ category: { _id, categoryName, articles } }: Props) => {
               href={`/article/${articleId}`}
               className={cx('articleWrapper')}
             >
-              <h2>{`${idx + 1}. ${title}`}</h2>
-              <time dateTime={createdAt}>
+              <h2 className={cx('article', 'title')}>{`${
+                idx + 1
+              }. ${title}`}</h2>
+              <time dateTime={createdAt} className={cx('article', 'time')}>
                 {dayjs(createdAt).format('YYYY.MM.DD')}
               </time>
             </Link>
