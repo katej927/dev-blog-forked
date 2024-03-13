@@ -1,12 +1,11 @@
 import dayjs from 'dayjs'
+import classNames from 'classnames/bind'
 
 import { GetDetailArticleInterface } from '@/apis/articles'
-import classNames from 'classnames/bind'
 
 import EditButtons from './EditButtons'
 import ArticleContent from '@/components/ArticleContent'
 import Comments from './Comments'
-
 import styles from './index.module.css'
 
 interface Props {
