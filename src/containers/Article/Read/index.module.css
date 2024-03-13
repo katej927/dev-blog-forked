@@ -1,0 +1,17 @@
+.title {
+  margin-bottom: 20px;
+  font-size: 38px;
+}
+
+.infoWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.createdAt {
+  color: var(--color-theme-gray);
+}
+
+.contentWrapper {
+  margin-top: 40px;
+}

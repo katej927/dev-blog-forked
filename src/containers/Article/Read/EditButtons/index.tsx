@@ -36,7 +36,7 @@ const EditButtons = ({ id }: { id: string }) => {
 
   if (!isLoggedin) return
   return (
-    <>
+    <div>
       <Link href={`edit/${id}`} className={cx('editButton')}>
         수정
       </Link>
@@ -46,7 +46,7 @@ const EditButtons = ({ id }: { id: string }) => {
       >
         삭제
       </button>
-    </>
+    </div>
   )
 }
 export default EditButtons
