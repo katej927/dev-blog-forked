@@ -2,9 +2,14 @@
 
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import classNames from 'classnames/bind'
 
 import { deleteArticleById } from '@/apis/articles'
 import useIsLogin from '@/hooks/useIsLogin'
+
+import styles from './index.module.css'
+
+const cx = classNames.bind(styles)
 
 const EditButtons = ({ id }: { id: string }) => {
   const { isLoggedin } = useIsLogin()
@@ -32,8 +37,15 @@ const EditButtons = ({ id }: { id: string }) => {
   if (!isLoggedin) return
   return (
     <>
-      <Link href={`edit/${id}`}>수정</Link>
-      <button onClick={handleClickDeleteButton}>삭제</button>
+      <Link href={`edit/${id}`} className={cx('editButton')}>
+        수정
+      </Link>
+      <button
+        className={cx('editButton', 'deletion')}
+        onClick={handleClickDeleteButton}
+      >
+        삭제
+      </button>
     </>
   )
 }
