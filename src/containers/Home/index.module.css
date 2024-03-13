@@ -1,8 +1,3 @@
-.wrapper {
-  max-width: 980px;
-  margin: auto;
-}
-
 .searchWrapper {
   display: flex;
   justify-content: flex-end;

@@ -1,0 +1,17 @@
+.articleWrapper {
+  display: block;
+  margin-top: 40px;
+
+  &:hover .title {
+    color: var(--color-theme-blue);
+  }
+}
+
+.title {
+  color: var(--color-theme-black);
+  transition: color 0.3s ease;
+}
+
+.time {
+  color: var(--color-theme-gray);
+}

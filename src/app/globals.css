@@ -16,7 +16,9 @@ a {
 }
 
 .childrenWrappper {
-  margin-top: 75px;
+  max-width: 980px;
+  margin: auto;
+  margin-top: 90px;
 }
 
 :root {

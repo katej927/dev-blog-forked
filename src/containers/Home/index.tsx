@@ -15,7 +15,7 @@ interface Props {
 
 const Home = ({ articles }: Props) => {
   return (
-    <div className={cx('wrapper')}>
+    <div>
       <div className={cx('searchWrapper')}>
         <Search />
       </div>
