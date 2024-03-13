@@ -15,14 +15,14 @@ const EachCategory = ({ category: { _id, categoryName, articles } }: Props) => {
       <EachCategoryHeader initCategoryName={categoryName} categoryId={_id} />
 
       {articles.length ? (
-        <div>
+        <article>
           {articles.map(({ _id: articleId, title, createdAt }, idx) => (
             <Link key={articleId} href={`/article/${articleId}`}>
               <h2>{`${idx + 1}. ${title}`}</h2>
               <div>{dayjs(createdAt).format('YYYY-MM-DD')}</div>
             </Link>
           ))}
-        </div>
+        </article>
       ) : (
         <div>글이 없습니다.</div>
       )}

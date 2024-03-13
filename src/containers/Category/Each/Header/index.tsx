@@ -75,7 +75,7 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
   }
 
   return (
-    <div>
+    <header>
       <h1
         contentEditable={isCategoryNameEditable}
         onInput={handleInputCategoryName}
@@ -84,21 +84,36 @@ const EachCategoryHeader = ({ initCategoryName, categoryId }: Props) => {
       >
         {initCategoryName}
       </h1>
+      <div className={cx('categoryTitleDivisionLine')} />
       {isLoggedin && (
-        <>
+        <div className={cx('categoryTitleEditButtonsWrapper')}>
           {isCategoryNameEditable ? (
-            <button onClick={handleClickApplyButton} disabled={!categoryName}>
+            <button
+              onClick={handleClickApplyButton}
+              disabled={!categoryName}
+              className={cx('categoryTitleEditButton')}
+            >
               적용
             </button>
           ) : (
             <>
-              <button onClick={handleClickEditButton}>수정</button>
-              <button onClick={handleClickDeleteButton}>삭제</button>
+              <button
+                onClick={handleClickEditButton}
+                className={cx('categoryTitleEditButton')}
+              >
+                수정
+              </button>
+              <button
+                onClick={handleClickDeleteButton}
+                className={cx('categoryTitleEditButton', 'deleteButton')}
+              >
+                삭제
+              </button>
             </>
           )}
-        </>
+        </div>
       )}
-    </div>
+    </header>
   )
 }
 

@@ -1,4 +1,33 @@
 .categoryTitle {
   margin-bottom: 20px;
   font-size: 35px;
+  outline: none;
+}
+
+.categoryTitleDivisionLine {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 20px;
+  background: var(--color-theme-gray);
+}
+
+.categoryTitleEditButtonsWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.categoryTitleEditButton {
+  color: var(--color-theme-gray);
+  font-size: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.categoryTitleEditButton:hover {
+  color: var(--color-theme-black);
+}
+
+.deleteButton {
+  margin-left: 8px;
 }
