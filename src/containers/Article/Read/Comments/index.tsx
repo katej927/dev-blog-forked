@@ -26,7 +26,6 @@ const Comments = () => {
 
   return (
     <section>
-      Comments
       <section ref={ref} />
     </section>
   )

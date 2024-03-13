@@ -20,7 +20,6 @@ const Article = ({
     title,
     _id,
     createdAt,
-    updatedAt,
     content: { html },
   },
 }: Props) => {
