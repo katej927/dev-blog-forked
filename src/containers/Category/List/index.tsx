@@ -32,10 +32,13 @@ const CategoryList = ({ categories }: Props) => {
                     {latestArticleTimestamp && (
                       <>
                         <span className={cx('categoryItem', 'dot')}>·</span>
-                        <span className={cx('categoryItem', 'lastUpdatedAt')}>
+                        <time
+                          className={cx('categoryItem', 'lastUpdatedAt')}
+                          dateTime={latestArticleTimestamp}
+                        >
                           마지막 업데이트 &nbsp;
                           {dayjs(latestArticleTimestamp).format('YYYY.MM.DD')}
-                        </span>
+                        </time>
                       </>
                     )}
                   </div>
