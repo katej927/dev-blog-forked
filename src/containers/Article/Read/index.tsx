@@ -20,16 +20,20 @@ const Article = ({
   },
 }: Props) => {
   return (
-    <div>
+    <article>
       <h2>제목: {title}</h2>
       <EditButtons id={_id} />
-      <div>생성 일자: {dayjs(createdAt).format('YYYY-MM-DD')}</div>
-      <div>수정 일자: {dayjs(updatedAt).format('YYYY-MM-DD')}</div>
+      <time dateTime={createdAt}>
+        생성 일자: {dayjs(createdAt).format('YYYY.MM.DD')}
+      </time>
+      <time dateTime={updatedAt}>
+        수정 일자: {dayjs(updatedAt).format('YYYY.MM.DD')}
+      </time>
       <div>
         내용: <ArticleContent contentHtml={html} />
       </div>
       <Comments />
-    </div>
+    </article>
   )
 }
 
