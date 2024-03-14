@@ -55,11 +55,20 @@ const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
           />
         </div>
         <div>
-          <input value={newTitle} type="text" className={cx('title')} />
+          <input
+            readOnly
+            value={newTitle}
+            type="text"
+            className={cx('title')}
+          />
           <ArticleContent contentHtml={newContent.html} />
         </div>
       </section>
-      <button type="button" onClick={handleSubmitTitleContent}>
+      <button
+        className={cx('publishButton')}
+        type="button"
+        onClick={handleSubmitTitleContent}
+      >
         출간하기
       </button>
       {isShowModal &&
