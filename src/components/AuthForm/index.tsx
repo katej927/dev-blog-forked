@@ -71,15 +71,14 @@ const AuthForm = ({
             className={cx('input')}
           />
         </div>
-
-        <button className={cx('submitButton')}>{submitButtonMessage}</button>
-
         {errorMessage && (
           <div className={cx('errorMessage')}>{errorMessage}</div>
         )}
 
-        <span>
-          {authSwitchMessage}
+        <button className={cx('submitButton')}>{submitButtonMessage}</button>
+
+        <span className={cx('authSwitch')}>
+          {authSwitchMessage}&nbsp;
           <Link href={authSwitchLink}>
             {authType === '로그인' ? '회원가입' : '로그인'}
           </Link>
