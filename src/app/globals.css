@@ -24,9 +24,13 @@ a {
 :root {
   /* colors */
   --color-theme-blue: #3182f6;
+  --color-theme-red: #fa4e4e;
   --color-theme-gray: #979797;
   --color-theme-black: #333333;
 
   /* z-index */
   --z-index-1000: 1000;
+
+  /* border-radius */
+  --border-radius-4: 4px;
 }

@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  margin-top: 30px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.input,
+.submitButton {
+  height: 54px;
+  border-radius: var(--border-radius-4);
+}
+
+.input {
+  margin-bottom: 10px;
+  padding: 0px 15px;
+  border: 1px solid var(--color-theme-gray);
+  outline: none;
+}
+
+.submitButton {
+  margin-top: 30px;
+  border: none;
+}
+
+.errorMessage {
+  color: var(--color-theme-red);
+}
