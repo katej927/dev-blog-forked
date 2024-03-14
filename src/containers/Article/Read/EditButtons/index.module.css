@@ -1,0 +1,11 @@
+.editButton {
+  color: var(--color-theme-gray);
+}
+
+.deletion {
+  margin-left: 8px;
+  font-size: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

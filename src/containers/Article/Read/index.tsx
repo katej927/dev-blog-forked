@@ -1,35 +1,43 @@
 import dayjs from 'dayjs'
+import classNames from 'classnames/bind'
 
 import { GetDetailArticleInterface } from '@/apis/articles'
 
 import EditButtons from './EditButtons'
 import ArticleContent from '@/components/ArticleContent'
 import Comments from './Comments'
+import styles from './index.module.css'
 
 interface Props {
   article: GetDetailArticleInterface
 }
+
+const cx = classNames.bind(styles)
 
 const Article = ({
   article: {
     title,
     _id,
     createdAt,
-    updatedAt,
     content: { html },
   },
 }: Props) => {
   return (
-    <div>
-      <h2>제목: {title}</h2>
-      <EditButtons id={_id} />
-      <div>생성 일자: {dayjs(createdAt).format('YYYY-MM-DD')}</div>
-      <div>수정 일자: {dayjs(updatedAt).format('YYYY-MM-DD')}</div>
-      <div>
-        내용: <ArticleContent contentHtml={html} />
+    <article>
+      <header>
+        <h1 className={cx('title')}>{title}</h1>
+        <section className={cx('infoWrapper')}>
+          <time dateTime={createdAt} className={cx('createdAt')}>
+            {dayjs(createdAt).format('YYYY.MM.DD')}
+          </time>
+          <EditButtons id={_id} />
+        </section>
+      </header>
+      <div className={cx('contentWrapper')}>
+        <ArticleContent contentHtml={html} />
       </div>
       <Comments />
-    </div>
+    </article>
   )
 }
 

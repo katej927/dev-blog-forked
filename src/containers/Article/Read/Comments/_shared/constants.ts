@@ -8,6 +8,6 @@ export const COMMENT_ATTRIBUTES = {
   'data-reactions-enabled': '1',
   'data-emit-metadata': '1',
   'data-input-position': 'top',
-  'data-theme': 'preferred_color_scheme',
+  'data-theme': 'light',
   'data-lang': 'en',
 }
