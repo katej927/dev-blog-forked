@@ -2,11 +2,16 @@
 
 import { ChangeEvent, useState } from 'react'
 import { createPortal } from 'react-dom'
+import classNames from 'classnames/bind'
 
 import Editor from './Editor'
 import ArticleContent from '../ArticleContent'
 import { Props, NewContentType, NewTitleType } from './_shared'
 import ArticleSetupModal from './ArticleSetupModal'
+
+import styles from './index.module.css'
+
+const cx = classNames.bind(styles)
 
 const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
   const [newTitle, setNewTitle] = useState<NewTitleType>(title)
@@ -35,22 +40,28 @@ const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
 
   return (
     <section>
+      <section className={cx('editorWrapper')}>
+        <div>
+          <input
+            onChange={handleChangeNewTitle}
+            value={newTitle}
+            type="text"
+            placeholder="제목을 입력하세요"
+            className={cx('title')}
+          />
+          <Editor
+            contentHtml={newContent.html}
+            onChangeContent={handleChangeNewContent}
+          />
+        </div>
+        <div>
+          <input value={newTitle} type="text" className={cx('title')} />
+          <ArticleContent contentHtml={newContent.html} />
+        </div>
+      </section>
       <button type="button" onClick={handleSubmitTitleContent}>
         출간하기
       </button>
-      <input
-        onChange={handleChangeNewTitle}
-        value={newTitle}
-        type="text"
-        placeholder="Text title..."
-      />
-      <div style={{ display: 'flex' }}>
-        <Editor
-          contentHtml={newContent.html}
-          onChangeContent={handleChangeNewContent}
-        />
-        <ArticleContent contentHtml={newContent.html} />
-      </div>
       {isShowModal &&
         createPortal(
           <ArticleSetupModal

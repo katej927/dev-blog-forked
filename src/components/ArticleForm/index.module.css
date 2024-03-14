@@ -1,0 +1,9 @@
+.title {
+  font-weight: bold;
+  border: none;
+  outline: none;
+}
+
+.editorWrapper {
+  display: flex;
+}
