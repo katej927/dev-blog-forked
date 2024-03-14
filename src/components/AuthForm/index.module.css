@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  margin-top: 30px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.input,
+.submitButton {
+  height: 54px;
+  border-radius: var(--border-radius-4);
+}
+
+.input {
+  margin-bottom: 10px;
+  padding: 0px 15px;
+  font-size: 16px;
+  border: 1px solid var(--color-theme-gray);
+  outline: none;
+}
+
+.input:last-of-type {
+  margin-bottom: 20px;
+}
+
+.submitButton {
+  margin: 30px 0px 20px;
+  color: white;
+  font-size: 16px;
+  background-color: var(--color-theme-blue);
+  border: none;
+}
+
+.errorMessage {
+  color: var(--color-theme-red);
+  text-align: center;
+}
+
+.authSwitch {
+  text-align: center;
+}
