@@ -32,8 +32,12 @@ function CategorySetup({ updateSelectedCategory, selectedCategory }: Props) {
           renderIf: !isShowCategoryList && selectedCategory,
         })}
       >
-        <div>{selectedCategory?.categoryName}</div>
-        <button type="button" onClick={handleClickRemoveCategory}>
+        <div className={cx('name')}>{selectedCategory?.categoryName}</div>
+        <button
+          className={cx('removalButton')}
+          type="button"
+          onClick={handleClickRemoveCategory}
+        >
           카테고리에서 제거
         </button>
       </div>

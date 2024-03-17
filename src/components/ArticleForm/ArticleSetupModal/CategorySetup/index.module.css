@@ -8,10 +8,26 @@
 
 .selectedCategoryWrapper {
   display: none;
+  width: 100%;
 
   &.renderIf {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
   }
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  background-color: var(--color-theme-light-gray);
+  border-radius: var(--border-radius-4);
+}
+
+.removalButton {
 }
 
 .addCategoryButton {

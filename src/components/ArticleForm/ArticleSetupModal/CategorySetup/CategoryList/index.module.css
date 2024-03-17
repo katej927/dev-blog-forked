@@ -49,6 +49,7 @@
   padding: 10px 0px;
   list-style-type: none;
   border-bottom: 1px solid var(--color-theme-gray);
+  cursor: pointer;
 
   &.active {
     color: white;
