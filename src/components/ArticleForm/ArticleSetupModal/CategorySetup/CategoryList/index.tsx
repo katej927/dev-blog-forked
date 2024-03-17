@@ -117,21 +117,23 @@ function CategoryList({
           <div>카테고리가 없습니다.</div>
         )}
       </ul>
-      <button
-        className={cx('button', 'cancel')}
-        type="button"
-        onClick={() => toggleCategoryList()}
-      >
-        취소
-      </button>
-      <button
-        className={cx('button', 'select')}
-        type="button"
-        onClick={handleClickSelectCategoryButton}
-        disabled={!clickedCategory}
-      >
-        선택하기
-      </button>
+      <div className={cx('categorySetupButtonsWrapper')}>
+        <button
+          className={cx('button', 'cancel')}
+          type="button"
+          onClick={() => toggleCategoryList()}
+        >
+          취소
+        </button>
+        <button
+          className={cx('button', 'select')}
+          type="button"
+          onClick={handleClickSelectCategoryButton}
+          disabled={!clickedCategory}
+        >
+          선택하기
+        </button>
+      </div>
     </section>
   )
 }
