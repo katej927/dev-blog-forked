@@ -74,23 +74,32 @@ function CategoryList({
   }
 
   return (
-    <section>
+    <section className={cx('wrapper')}>
       <input
         value={newCategoryName}
         type="text"
         placeholder="새로운 카테고리 이름을 입력하세요."
         onChange={handleChangeNewCategoryName}
+        className={cx('newCategoryInput')}
       />
-      <div>
-        <button type="button" onClick={() => setNewCategoryName('')}>
+      <div className={cx('editButtonsWrapper')}>
+        <button
+          className={cx('button', 'cancel')}
+          type="button"
+          onClick={() => setNewCategoryName('')}
+        >
           취소
         </button>
-        <button type="button" onClick={handleClickCreatingNewCategoryButton}>
+        <button
+          className={cx('button', 'add')}
+          type="button"
+          onClick={handleClickCreatingNewCategoryButton}
+        >
           카테고리 추가
         </button>
       </div>
 
-      <ul>
+      <ul className={cx('categoriesWrapper')}>
         {categories.length ? (
           categories.map(({ _id, categoryName }) => (
             <li
@@ -108,10 +117,15 @@ function CategoryList({
           <div>카테고리가 없습니다.</div>
         )}
       </ul>
-      <button type="button" onClick={() => toggleCategoryList()}>
+      <button
+        className={cx('button', 'cancel')}
+        type="button"
+        onClick={() => toggleCategoryList()}
+      >
         취소
       </button>
       <button
+        className={cx('button', 'select')}
         type="button"
         onClick={handleClickSelectCategoryButton}
         disabled={!clickedCategory}

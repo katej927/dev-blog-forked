@@ -1,4 +1,5 @@
 .title {
+  width: 100%;
   font-weight: bold;
   font-size: 35px;
   border: none;
@@ -16,4 +17,5 @@
   background-color: var(--color-theme-blue);
   border: none;
   border-radius: var(--border-radius-4);
+  cursor: pointer;
 }

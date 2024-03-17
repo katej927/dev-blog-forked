@@ -20,8 +20,8 @@ function CategorySetup({ updateSelectedCategory, selectedCategory }: Props) {
   const handleClickRemoveCategory = () => updateSelectedCategory(null)
 
   return (
-    <div>
-      <h3>카테고리 설정</h3>
+    <section className={cx('wrapper')}>
+      <h3 className={cx('title')}>카테고리 설정</h3>
       <CategoryList
         renderIf={isShowCategoryList}
         updateSelectedCategory={updateSelectedCategory}
@@ -46,7 +46,7 @@ function CategorySetup({ updateSelectedCategory, selectedCategory }: Props) {
       >
         카테고리에 추가하기
       </button>
-    </div>
+    </section>
   )
 }
 
