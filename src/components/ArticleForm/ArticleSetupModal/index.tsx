@@ -24,7 +24,7 @@ function ArticleSetupModal({ title, content, category, onSubmit }: Props) {
   }
 
   return (
-    <section className={cx('container')}>
+    <section className={cx('wrapper')}>
       <CategorySetup
         updateSelectedCategory={updateSelectedCategory}
         selectedCategory={selectedCategory}
