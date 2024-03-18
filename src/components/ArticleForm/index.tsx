@@ -70,7 +70,12 @@ const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
             type="text"
             className={cx('title')}
           />
-          <ArticleContent contentHtml={newContent.html} />
+          <ArticleContent
+            contentHtml={newContent.html}
+            style={{
+              height: '670px',
+            }}
+          />
         </div>
       </section>
 
