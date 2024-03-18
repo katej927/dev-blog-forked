@@ -22,7 +22,10 @@ const Editor = ({ contentHtml, onChangeContent }: Props) => {
   return (
     <ReactQuill
       theme="snow"
-      style={{ height: '600px' }}
+      style={{
+        height: '550px',
+        display: 'inline-block',
+      }}
       onChange={(value, delta, source, editor) =>
         onChangeContent({
           text: editor.getText(),
