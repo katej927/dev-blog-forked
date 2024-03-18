@@ -39,9 +39,9 @@ const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
   }
 
   return (
-    <section>
+    <section className={cx('wrapper')}>
       <section className={cx('editorWrapper')}>
-        <div>
+        <div className={cx('left')}>
           <input
             onChange={handleChangeNewTitle}
             value={newTitle}
@@ -53,8 +53,17 @@ const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
             contentHtml={newContent.html}
             onChangeContent={handleChangeNewContent}
           />
+          <div className={cx('publishButtonWrapper')}>
+            <button
+              className={cx('publishButton')}
+              type="button"
+              onClick={handleSubmitTitleContent}
+            >
+              출간하기
+            </button>
+          </div>
         </div>
-        <div>
+        <div className={cx('right')}>
           <input
             readOnly
             value={newTitle}
@@ -64,13 +73,7 @@ const ArticleForm = ({ title, content, category, onSubmit }: Props) => {
           <ArticleContent contentHtml={newContent.html} />
         </div>
       </section>
-      <button
-        className={cx('publishButton')}
-        type="button"
-        onClick={handleSubmitTitleContent}
-      >
-        출간하기
-      </button>
+
       {isShowModal &&
         createPortal(
           <ArticleSetupModal
