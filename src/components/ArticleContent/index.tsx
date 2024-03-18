@@ -1,5 +1,6 @@
 'use client'
 
+import { CSSProperties } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
@@ -7,7 +8,7 @@ import { ArticleContentInterface } from '@/apis/articles'
 
 interface Props {
   contentHtml: ArticleContentInterface['html']
-  style?: {}
+  style?: CSSProperties
 }
 
 const ArticleContent = ({ contentHtml, style }: Props) => {

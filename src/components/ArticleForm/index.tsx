@@ -8,7 +8,6 @@ import Editor from './Editor'
 import ArticleContent from '../ArticleContent'
 import { Props, NewContentType, NewTitleType } from './_shared'
 import ArticleSetupModal from './ArticleSetupModal'
-
 import styles from './index.module.css'
 
 const cx = classNames.bind(styles)

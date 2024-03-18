@@ -1,11 +1,10 @@
 import { useState } from 'react'
+import classNames from 'classnames/bind'
 
 import CategorySetup from './CategorySetup'
 import { SelectedCategoryType } from './_shared'
 import { Props } from '../_shared'
 import styles from './index.module.css'
-
-import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
