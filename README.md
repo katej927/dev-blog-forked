@@ -1,3 +1,4 @@
+# Detail
 ## article과 category의 CRUD 제작 (mongoDB)
 
 <details>
@@ -187,4 +188,128 @@
    뿌듯했고 성취감을 느꼈다. 얼마 전, preview 구현하면서도 이번에도 (비록 오랜 시간이 걸렸지만) 스스로 해결해냈다.
     
    **단순히 끝날 줄 알았던 update와 delete였는데 새로이 업데이트된 기능으로 구현하는데 차질이 많았고 스스로 해결하려다 보니 오랜 시간이 걸렸으나 뿌듯했다.얻은 점은 조금씩, 스스로 문제 해결하는 방법을 찾는 것 같다는 점이다. 에러 로그를 이해하고 부족하면 에러 로그를 검색하고 (원어라 고통스럽지만) issue탭이나 stackoverflow에서 나와 비슷한 문제를 겪는 이들이 있는 것을 확인하고 그들이 어떻게 해결해내고 있는지 알 수 있다.앞으로도 이런 방식을 조금 더 빨리 실행해서 스스로 해결할 때 속도를 높이는 것이 좋을 것 같다.**
+</details>
+
+## WYSIWYG 에디터 추가 
+
+
+<details>
+  <summary>자세히 보기</summary>
+
+![](https://velog.velcdn.com/images/katej927/post/c8464648-6ce7-4646-9a9c-c01b77e512d4/image.gif)
+
+- 방법
+
+  - 화면 UI (write/edit 페이지)
+
+  	```
+  	  ┌----------------------------------------------------------------┐
+  	  |                                                                |
+  	  | Title                                                          |
+  	  | ┌-------- Editor --------┐ ┌------------- Preview ------------┐|
+  	  | |                        | |                                  ||
+  	  | |                        | |                                  ||
+  	  | |                        | |                                  ||
+  	  | |                        | |                                  ||
+  	  | |                        | |                                  ||
+  	  | |                        | |                                  ||
+  	  | |                        | |                                  ||
+  	  | |                        | |                                  ||
+  	  | └------------------------┘ └----------------------------------┘|
+  	  └----------------------------------------------------------------┘
+  	```
+
+  - article에 대한 interface 구조
+  
+    ```tsx
+      interface ArticleInterface {
+        title: string
+        content: { text: string; html: string }
+      }
+    ```
+    - 이유
+  
+      - text는 보다 빠른 검색을 하게 하고, 글 목록에서 글 내용의 일부를 보여주기 위해
+  
+      - html은 글 내용 렌더링을 위해
+  - firebase 활용
+    - 사용 이유 : 이미지 url을 만들어주도록 하기 위함.
+
+- 코드 [자세히 보기 →](https://github.com/katej927/kate-devlog/tree/main/src/components/ArticleForm/Editor)
+    
+    ```tsx
+    'use client'
+    
+    import { useMemo, useRef } from 'react'
+    import ReactQuill from 'react-quill'
+    import 'react-quill/dist/quill.snow.css'
+    
+    import { ArticleContentInterface } from '@/apis/articles'
+    
+    import { FORMATS, convertModules } from './_shared'
+    import { HandleChangeNewContentType } from '../_shared'
+    
+    interface Props {
+      contentHtml: ArticleContentInterface['html']
+      onChangeContent: (content: HandleChangeNewContentType) => void
+    }
+    
+    const Editor = ({ contentHtml, onChangeContent }: Props) => {
+      const quillRef = useRef<ReactQuill>()
+    
+      const modules = useMemo(() => convertModules(quillRef), [])
+    
+      return (
+        <ReactQuill
+          theme="snow"
+          style={{
+            height: '550px',
+            display: 'inline-block',
+          }}
+          onChange={(value, delta, source, editor) =>
+            onChangeContent({
+              text: editor.getText(),
+              html: editor.getHTML(),
+            })
+          }
+          modules={modules}
+          formats={FORMATS}
+          ref={(element) => {
+            if (element !== null) {
+              quillRef.current = element
+            }
+          }}
+          placeholder="내용을 입력해주세요."
+          value={contentHtml}
+        />
+      )
+    }
+    
+    export default Editor
+    ```
+
+- 트러블 슈팅 [다른 기록도 보기 →](https://velog.io/@katej927/Trouble-shooting-kate-devlog-2-WYSIWYG-%EC%97%90%EB%94%94%ED%84%B0)
+    
+    **[ issue 탭의 힘 ]**
+    
+    에디터의 데이터를 어떻게 저장해야 할지 걱정이었다.
+    
+    에디터의 값을 받아보니 왠걸 태그까지 같이 저장해주고 있었다.
+    
+    이걸로 어떻게 검색 기능을 넣지?라는 생각이 들었고 챗 지피티와 구글링을 열심히 했다.
+    
+    챗 지피티에서는 (비록 좀 부실해보이지만) 해결방법은 있다는 것에 안도감을 느꼈고, 그로 인해 차분히 서칭할 수 있었다.
+    
+    서칭하면서 구글링 해서 나온 issue 탭에 나와 비슷한 고민을 가진 사람들이 이미 적어둔 해결책을 보고 이 react-quill이라는 에디터의 데이터를 저장하기 위해서는 에디터에서 만들어둔 방법이 따로 없다는 것을 알았다. (이걸로 라이브러리 쓰다 바꾸는 유저들도 있더라) 하지만 에디터의 내장된 메서드인 delta라는 객체와 태그로된 문자열을 함께 저장하기를 추천했다. delta for editor, html for rendering이 최선의 아이디어 였다.
+    
+    나는 이에 더해 나의 아이디어를 덧붙였다. 저렇게 저장하기에는 검색할 때 성능이 더딜 것 같다는 생각이 들었고 계속 시도해보니 에디터가 꼭 delta로만 렌더링 되지 않고 html 문자열로도 렌더링 되는 것을 알 수 있었다. 직접 넣어봐서 알 수 있었다. 덕분에 조금이라도 성능을 개선하기 위해 나는 글을 그대로 저장하는 문자열(\n이 들어가긴 한다)과 렌더링을 위한 html 문자열을 저장해두기로 했다.
+    
+    이렇게 하기까지 많은 시간과 용기와 인내가 필요했다. 여기까지 하고도 나는 db에 잘 연결할 수 있을지 걱정했는데 생각보다 간단히 수정되어서 좋았다.
+    
+    매번 걱정하는데 실제로 발을 넣어보면 그렇게 무서운 건 아닌 것 같다.
+    
+    **그냥 찾아보고 해보는 게 좋을 것 같다. 너무 두려워 하지말자.**
+    
+    **그리고 앞으로도 issue탭을 먼저 활용하면 더 빨리 해결할 수 있을 것 같다. (챗 지피티는 간단한/직관적인 문제 해결 정도에 도움 되는 듯)**
+
 </details>
