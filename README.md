@@ -479,5 +479,240 @@
         
         아무튼.. 이번에도 좋은 경험을 한 것 같다. 수고했다.🤝
 
+</details>
+
+
+## 검색 기능 추가 (debounce, mongoDB의 Aggregation 프레임워크)
+
+<details>
+  <summary>자세히 보기</summary>
+
+  
+  ![](https://velog.velcdn.com/images/katej927/post/82fb0f06-638d-49b3-b972-99ccce696faa/image.gif)
+  
+  
+- 방법
+  
+    - 컴포넌트 기본 구현 ([코드 링크](https://github.com/katej927/kate-devlog/blob/main/src/containers/Home/Search/index.tsx))
+  
+        - **디바운스 처리**
+            
+            > 사용자 입력을 디바운스 처리하여 불필요한 검색 요청을 줄임 (`useDebounce` 커스텀 훅  활용)
+            > 
+        - **API 요청**
+
+            검색어가 변경될 때마다 `/api/articles` 엔드포인트로 요청을 보내 검색 결과를 처리함
+            
+    - 검색 입력 디바운스 처리 ([코드 링크](https://github.com/katej927/kate-devlog/blob/main/src/hooks/useDebounce.ts))
+        - **네트워크 및 서버 부하 최적화**
+
+            사용자가 입력을 멈춘 후 일정 시간(500ms)이 지나야 실제 검색 요청을 보내 네트워크 및 서버 부하를 최소화함
+            
+    - 데이터베이스 연동 및 검색 처리 ([코드 링크](https://github.com/katej927/kate-devlog/blob/main/src/app/api/articles/route.ts))
+  
+        - MongoDB와 연동하여 Aggregation 프레임워크를 사용하여 데이터베이스에서 검색 및 필터링 작업을 수행
+  
+            - 구체적인 구현 조건
+  
+                - article의 title(제목)과 content(본문)에서 검색을 하되, return 할 때는 조건에 부합하는 content의 _id까지만 나오도록 함. (본문 내용은 반환하지 않게끔 함.)
+                - 본문 내용은 반환하지 않게끔 하는 이유
+  
+                    
+                    검색 시에 보여지는 내용이 article의 개요 부분들이라 굳이 article 클릭 전에 content 데이터까지 들고 다닐 이유가 없다고 생각해서.
+  
+- [`src/app/api/articles/route.ts`](https://github.com/katej927/kate-devlog/blob/main/src/app/api/articles/route.ts)
+    
+    ```tsx
+    export const GET = async (request: NextRequest) => {
+      const searchTerm = request.nextUrl.searchParams.get('searchTerm')
+    
+      await connectMongoDB()
+    
+      const searchCondition = {
+        $or: [
+          { title: { $regex: searchTerm, $options: 'i' } },
+          { 'content.text': { $regex: searchTerm, $options: 'i' } },
+        ],
+      }
+    
+      const articles = searchTerm
+        ? await Article.aggregate([ // 👈 mongoDB의 Aggregation 프레임워크
+            {
+              $lookup: {
+                from: 'articlecontents',
+                localField: 'content',
+                foreignField: '_id',
+                as: 'content',
+              },
+            },
+            {
+              $unwind: {
+                path: '$content',
+                preserveNullAndEmptyArrays: true,
+              },
+            },
+            {
+              $match: searchCondition,
+            },
+            {
+              $project: {
+                _id: 1,
+                title: 1,
+                content: { _id: 1 },
+                createdAt: 1,
+                updatedAt: 1,
+              },
+            },
+            {
+              $sort: { createdAt: -1 },
+            },
+          ])
+        : await Article.find().sort({ createdAt: -1 })
+    
+      return NextResponse.json({ articles }, { status: 200 })
+    }
+    ```
+
+- 트러블 슈팅 [다른 기록도 보기 →](https://velog.io/@katej927/Trouble-shooting-kate-devlog-%EA%B2%80%EC%83%89-%EA%B8%B0%EB%8A%A5)
+    
+    **[ [해낸 케이스 1] server component를 사용하기 위해 page.js 의 내장된 parameter, searchParams를 사용하다. ]**
+    
+    독자에게 보여지는 글은 가급적 SSR로 보여주고 싶었다. 좀 더 빠른 렌더링, SEO 를 위해서이다.
+    
+    그런데 작성하다보니 searchParams가 필요했는데 나는 nextjs에 능숙하지 않아서 useSearchParams를 사용해야만 하는 줄 알았다. **그래도 방법이 있나 하고 구글링을 해봤다.**
+    
+    나와 같은 고민을 하는 사람들이 많았고 결국 비교적 빠르고 간단히 해결방법을 찾았다. `nextjs searchparams server component` 라고 검색해봤고 거기에는 nextjs 공식문서를 레퍼런스로 달면서 page.js에서 searchParams를 가져와 사용하는 예시를 보여주었다.
+    
+    어쩐지 그 전에 강의를 들으면서 searchParams를 props로 받았지만 내려주는 곳이 없어 의아하게 생각하며 넘어간 바로 그 searchParams 였다. (심지어 난 봤고 유심히 코드를 까보았음에도 잘 몰라서 그냥 넘어간 것 이였다.)
+    
+    바로 내 프로젝트에서 console.log를 찍어보니 내가 원하던 값이 잘 나왔다.
+    
+    얼마나 잘 알려져있는 parameter인지는 모르겠으나 꽤나 유용히 사용될 것 같다. 스스로 문제를 해결하는 좋은 경험을 한 번 더 쌓을 수 있어서 기뻤다.
+    
+    **‘그래도 방법이 있나 찾아보는 것’ 이런 마음가짐이 중요한 것 같다.**
+  
+
+</details>
+
+
+## authentication (회원가입, 로그인) 기능 추가 (NextAuth.js)
+
+
+<details>
+  <summary>자세히 보기</summary>
+
+  ![](https://velog.velcdn.com/images/katej927/post/9690414f-23fe-4c89-8bf2-fa30550d0917/image.gif)
+  
+- 설명 ([관련 PR 링크 →](https://github.com/katej927/kate-devlog/pull/4))
+  
+    - 회원가입
+  
+        - 이미 존재하는 회원인지 (email로) 여부 파악함
+  
+            - 방법 : `mongoDB`에서 `findeOne`으로 `email` 찾음
+        - 비밀번호 암호화
+            - 방법 : `bcrypt`의 `hash` 활용
+    - 로그인
+        - 사용자가 로그인 했다면 register, login 페이지 접근 불가
+  
+            - 방법: `getServerSession`으로 `session`이 있다면, 홈으로 redirect
+    - 그 외
+        - 회원가입과 로그인의 공통된 ui를 위한 form component를 제작
+  
+            - 이유 : 회원가입과 로그인은 거의 비슷한 ui를 가졌기 때문에 둘을 위한 UI 컴포넌트 제작
+        - 비로그인 상태일 경우, 글 작성 및 수정 페이지 접근 불가
+            - 방법 : `next-auth`의 `middleware` 활용
+  
+  
+- 트러블 슈팅 [다른 기록도 보기 →](https://velog.io/@katej927/Trouble-shooting-kate-devlog-authentication-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B8%B0%EB%8A%A5)
+    
+    **[‘무지성 검색’이 무엇인지, 어떻게 하면 ‘지성 검색’을 할 수 있는지 조금 알 것 같다. (feat. TypeError [ERR_INVALID_URL]: Invalid URL)]**
+    
+    전에 멘토님께 무지성 검색을 하지 말라는 말을 들었다.
+    
+    매우 속상하고 신경이 쓰였는데, 왜 그런 말을 하셨는지 알 것 같다.
+    
+    조금 어감이 쎄긴 했으나 ‘해당 에러가 왜 생겼는지 좀 더 생각해보며 찾아보라’ 정도로 이해하면 좋을 것 같다.
+    
+    왜냐면 이번에 `TypeError [ERR_INVALID_URL]: Invalid URL` 에러를 처리하며 (마음 고생도 함께 처리함) 깨닫는 게 있었기 때문이다.
+    
+    해당 에러를 처리 하면서 나오는 에러 문은 알아들을 수 없는 에러문으로 가득 찼었다..
+    
+    ```
+    Error occurred prerendering page "/auth/register". Read more: <https://nextjs.org/docs/messages/prerender-error>
+    TypeError [ERR_INVALID_URL]: Invalid URL
+        at new NodeError (node:internal/errors:405:5)
+        at new URL (node:internal/url:676:13)
+        at t.default (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/chunks/41.js:1:22140)
+        at 74284 (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/chunks/41.js:1:15075)
+        at __webpack_require__ (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/webpack-runtime.js:1:161)
+        at 45029 (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/chunks/192.js:1:964)
+        at __webpack_require__ (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/webpack-runtime.js:1:161)
+        at I (/home/runner/work/dev-blog-forked/dev-blog-forked/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:43:5587)
+        at C (/home/runner/work/dev-blog-forked/dev-blog-forked/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:43:4266)
+        at rp (/home/runner/work/dev-blog-forked/dev-blog-forked/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:27:25013)
+    TypeError [ERR_INVALID_URL]: Invalid URL
+        at new NodeError (node:internal/errors:405:5)
+        at new URL (node:internal/url:676:13)
+        at t.default (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/chunks/41.js:1:22140)
+        at 74284 (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/chunks/41.js:1:15075)
+        at __webpack_require__ (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/webpack-runtime.js:1:161)
+        at 45029 (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/chunks/192.js:1:964)
+        at __webpack_require__ (/home/runner/work/dev-blog-forked/dev-blog-forked/.next/server/webpack-runtime.js:1:161)
+        at I (/home/runner/work/dev-blog-forked/dev-blog-forked/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:43:5587)
+        at C (/home/runner/work/dev-blog-forked/dev-blog-forked/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:43:4266)
+        at rp (/home/runner/work/dev-blog-forked/dev-blog-forked/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:27:25013) {
+      input: '',
+      code: 'ERR_INVALID_URL'
+    }
+    
+    ```
+    
+    작업 도중 실수로 올린 PR에는 문제가 없었는데 뜬금없이 다 완료하고 나니 이런 에러가 github action에서 발생했다.
+    
+    local에서 build할 때도 나오지 않았고 그래서 더 해결하기 어려워했던 것 같다. 또한 구글링을 해도 비슷한 에러가 많이 발생했었는지 discussion에 많이 올라와있었다.
+    
+    확인했을 때, 종종 `NEXTAUTH_URL` 이라는 단어가 올라오는 것을 봤는데, 나는 다른 변수명으로 local url과 production url을 사용하고 있었고 전에 올려둔 PR에서는 에러가 나지 않았기 때문에 이 부분에 대해서는 이상이 없을 것이라고 생각해서 넘겼다.
+    
+    그 상태에서 구글링에 나온 다른 해결법을 찾아도 도저히 해결이 안되었고 나는 하는 수 없이 최후의 보루로 남겨둔, ‘에러 없던 커밋까지 다시 롤백해보기’전략을 선택했다. 하나하나 주석처리를 하며 확인하던 중 대규모로 수정했고 invalid url error라는 에러랑은 관련이 없어보이는 부분 까지 다시 롤백하려니 현타가 와서 다시 방법을 찾아보기 시작했다.
+    
+    그러자 전에 무심코 스쳐지나갔던 `NEXTAUTH_URL` 이 눈에 띄었다. 여러 번 보이던 저 단어.. 하지만 내가 참고한 강의안에는 보이지 않았던 단어. 난 이 단어에 대해 지나치지 않기로 마음먹고 discussions을 다시 확인 하던 차에 어떤 이가 해결방법으로 보낸 [next-auth의 공식문서 링크](https://next-auth.js.org/configuration/options)를 발견했다. ([참고한 discussion 링크](https://github.com/nextauthjs/next-auth/discussions/7801))
+    
+    ![](https://velog.velcdn.com/images/katej927/post/7d494410-0d77-4276-810f-2c17ee71bd97/image.png)
+
+    
+    아예 `NEXTAUTH_URL` 를 써야 한다고 써져있었다..! (ㅎㅎ..a)
+    
+    이에 나는 재빨리, 하지만 반신반의하면서 바로 .env.local에는 해당 변수명으로 local url을, .env.production에는 정식 url을 적었고 vercel에도 설정했다. 또한 process.env에서 가져오는 url도 `NEXTAUTH_URL` 로 바꿨다.
+    
+    노심초사한 결과, 결국 build가 잘 되었음을 확인 할 수 있었다.
+    
+    ---
+    
+    ### ◆ + 추가 에러 발견
+    
+    하지만 잘 해결되었다고 생각하고 PR을 정리하던 도중 어떤 url에서는 `NEXTAUTH_URL` 가 undefined로 뜨고 어디서는 잘 나오는 버그를 발견했다.
+    
+    태도를 조금 바꾸어 너무 절망하지 않고 하나 잘 끝냈으니 이것도 잘 끝낼 거라고 스스로를 다독이면서 하나하나 찾아나갔다.
+    
+    그리고 결국 정말 문제를 해결할 수 있었다.
+    
+    원인은 `NEXTAUTH_URL` 가 server side에서만 렌더링 되는 것이였다. 이러한 특징을 발견한 나는 바로 ssr, csr용 url을 구분하여 적용했고 문제가 해결됨을 볼 수 있었다. (햅삐 엔딩이다 ^ㅇ^)
+    
+    ---
+    
+    ### ◆ 과정 속에서 깨달은 점들
+    
+    내가 이 과정 속에서 깨달은 것은 뭐든 해결책에서 반복적으로 나오는 키워드들은 다시 확인해보고 적용해보자는 것이다. 그리고 error에서 나온 키워드를 중점적으로 찾으면 진짜 버그의 원인을 알 수 있다는 것이다. (여기서는 `Invalid URL` 였으나 나는 이를 아주 중점적으로 보진 않았다.)
+    
+    또한 PR은 최대한 쪼개서 올리자는 것, test code를 빨리 짜보자는 것이다. PR을 더 잘게 쪼개어 올렸더라면 더 좁은 단위에서 버그를 찾아볼 수 있었을 것이고 test code를 짰더라면 바로 에러를 찾기 좋았을 것이다. (이 case에서는 prod가 아니여서 못 찾았을수도 있지만 그 추적 범위를 좁히는데 도움이 되었을 것 같다.)
+    
+    이걸 해낼 수 있을까 많이 두렵고 걱정도 되었다. 이 큰 규모의 PR을 merge할 수도, 많은 노력과 성과가 있기에 그대로 둘 수도 없어 걱정이 많았다.
+    
+    하지만 결국 해냈다. 꽤나 간단한 방법으로 말이다.
+    
+    결국 할 수 있으니 바로 풀리지 않았다고 너무 상심하지 않는 것도 개발자의 좋은 태도가 아닐까 싶다. (어제 풀리지 않아서 많이 속상했었다.)
+    
+    많은 깨달음을 준 버그였다. 수고했다 내 자신. 🤝
   
 </details>
