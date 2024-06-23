@@ -1,5 +1,28 @@
-# Detail
-## article과 category의 CRUD 제작 (mongoDB)
+# 📌 Link
+👉 화면 확인 : [배포 링크](https://kate-devlog.vercel.app/)
+
+👉 코드 확인 : [깃헙 링크](https://github.com/katej927/kate-devlog)
+
+# 📌 About
+> 기술 블로그 웹 사이트
+> 
+
+- 진행 중
+
+# 📌 Techs
+- Next.js 13
+
+- TypeScript
+- CSS Modules
+- NextAuth.js
+- mongoDB
+- mongoose
+- firebase
+- react-quill
+- bcryptjs
+
+# 📌 Detail
+## 🔸 article과 category의 CRUD 제작 (mongoDB)
 
 <details>
   <summary>자세히 보기</summary>
@@ -190,7 +213,7 @@
    **단순히 끝날 줄 알았던 update와 delete였는데 새로이 업데이트된 기능으로 구현하는데 차질이 많았고 스스로 해결하려다 보니 오랜 시간이 걸렸으나 뿌듯했다.얻은 점은 조금씩, 스스로 문제 해결하는 방법을 찾는 것 같다는 점이다. 에러 로그를 이해하고 부족하면 에러 로그를 검색하고 (원어라 고통스럽지만) issue탭이나 stackoverflow에서 나와 비슷한 문제를 겪는 이들이 있는 것을 확인하고 그들이 어떻게 해결해내고 있는지 알 수 있다.앞으로도 이런 방식을 조금 더 빨리 실행해서 스스로 해결할 때 속도를 높이는 것이 좋을 것 같다.**
 </details>
 
-## WYSIWYG 에디터 추가 
+## 🔸 WYSIWYG 에디터 추가 
 
 
 <details>
@@ -315,7 +338,7 @@
 </details>
 
 
-## 성능 최적화 (article의 제목과 내용의 schema 분리) 
+## 🔸 성능 최적화 (article의 제목과 내용의 schema 분리) 
 
 <details>
   <summary>자세히 보기</summary>
@@ -482,7 +505,7 @@
 </details>
 
 
-## 검색 기능 추가 (debounce, mongoDB의 Aggregation 프레임워크)
+## 🔸 검색 기능 추가 (debounce, mongoDB의 Aggregation 프레임워크)
 
 <details>
   <summary>자세히 보기</summary>
@@ -595,7 +618,7 @@
 </details>
 
 
-## authentication (회원가입, 로그인) 기능 추가 (NextAuth.js)
+## 🔸 authentication (회원가입, 로그인) 기능 추가 (NextAuth.js)
 
 
 <details>
@@ -719,7 +742,7 @@
 
 
 
-## SEO 향상을 위한 meta tag, robots.txt, sitemap 구현
+## 🔸 SEO 향상을 위한 meta tag, robots.txt, sitemap 구현
 
 <details>
   <summary>자세히 보기</summary>
