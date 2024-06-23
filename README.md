@@ -716,3 +716,112 @@
     많은 깨달음을 준 버그였다. 수고했다 내 자신. 🤝
   
 </details>
+
+
+
+## SEO 향상을 위한 meta tag, robots.txt, sitemap 구현
+
+<details>
+  <summary>자세히 보기</summary>
+  
+
+  | action | image |
+  | --- | --- |
+  | 1. robots.txt | <img src='https://github.com/katej927/kate-devlog/assets/69146527/6b578355-d1e3-475b-b2c2-58969c89b8a8' height='200'/> |
+  | 2. sitemap.xml | <img src='https://github.com/katej927/kate-devlog/assets/69146527/688450fe-958a-4aa4-8521-f6b5b60de850' height='200'/> |
+  
+  - [`src/app/sitemap.ts`](https://github.com/katej927/kate-devlog/blob/main/src/app/sitemap.ts)
+    
+    ```tsx
+    const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
+      const articles = await loadArticles()
+      const categories = await loadCategories()
+    
+      const basicSitemap: MetadataRoute.Sitemap = [
+        { url: `${DOMAIN}`, lastModified: articles?.[0].updatedAt },
+        { url: `${DOMAIN}/category`, lastModified: articles?.[0].updatedAt },
+      ]
+    
+      const articlesSitemap: MetadataRoute.Sitemap =
+        articles?.map(({ _id, updatedAt }) => ({
+          url: `${DOMAIN}/article/${_id}`,
+          lastModified: updatedAt,
+        })) ?? []
+    
+      const categoriesSitemap: MetadataRoute.Sitemap =
+        categories?.map(({ _id, latestArticleTimestamp }) => ({
+          url: `${DOMAIN}/category/${_id}`,
+          lastModified: latestArticleTimestamp,
+        })) ?? []
+    
+      return [...basicSitemap, ...categoriesSitemap, ...articlesSitemap]
+    }
+    
+    export default Sitemap
+    ```
+    
+- [`src/app/robots.ts`](https://github.com/katej927/kate-devlog/blob/main/src/app/robots.ts)
+    
+    ```tsx
+    import { MetadataRoute } from 'next'
+    
+    import { DOMAIN } from '@/constants/common'
+    
+    export default function robots(): MetadataRoute.Robots {
+      return {
+        rules: {
+          userAgent: '*',
+          allow: '/',
+          disallow: ['/src/app/article/edit/', '/src/app/article/write/'],
+        },
+        sitemap: `${DOMAIN}/sitemap.xml`,
+      }
+    }
+    ```
+    
+- [`src/constants/metaDatas.ts`](https://github.com/katej927/kate-devlog/blob/fe412edff2f41cddbd743ce4927ae13edb944dd8/src/constants/metaDatas.ts)
+    
+   ```tsx
+    export const LAYOUT_METADATA = {
+      title: 'kate-devlog',
+      description: 'A dev blog written with the aim of reviewing',
+      keywords: ['kate', 'devlog', 'frontend'],
+      verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+    }
+   ```
+  
+ - 트러블 슈팅 [다른 기록도 보기 →](https://velog.io/@katej927/Trouble-shooting-kate-devlog-SEO)
+    
+    **[ 지나고 나면 별 거 아니지만 당시에는 어려웠던 것들 ]**
+    
+    SEO에 대해 스스로 찾아보는 것이 처음이라서 초반엔 뭐부터 해야할지 감도 오지를 않았다.
+    
+    그러다가 SEO에 대한 다양한 방법을 개괄적으로 알려주는 [한 블로그](https://yoonhu.vercel.app/makeblog/make_nextjs_blog6#nextjs-google-meta-%ED%83%9C%EA%B7%B8-%EB%84%A3%EA%B8%B0)를 찾게 되었다. 여기서는 목차랑 대략적인 내용만 참고했고 그것들이 무엇을 의미하는지 자세한 것은 따로 구글링을 해서 알아보았다.
+    
+    따로 찾아본 목록은 아래와 같다.
+    
+    1. google meta tag 넣기
+
+        meta태그가 무엇인지, 어떻게 해야 nextjs에 넣을 수 있는지 몰랐다. 블로그에서는 generateMetadata 함수를 활용해서 `head`의 `meta`태그를 설정해 주었는데 이것도 알 수가 없어서 구글링을 해보았다.
+        
+        비록 공식문서가 아닌 [블로그](https://curryyou.tistory.com/550)로 내용을 찾아보았지만 꽤나 유용한 내용을 알아낼 수 있었다.
+        
+        Next.js는 metaData API를 통해 meta data를 추가 정의 하고 metadata 객체는 정적 메타데이터를, generateMetadata함수는 동적 메타 데이터를 정의할 때 사용한다는 것을 알 수 있었다.
+        
+        나는 시간 관계상 이들이 무엇을 의미하는지 정도만 파악하고 가장 기본적인 속성만 추가하고 metadata의 다양한 속성은 나중에 추가하고자 한다.
+        
+    2. sitemap.xml, Robots.ts
+        
+        이 둘 또한 블로그에 소개된 내용을 바탕으로 이해를 했으며 블로그 글을 참고하여 작성해 보았고 잘 나오는 것을 확인 했다.
+        
+    - 소감
+
+        처음에는 뭘 어떻게 해야 할지 몰라서 많이 막막했다.
+        
+        하지만 하나씩 차근차근 풀어나가고 목차를 바탕으로 최대한 공식문서 또는 이에 준하는 레퍼런스를 참고하면 문제를 잘 풀어나갈 수 있지 않을까 하는 생각이 들었다.
+        
+        지금 이를 정리하면서 내가 어떻게 하면 문제를 잘 풀어낼 수 있었던 것인지 정리가 된 것 같고 그래서 감사하다.
+        
+        고생했다. 내 자신.
+  
+</details>
