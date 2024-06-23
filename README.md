@@ -313,3 +313,171 @@
     **그리고 앞으로도 issue탭을 먼저 활용하면 더 빨리 해결할 수 있을 것 같다. (챗 지피티는 간단한/직관적인 문제 해결 정도에 도움 되는 듯)**
 
 </details>
+
+
+## 성능 최적화 (article의 제목과 내용의 schema 분리) 
+
+<details>
+  <summary>자세히 보기</summary>
+
+> network의 time 5배 개선
+> 
+
+| action | image |
+| --- | --- |
+| 분리 전 | <img src='https://github.com/katej927/dev-blog-forked/assets/69146527/0731cbb8-79c8-4ceb-b4e4-964a6160e2d5' height='200'/> |
+| 분리 후 | <img src='https://github.com/katej927/dev-blog-forked/assets/69146527/bb1d8e52-df59-4e37-b627-b0c4d1f5d9b9' height='200'/> |
+
+
+- 방법 [관련 PR 보기 →](https://github.com/katej927/kate-devlog/pull/6)
+
+   - mongoDB의 collection이 articles와 articleContents로 분리됨.
+        
+     > ✓ articles ⇒ article의 개요를 담음
+     
+     >   ✓ articleContents ⇒ article의 본문을 담음
+      
+
+     - 본문이 필요할 때, articleContents를 가져옴
+  
+       방법: ```find().populate()```
+  
+  - Schema 분리
+    - ```articleContentSchema```, ```articleSchema```
+  
+    - 두 스키마간 relation 설정
+      - 방법 : id로 연결
+        ```tsx
+        content: {
+          type: Schema.Types.ObjectId,
+          ref: 'ArticleContent',
+          required: true,
+        }
+        ```
+  
+- 코드 [자세히 보기 →](https://github.com/katej927/kate-devlog/blob/main/src/models/article.ts)
+    
+    ```tsx
+    import mongoose, { Schema } from 'mongoose'
+    
+    const articleContentSchema = new Schema({
+      text: {
+        type: String,
+        required: true,
+      },
+      html: {
+        type: String,
+        required: true,
+      },
+    })
+    
+    const articleSchema = new Schema(
+      {
+        title: { type: String, required: true },
+        content: {
+          type: Schema.Types.ObjectId,
+          ref: 'ArticleContent',
+          required: true,
+        },
+        category: {
+          type: Schema.Types.ObjectId,
+          ref: 'Category',
+          required: false,
+        },
+      },
+      { timestamps: true },
+    )
+    
+    const ArticleContent =
+      mongoose.models.ArticleContent ||
+      mongoose.model('ArticleContent', articleContentSchema)
+    
+    const Article =
+      mongoose.models.Article || mongoose.model('Article', articleSchema)
+    
+    export { Article, ArticleContent }
+    ```
+
+- 트러블 슈팅 [다른 기록도 보기 →](https://velog.io/@katej927/Trouble-shooting-kate-devlog-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94#-%EA%B3%BC%EC%97%B0-%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-%EC%8B%B6%EC%97%88%EB%8D%98-%EA%B2%83%EC%9D%84-%EB%8F%84%EC%A0%84%ED%95%98%EA%B3%A0-%EC%84%B1%EA%B3%B5%ED%96%88%EB%8B%A4-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%B0%B1%EC%97%94%EB%93%9C-%EB%A1%9C%EC%A7%81-%EC%88%98%EC%A0%95-%EC%84%B1%EA%B3%B5)
+    
+    **[ 과연 할 수 있을까 싶었던 것을 도전하고 성공했다. (성능 최적화를 위한 백엔드 로직 수정 성공) ]**
+    
+    - 무엇을 하고 싶었는가?
+        
+        > 성능 최적화를 하고 싶었다.
+        > 
+        
+        어느 부분을 하고 싶었냐면, PR 제목처럼 post에서 글의 내용과 개요를 분리하고 싶었다.
+
+    - 왜 하고 싶었는가?
+        
+        > 렌더링을 빠르게 하고 페이지가 가볍기를 바랬다.
+        > 
+        
+        개요는 목록 UI에서 간단하면서 빠르게 보여주고 싶었다. 그런데 기존의 로직대로라면 개요 (제목, 간단한 설명) 정도만 보여주는데 모든 글의 내용을 load 받았어야 했다. content가 모든 글에 항상 붙어있었기 때문이다.
+        
+        지금이야 문제 없겠지만 앞으로 글이 많아지면 무거워질테고 그러면 렌더링이 느려질 것이라고 생각했다.
+        
+        느린 렌더링은 많이 비선호하는 편이고 프론트엔드 개발자로서도 받아들이기 어려운 부분이었다.
+        
+        비단 느린 렌더링 뿐 아니라 굳이 사용하지 않는 데이터를 들고 다닐 이유가 없다고 생각했다.
+
+    - 어떤 부분에서 구현을 망설였는가?
+        
+        > 백엔드를 잘 몰라서 못할 것만 같았다.
+        > 
+        
+        괜히 실수했다가 꼬이면 어쩌지? 하는 걱정도 들었다.
+        
+    - 어떻게 구현했는가?
+        
+        > 백엔드 구현 로직 확인chatGPT로 수정 키워드 뽑아내기mongoose로 relation 설정하기 (populate 활용)
+        > 
+        1. 백엔드 구현 로직 확인
+            
+            우선 article을 구현하면서 참고했던 레퍼런스([Step-by-Step Guide: Create a Next.js 13 CRUD App with MongoDB from Scratch](https://youtu.be/wNWyMsrpbz0?si=HqccCslQlj0oIERU))를 다시 보면서 어떤 식으로 백엔드 코드를 짰었는지 다시 점검했다.
+            
+            그래도 잘 모르겠고 어떤 부분을 수정해야 할지 감이 잘 오질 않았다.
+            
+        2. chatGPT로 수정 키워드 뽑아내기
+            
+            막막해서 chatGPT에게 물어보았다. 나의 Schema와 이 상태에서 내가 원하는 로직은 어떤 것인데 어떻게 구현해야 할지 모르겠다고.
+            
+            생각 보다 답을 잘 알려주었는데 그 코드가 어떻게 동작하는지 잘 모르겠고 정확성도 신뢰하기가 어려웠다. 그래서 수정된 부분이면서 중요 키워드로 보이는 코드를 따서 구글링 해보았다.
+            
+            해당 키워드는 `Schema.Types.ObjectId` 였다.
+            
+        3. mongoose로 relation 설정하기 (populate 활용)
+            
+            검색하니 바로 눈에 띄는 제목이 보였다. ‘[**mongoose로 relation 설정하기 (populate 이용하기)**](https://fierycoding.tistory.com/35)’
+            
+            읽어보니 내가 딱 원하던 내용이었다.
+            
+            각 모델을 생성하고 아래의 코드를 통해 연결 할 수 있었다.
+            
+            ```
+            연결할 key: {
+                type: Schema.Types.ObjectId, // id로 연결
+                ref: 'Seller',
+                required: true
+              }
+            ```
+            
+            그 후, `find().populate()` 를 통해 연결된 객체까지 조회할 수 있음을 알 수 있었다.
+            
+    - 소감
+        
+        해낼 수 있을까 걱정도 되었는데 늘 하나씩, 차분히 해내기로 마음 먹고 난 후로 하나씩 실마리를 풀어감을 느꼈다.
+        
+        그리고 이번에 해결했던 방법처럼 아예 감을 잡기 힘들때는 chatGPT에 키워드를 뽑고 자세한 것은 구글링을 통해 이해할 수 있지 않을까 하는 생각이 들었다.
+        
+        계속 차분히 해나가면 해낼 수 있구나 하는 자신감도 얻고 있다.
+        
+        중간중간 머리도 아팠지만.. 연속 2시간 반을 자리에서 스트레이트로 구현하는 날 보며 나는 여전히, 처음 프론트를 할 때 처럼 시간 가는 줄 모르고 하는 구나.
+        
+        개발하길 잘한 것 같다는 생각이 들어서 보람찼다.
+        
+        아무튼.. 이번에도 좋은 경험을 한 것 같다. 수고했다.🤝
+
+  
+</details>
